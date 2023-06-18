@@ -19,13 +19,11 @@ public class GuardianService extends RService
     @Override
     public void onStart()
     {
-
     }
 
     @Override
     public void onStop()
     {
-
     }
 
     private Component getKickMessage(String header, String message, TagResolver... placeholders)

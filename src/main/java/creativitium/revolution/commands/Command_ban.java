@@ -3,6 +3,8 @@ package creativitium.revolution.commands;
 import creativitium.revolution.sentinel.Ban;
 import creativitium.revolution.templates.RCommand;
 import creativitium.revolution.utilities.TimeUtil;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.OfflinePlayer;
@@ -37,16 +39,23 @@ public class Command_ban extends RCommand
             return true;
         }
 
+        // Get the reason
+        final String reason = args.length > 1 ? StringUtils.join(ArrayUtils.remove(args, 0), " ") : null;
+
         // Build the ban
         final Ban ban = Ban.builder().uuid(player.getUniqueId())
                 .username(player.getName())
-                .reason(args.length > 1 ? StringUtils.join(ArrayUtils.remove(args, 0), " ") : null)
+                .reason(reason)
                 .by(sender.getName())
-                .expires(TimeUtil.getOffsetFromCurrentTime(1, TimeUtil.TimeUnit.DAYS))
+                .expires(TimeUtil.getOffsetFromCurrentTime(24, TimeUtil.TimeUnit.HOURS))
                 .ips(player.isOnline() ? new ArrayList<>(Collections.singleton(((Player) player).getAddress().getAddress().getHostAddress())) : new ArrayList<>())
                 .build();
 
-        // Adds the ban (which also kicks the player)
+        // Broadcasts and adds the ban (which also kicks the player)
+        action(sender, plugin.msg.getMessage("revolution.action.ban",
+                Placeholder.unparsed("player", player.getName()),
+                Placeholder.component("reason", reason == null ? Component.empty() :
+                        plugin.msg.getMessage("revolution.action.ban.reason", Placeholder.unparsed("reason", reason)))));
         plugin.sen.addBan(player.getUniqueId(), ban);
         return true;
     }

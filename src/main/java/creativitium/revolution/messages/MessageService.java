@@ -41,18 +41,44 @@ public class MessageService extends RService
 
     public void load()
     {
+        if (!prefixesFile.exists())
+        {
+            try
+            {
+                Files.copy(Objects.requireNonNull(plugin.getResource("prefixes.json")), prefixesFile.toPath());
+            }
+            catch (Throwable ex)
+            {
+                Revolution.getSlf4jLogger().error("Failed to copy prefixes file", ex);
+            }
+        }
+
         if (prefixesFile.exists())
         {
             try
             {
                 prefixes.clear();
                 prefixes = gson.fromJson(Files.newBufferedReader(prefixesFile.toPath(), StandardCharsets.UTF_8),
-                        new TypeToken<Map<String, String>>() {}.getType());
+                        new TypeToken<Map<String, String>>()
+                        {
+                        }.getType());
                 Revolution.getSlf4jLogger().info(prefixes.size() + " prefixes loaded.");
             }
             catch (Throwable ex)
             {
                 Revolution.getSlf4jLogger().info("FUCK", ex);
+            }
+        }
+
+        if (!messagesFile.exists())
+        {
+            try
+            {
+                Files.copy(Objects.requireNonNull(plugin.getResource("messages.json")), messagesFile.toPath());
+            }
+            catch (Throwable ex)
+            {
+                Revolution.getSlf4jLogger().error("Failed to copy messages file", ex);
             }
         }
 

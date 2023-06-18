@@ -106,18 +106,26 @@ public abstract class RCommand
 
     protected final OfflinePlayer getOfflinePlayer(String nameOrUuid)
     {
-        OfflinePlayer player;
-
         try
         {
-            player = Bukkit.getOfflinePlayer(UUID.fromString(nameOrUuid));
+            return Bukkit.getOfflinePlayer(UUID.fromString(nameOrUuid));
         }
         catch (Exception ignored)
         {
-            player = Bukkit.getOfflinePlayer(nameOrUuid);
+            return Bukkit.getOfflinePlayer(nameOrUuid);
         }
+    }
 
-        return player;
+    protected final Optional<Player> getPlayer(String nameOrUuid)
+    {
+        try
+        {
+            return Optional.ofNullable(Bukkit.getPlayer(UUID.fromString(nameOrUuid)));
+        }
+        catch (Exception ignored)
+        {
+            return Optional.ofNullable(Bukkit.getPlayer(nameOrUuid));
+        }
     }
 
     private static class RCommandInternal extends Command implements PluginIdentifiableCommand
@@ -150,7 +158,7 @@ public abstract class RCommand
             }
             catch (Throwable ex)
             {
-                external.msg(sender, "revolution.command.error.internal", TagResolver.resolver("exception", Tag.inserting(Component.text(ex.getMessage()))));
+                external.msg(sender, "revolution.command.error.internal", TagResolver.resolver("exception", Tag.inserting(Component.text(ex.getMessage() != null ? ex.getMessage() : ex.getClass().getName()))));
                 ex.printStackTrace();
             }
 

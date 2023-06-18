@@ -12,7 +12,7 @@ public class TimeUtil
     public static long getOffsetFromCurrentTime(final int amount, final TimeUnit unit)
     {
         calendar.setTime(new Date());
-        calendar.add(amount, unit.type);
+        calendar.add(unit.type, amount);
         return calendar.getTimeInMillis();
     }
 

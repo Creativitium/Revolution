@@ -5,6 +5,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerLoginEvent;
@@ -77,6 +78,14 @@ public class SentinelService extends RService
         }).findAny();
     }
 
+    public void kickPlayer(final Player player, CommandSender sender, String reason)
+    {
+        player.kick(getSentinelKickMessage(plugin.msg.getMessage("revolution.components.sentinel.kicked.header"),
+                plugin.msg.getMessage("revolution.components.sentinel.kicked.template",
+                        Placeholder.unparsed("by", sender.getName()),
+                        Placeholder.component("reason", reason != null ?
+                                plugin.msg.getMessage("revolution.components.sentinel.kicked.reason", Placeholder.unparsed("reason", reason)) : Component.empty()))));
+    }
 
     public Component getSentinelKickMessage(Component header, Component message)
     {

@@ -90,6 +90,7 @@ public class Command_nickname extends RCommand
                 Matcher useLegacy = AMPERSAND_PATTERN.matcher(args[0]);
                 Component nickname = useLegacy.find() ? LegacyComponentSerializer.legacyAmpersand().deserialize(args[0].replaceAll("(&(?i)k)", "")) : MM.getNonExploitable().deserialize(args[0]);
 
+
                 // Some verification first
                 String plainText = PlainTextComponentSerializer.plainText().serialize(nickname).trim();
                 Optional<PlayerData> lol = plugin.pls.getAllPlayerData().stream().filter(player -> !sender.getName().equalsIgnoreCase(player.getName()))
