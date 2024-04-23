@@ -3,6 +3,6 @@ version: '${project.version}'
 main: creativitium.revolution.administration.Administration
 api-version: 1.19
 authors: [ videogamesm12 ]
-description: Administration-related commands for Revolution
+description: Administration-related commands for Revolution. Handles things like bans, kicks, smites, etc.
 depend:
   - Foundation

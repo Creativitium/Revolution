@@ -1,8 +1,12 @@
 {
+  "administration.broadcast.smite": "<red><player> has been a naughty, naughty boy.",
+  "administration.broadcast.reason": "<red>  Reason: <yellow><reason>",
+
   "administration.command.adminchat.enabled": "<info>Your chat messages from now on will be sent to the admin chat.",
   "administration.command.adminchat.disabled": "<info>Your chat messages from now on will no longer be sent to the admin chat",
   "administration.command.commandspy.enabled": "<info>CommandSpy enabled.",
   "administration.command.commandspy.disabled": "<info>CommandSpy disabled.",
+  "administration.command.say.broadcast": "<light_purple>[Server:<name>] <message>",
 
   "administration.components.commandspy": "<commandspy><underlined><player></underlined>: <gray><command>",
   "administration.components.staffchat": "<staffchat><name> <dark_gray>[<yellow>HfS<dark_gray>]<white>: <gold><message>"

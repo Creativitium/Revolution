@@ -3,19 +3,15 @@ package creativitium.revolution.administration;
 import creativitium.revolution.administration.commands.Command_adminchat;
 import creativitium.revolution.administration.commands.Command_commandspy;
 import creativitium.revolution.administration.commands.Command_say;
-import creativitium.revolution.administration.data.APlayer;
+import creativitium.revolution.administration.commands.Command_smite;
 import creativitium.revolution.administration.services.AdminChatService;
 import creativitium.revolution.administration.services.CommandSpyService;
-import creativitium.revolution.foundation.CommandLoader;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
 import creativitium.revolution.administration.data.APlayerService;
-import creativitium.revolution.foundation.command.RCommand;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.reflections.Reflections;
 
 public class Administration extends JavaPlugin
 {
@@ -54,6 +50,6 @@ public class Administration extends JavaPlugin
          *  somehow, Reflections reports that it found 94 urls... how?! */
         //Foundation.getInstance().getCommandLoader().loadCommands("creativitium.revolution.administration.commands", "admin");
         Foundation.getInstance().getCommandLoader().loadCommandsManually("administration",
-                new Command_adminchat(), new Command_commandspy(), new Command_say());
+                new Command_adminchat(), new Command_commandspy(), new Command_say(), new Command_smite());
     }
 }
