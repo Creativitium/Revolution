@@ -22,7 +22,7 @@ public class Administration extends JavaPlugin
     private static Administration instance;
     //--
     @Getter
-    private RServiceGroup services = new RServiceGroup();
+    private final RServiceGroup services = new RServiceGroup();
     @Getter
     private CommandSpyService commandSpyService;
     @Getter

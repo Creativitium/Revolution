@@ -69,7 +69,7 @@ public class MessageService extends RService
         final File prefixesFile = new File(plugin.getDataFolder(), "prefixes.json");
         final File messagesFile = new File(plugin.getDataFolder(), "messages.json");
 
-        if (!prefixesFile.exists())
+        if (!prefixesFile.exists() && plugin.getResource("prefixes.json") != null)
         {
             try
             {
@@ -98,7 +98,7 @@ public class MessageService extends RService
             }
         }
 
-        if (!messagesFile.exists())
+        if (!messagesFile.exists() && plugin.getResource("messages.json") != null)
         {
             try
             {

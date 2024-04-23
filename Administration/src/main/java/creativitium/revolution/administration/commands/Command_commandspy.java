@@ -15,7 +15,7 @@ import org.bukkit.plugin.Plugin;
         description = "Toggles CommandSpy - a tool that lets you see other players' commands.",
         usage = "/commandspy",
         aliases = {"cmdspy"},
-        permission = "revolution.command.commandspy",
+        permission = "administration.command.commandspy",
         source = SourceType.ONLY_IN_GAME)
 public class Command_commandspy extends RCommand
 {

@@ -41,4 +41,10 @@ public class Foundation extends JavaPlugin
         //--
         commandLoader.loadCommands("creativitium.revolution.foundation.commands", "foundation");
     }
+
+    @Override
+    public void onDisable()
+    {
+        coreServices.stopServices();
+    }
 }

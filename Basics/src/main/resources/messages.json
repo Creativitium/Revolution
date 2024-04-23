@@ -1,0 +1,17 @@
+{
+  "basics.command.delhome.deleted.all": "<success>All of your homes have been successfully deleted.",
+  "basics.command.delhome.deleted.all.others": "<success>All of the homes belonging to <dark_green><name></dark_green> have been successfully deleted.",
+  "basics.command.delhome.deleted.others": "<success>The home <dark_green><home></dark_green> belonging to <dark_green><name></dark_green> has been successfully deleted.",
+  "basics.command.delhome.home_not_found": "<error>You can't delete a home that doesn't already exist!",
+  "basics.command.delhome.others.how_to": "<info>In order to delete other people's homes, you must put the name, then a comma, and then the name of the home in question.",
+  "basics.command.delhome.deleted": "<success>The home <dark_green><home></dark_green> has been successfully deleted.",
+  "basics.command.god.enabled": "<info>God mode enabled.",
+  "basics.command.god.disabled": "<info>God mode disabled.",
+  "basics.command.home.invalid_home": "<error>Invalid home: <dark_red><home>",
+  "basics.command.home.list": "<info>Your homes: <white><homes>",
+  "basics.command.home.others.how_to": "<info>In order to warp to other people's homes, you must put the name, then a comma, and then the name of the home in question.",
+  "basics.command.home.others.list": "<info><white><name></white>'s homes: <white><homes>",
+  "basics.command.home.teleporting": "<info>Teleporting...",
+  "basics.command.sethome.invalid_home_name": "<error>Invalid home name: <dark_red><name>",
+  "basics.command.sethome.set": "<success>Home set."
+}
