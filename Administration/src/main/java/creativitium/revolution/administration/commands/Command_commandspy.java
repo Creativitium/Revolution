@@ -32,6 +32,6 @@ public class Command_commandspy extends RCommand
     @Override
     public Plugin getPlugin()
     {
-        return Bukkit.getPluginManager().getPlugin("Administration");
+        return Administration.getInstance();
     }
 }

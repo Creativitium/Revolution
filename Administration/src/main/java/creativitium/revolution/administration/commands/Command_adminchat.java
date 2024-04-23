@@ -1,10 +1,12 @@
 package creativitium.revolution.administration.commands;
 
+import creativitium.revolution.administration.data.APlayer;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.administration.Administration;
+import creativitium.revolution.foundation.utilities.Shortcuts;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.apache.commons.lang3.StringUtils;
@@ -24,16 +26,22 @@ public class Command_adminchat extends RCommand
     @Override
     public boolean run(CommandSender sender, Player playerSender, String commandLabel, String[] args)
     {
-        if (args.length == 0) return false;
+        // Toggle
+        if (args.length == 0)
+        {
+            if (!SourceType.ONLY_IN_GAME.matchesSourceType(sender))
+            {
+                return false;
+            }
 
-        Component sm = Foundation.getInstance().getMessageService().getMessage("administration.components.staffchat",
-                Placeholder.unparsed("name", sender.getName()),
-                Placeholder.unparsed("message", StringUtils.join(args, " ")));
+            APlayer data = (APlayer) Shortcuts.getExternalPlayerService(Administration.getInstance()).getPlayerData(playerSender.getUniqueId());
+            data.setAdminChatEnabled(!data.isAdminChatEnabled());
 
-        Bukkit.getOnlinePlayers().stream().filter(player -> player.hasPermission("administration.components.staffchat"))
-                .forEach(player -> player.sendMessage(sm));
-        getPlugin().getComponentLogger().info(sm);
+            msg(sender, "administration.command.adminchat." + (data.isAdminChatEnabled() ? "enabled" : "disabled"));
+            return true;
+        }
 
+        ((Administration) getPlugin()).getAdminChatService().sendAdminChat(sender, StringUtils.join(args, " "));
         return true;
     }
 

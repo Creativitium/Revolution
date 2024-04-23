@@ -3,6 +3,7 @@ package creativitium.revolution.administration;
 import creativitium.revolution.administration.commands.Command_adminchat;
 import creativitium.revolution.administration.commands.Command_commandspy;
 import creativitium.revolution.administration.data.APlayer;
+import creativitium.revolution.administration.services.AdminChatService;
 import creativitium.revolution.administration.services.CommandSpyService;
 import creativitium.revolution.foundation.CommandLoader;
 import creativitium.revolution.foundation.Foundation;
@@ -24,6 +25,8 @@ public class Administration extends JavaPlugin
     private RServiceGroup services = new RServiceGroup();
     @Getter
     private CommandSpyService commandSpyService;
+    @Getter
+    private AdminChatService adminChatService;
 
     @Override
     public void onLoad()
@@ -42,14 +45,12 @@ public class Administration extends JavaPlugin
 
         // Set up our other services
         commandSpyService = services.addService(NamespacedKey.fromString("adm:commandspy"), new CommandSpyService());
+        adminChatService = services.addService(NamespacedKey.fromString("adm:adminchat"), new AdminChatService());
         services.startServices();
 
         // Set up our commands
         /* This just doesn't work at all. None of the commands get registered when we do it with this method, and yet
-         *  somehow, Reflections reports that it found 94 urls... how?! There isn't even a good
-         */
-        // This doesn't work for some reason. It just says "it took X ms to scan 94 urls producing 0 keys and 0 values",
-        //  but there aren't 94 classes at all? WTF?
+         *  somehow, Reflections reports that it found 94 urls... how?! */
         //Foundation.getInstance().getCommandLoader().loadCommands("creativitium.revolution.administration.commands", "admin");
         Foundation.getInstance().getCommandLoader().loadCommandsManually("administration",
                 new Command_adminchat(), new Command_commandspy());

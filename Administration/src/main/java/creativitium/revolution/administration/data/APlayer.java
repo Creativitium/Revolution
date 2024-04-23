@@ -10,6 +10,7 @@ import java.util.Map;
 @Data
 public class APlayer implements ConfigurationSerializable
 {
+    private boolean adminChatEnabled = false;
     private boolean commandSpyEnabled = false;
 
     @Override
@@ -17,6 +18,7 @@ public class APlayer implements ConfigurationSerializable
     {
         Map<String, Object> map = new HashMap<>();
 
+        map.put("adminChatEnabled", adminChatEnabled);
         map.put("commandSpyEnabled", commandSpyEnabled);
 
         return map;
@@ -25,6 +27,7 @@ public class APlayer implements ConfigurationSerializable
     public static APlayer deserialize(Map<String, Object> map)
     {
         final APlayer data = new APlayer();
+        data.adminChatEnabled = (boolean) map.getOrDefault("adminChatEnabled", false);
         data.commandSpyEnabled = (boolean) map.getOrDefault("commandSpyEnabled", false);
         return data;
     }
