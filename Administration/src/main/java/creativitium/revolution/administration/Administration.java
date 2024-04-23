@@ -2,6 +2,7 @@ package creativitium.revolution.administration;
 
 import creativitium.revolution.administration.commands.Command_adminchat;
 import creativitium.revolution.administration.commands.Command_commandspy;
+import creativitium.revolution.administration.commands.Command_say;
 import creativitium.revolution.administration.data.APlayer;
 import creativitium.revolution.administration.services.AdminChatService;
 import creativitium.revolution.administration.services.CommandSpyService;
@@ -53,6 +54,6 @@ public class Administration extends JavaPlugin
          *  somehow, Reflections reports that it found 94 urls... how?! */
         //Foundation.getInstance().getCommandLoader().loadCommands("creativitium.revolution.administration.commands", "admin");
         Foundation.getInstance().getCommandLoader().loadCommandsManually("administration",
-                new Command_adminchat(), new Command_commandspy());
+                new Command_adminchat(), new Command_commandspy(), new Command_say());
     }
 }
