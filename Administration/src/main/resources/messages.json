@@ -1,0 +1,7 @@
+{
+  "administration.command.commandspy.enabled": "<info>CommandSpy enabled.",
+  "administration.command.commandspy.disabled": "<info>CommandSpy disabled.",
+
+  "administration.components.commandspy": "<commandspy><underlined><player></underlined>: <gray><command>",
+  "administration.components.staffchat": "<staffchat><name> <dark_gray>[<yellow>HfS<dark_gray>]<white>: <gold><message>"
+}

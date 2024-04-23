@@ -3,8 +3,11 @@ package creativitium.revolution.foundation;
 import creativitium.revolution.foundation.command.RCommand;
 import org.bukkit.Bukkit;
 import org.reflections.Reflections;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CommandLoader
@@ -17,6 +20,7 @@ public class CommandLoader
         {
             try
             {
+                Foundation.getSlf4jLogger().info("Found command " + commandClass.getName());
                 final RCommand command = commandClass.getDeclaredConstructor().newInstance();
                 Bukkit.getCommandMap().register(prefix.toLowerCase(), command.getInternalCommand());
                 commands.add(command);
@@ -28,5 +32,14 @@ public class CommandLoader
         });
 
         Foundation.getSlf4jLogger().info("Successfully loaded and registered " + commands.size() + " commands");
+    }
+
+    public void loadCommandsManually(String prefix, RCommand... cmds)
+    {
+        Arrays.stream(cmds).forEach(command ->
+        {
+            Bukkit.getCommandMap().register(prefix.toLowerCase(), command.getInternalCommand());
+            commands.add(command);
+        });
     }
 }

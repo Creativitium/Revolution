@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>creativitium.revolution</groupId>
-    <artifactId>Sentinel</artifactId>
+    <artifactId>Administration</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -18,25 +18,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencies>
         <dependency>
             <groupId>creativitium.revolution</groupId>
             <artifactId>Foundation</artifactId>
-            <version>13.0-INDEV</version>
         </dependency>
     </dependencies>
 </project>

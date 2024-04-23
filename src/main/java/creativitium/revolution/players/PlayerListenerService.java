@@ -76,7 +76,7 @@ public class PlayerListenerService extends RService
         Bukkit.getOnlinePlayers().stream().filter(player -> !player.getUniqueId().equals(sender.getUniqueId())
                 && player.hasPermission("revolution.command.commandspy")
                 && plugin.pls.getPlayerData(player.getUniqueId()).isCommandSpyEnabled()).forEach(player ->
-                player.sendMessage(plugin.msg.getMessage("revolution.components.commandspy",
+                player.sendMessage(plugin.msg.getMessage("administration.components.commandspy",
                         Placeholder.component("player", Component.text(sender.getName())
                                 .hoverEvent(HoverEvent.showText(Component.translatable("chat.copy.click")))
                                 .clickEvent(ClickEvent.copyToClipboard(sender.getName()))),

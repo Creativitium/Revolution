@@ -31,6 +31,7 @@ public class MessageService extends RService
     public void onStart()
     {
         messages.clear();
+        prefixes.clear();
 
         // Load the base messages first
         if (!externalPlugins.contains(base))
@@ -101,7 +102,7 @@ public class MessageService extends RService
         {
             try
             {
-                Files.copy(Objects.requireNonNull(getPlugin().getResource("messages.json")), messagesFile.toPath());
+                Files.copy(Objects.requireNonNull(plugin.getResource("messages.json")), messagesFile.toPath());
             }
             catch (Throwable ex)
             {

@@ -19,7 +19,11 @@ public abstract class RService implements Listener
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
-    public RService()
+    /**
+     * Constructor for an instance of RService that uses Foundation as the main class.
+     * @deprecated Internal use only
+     */
+    protected RService()
     {
         this(Foundation.getInstance());
     }
