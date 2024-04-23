@@ -1,9 +1,6 @@
 package creativitium.revolution.basics;
 
-import creativitium.revolution.basics.commands.Command_delhome;
-import creativitium.revolution.basics.commands.Command_god;
-import creativitium.revolution.basics.commands.Command_home;
-import creativitium.revolution.basics.commands.Command_sethome;
+import creativitium.revolution.basics.commands.*;
 import creativitium.revolution.basics.data.BPlayerService;
 import creativitium.revolution.basics.services.BasicsService;
 import creativitium.revolution.foundation.Foundation;
@@ -43,6 +40,10 @@ public class Basics extends JavaPlugin
 
         // Set up our commands
         Foundation.getInstance().getCommandLoader().loadCommandsManually("basics",
-                new Command_delhome(), new Command_god(), new Command_home(), new Command_sethome());
+                new Command_delhome(),
+                new Command_god(),
+                new Command_home(),
+                new Command_kill(),
+                new Command_sethome());
     }
 }
