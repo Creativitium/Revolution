@@ -40,6 +40,7 @@ public class Basics extends JavaPlugin
 
         // Set up our commands
         Foundation.getInstance().getCommandLoader().loadCommandsManually("basics",
+                new Command_berserk(),
                 new Command_delhome(),
                 new Command_god(),
                 new Command_home(),

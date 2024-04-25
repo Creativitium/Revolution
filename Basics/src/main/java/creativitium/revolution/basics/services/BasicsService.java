@@ -4,15 +4,32 @@ import creativitium.revolution.basics.Basics;
 import creativitium.revolution.basics.data.BPlayer;
 import creativitium.revolution.foundation.templates.RService;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.util.Vector;
+
+import java.util.List;
 
 public class BasicsService extends RService
 {
+    private static final List<EntityPotionEffectEvent.Cause> GOD_IMMUNE_EFFECTS = List.of(
+            EntityPotionEffectEvent.Cause.POTION_SPLASH,
+            EntityPotionEffectEvent.Cause.AREA_EFFECT_CLOUD,
+            EntityPotionEffectEvent.Cause.ARROW,
+            EntityPotionEffectEvent.Cause.ATTACK,
+            EntityPotionEffectEvent.Cause.FOOD,
+            EntityPotionEffectEvent.Cause.WITHER_ROSE,
+            EntityPotionEffectEvent.Cause.WARDEN,
+            EntityPotionEffectEvent.Cause.PATROL_CAPTAIN,
+            EntityPotionEffectEvent.Cause.BEACON,
+            EntityPotionEffectEvent.Cause.DOLPHIN
+    );
+
     public BasicsService()
     {
         super(Basics.getInstance());
@@ -57,19 +74,21 @@ public class BasicsService extends RService
         {
             event.setCancelled(true);
         }
+
+        if (event.getDamager() instanceof Player player
+                && ((BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId())).isBerserkEnabled()
+                && player.getItemInHand().getType() == Material.AIR
+                && !event.isCancelled())
+        {
+            event.setDamage(EntityDamageEvent.DamageModifier.BASE, Double.MAX_VALUE);
+        }
     }
 
     @EventHandler
     public void onPotionEffect(EntityPotionEffectEvent event)
     {
         if (event.getEntity() instanceof Player player
-                && (event.getCause() == EntityPotionEffectEvent.Cause.POTION_SPLASH
-                || event.getCause() == EntityPotionEffectEvent.Cause.AREA_EFFECT_CLOUD
-                || event.getCause() == EntityPotionEffectEvent.Cause.ARROW
-                || event.getCause() == EntityPotionEffectEvent.Cause.ATTACK
-                || event.getCause() == EntityPotionEffectEvent.Cause.FOOD
-                || event.getCause() == EntityPotionEffectEvent.Cause.WITHER_ROSE
-                || event.getCause() == EntityPotionEffectEvent.Cause.BEACON)
+                && (GOD_IMMUNE_EFFECTS.contains(event.getCause()))
                 && ((BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId())).isGodEnabled())
         {
             event.setCancelled(true);

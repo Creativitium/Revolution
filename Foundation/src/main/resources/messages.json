@@ -9,6 +9,7 @@
   "revolution.command.error.internal": "<error>Command error: <yellow><exception>",
   "revolution.command.error.no_permission.command": "<error>You don't have permission to use that command.",
   "revolution.command.error.no_permission.subcommand": "<error>You don't have permission to do that!",
+  "revolution.command.error.item_not_found": "<error>That item could not be found.",
   "revolution.command.error.player_not_found": "<error>That player could not be found.",
 
   "revolution.command.messages.reload": "<success>The messages system has been reloaded.",

@@ -12,6 +12,7 @@ import java.util.Map;
 public class BPlayer implements ConfigurationSerializable
 {
     private String name = null;
+    private boolean berserkEnabled = false;
     private boolean godEnabled = false;
     private Map<String, Location> homes = new HashMap<>();
 
@@ -30,6 +31,7 @@ public class BPlayer implements ConfigurationSerializable
         Map<String, Object> map = new HashMap<>();
 
         map.put("name", name);
+        map.put("berserkEnabled", berserkEnabled);
         map.put("godEnabled", godEnabled);
         map.put("homes", homes);
 
@@ -40,6 +42,7 @@ public class BPlayer implements ConfigurationSerializable
     {
         final BPlayer data = new BPlayer();
         data.name = (String) map.getOrDefault("name", null);
+        data.berserkEnabled = (boolean) map.getOrDefault("berserkEnabled", false);
         data.godEnabled = (boolean) map.getOrDefault("godEnabled", false);
         data.homes = (Map<String, Location>) map.getOrDefault("homes", new HashMap<>());
         return data;

@@ -14,7 +14,9 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
 @CommandParameters(name = "smite",
@@ -53,6 +55,12 @@ public class Command_smite extends RCommand
         }, () -> msg(sender, "revolution.command.error.player_not_found"));
 
         return true;
+    }
+
+    @Override
+    public @Nullable List<String> tabCompleteOptions(CommandSender sender, Player playerSender, String commandLabel, String[] args)
+    {
+        return args.length == 1 ? match(getOnlinePlayers(), args[0]) : null;
     }
 
     @Override

@@ -1,4 +1,6 @@
 {
+  "basics.command.berserk.enabled": "<info><red>Berserk!",
+  "basics.command.berserk.disabled": "<info>You suddenly feel calmer.",
   "basics.command.delhome.deleted.all": "<success>All of your homes have been successfully deleted.",
   "basics.command.delhome.deleted.all.others": "<success>All of the homes belonging to <dark_green><name></dark_green> have been successfully deleted.",
   "basics.command.delhome.deleted.others": "<success>The home <dark_green><home></dark_green> belonging to <dark_green><name></dark_green> has been successfully deleted.",

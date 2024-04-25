@@ -61,6 +61,6 @@ public class Command_kill extends RCommand
     @Override
     public @Nullable List<String> tabCompleteOptions(CommandSender sender, Player playerSender, String commandLabel, String[] args)
     {
-        return args.length <= 1 && sender.hasPermission("revolution.command.kill.others") ? getOnlinePlayers() : null;
+        return args.length == 1 && sender.hasPermission("revolution.command.kill.others") ? match(getOnlinePlayers(), args[0]) : null;
     }
 }
