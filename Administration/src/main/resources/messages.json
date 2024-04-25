@@ -1,6 +1,14 @@
 {
+  "administration.action.ban": "Banning <player> from the server<reason>",
+  "administration.action.ban.reason": ", Reason: <yellow><reason></yellow>",
+  "administration.action.unban": "Unbanning <player> from the server",
+
   "administration.broadcast.smite": "<red><player> has been a naughty, naughty boy.",
   "administration.broadcast.reason": "<red>  Reason: <yellow><reason>",
+
+  "administration.ban.message": "<red>You are banned from this server.<newline>By: <yellow><by></yellow><reason><expires>",
+  "administration.ban.reason": "<newline><red>Reason: <yellow><reason></yellow>",
+  "administration.ban.expires": "<newline><red>Expires: <yellow><expires></yellow>",
 
   "administration.command.adminchat.enabled": "<info>Your chat messages from now on will be sent to the admin chat.",
   "administration.command.adminchat.disabled": "<info>Your chat messages from now on will no longer be sent to the admin chat",
@@ -9,6 +17,7 @@
   "administration.command.commandspy.enabled": "<info>CommandSpy enabled.",
   "administration.command.commandspy.disabled": "<info>CommandSpy disabled.",
   "administration.command.say.broadcast": "<light_purple>[Server:<name>] <message>",
+  "administration.command.unban.not_banned": "<error>That player isn't banned.",
   "administration.command.whohas.nobody": "<info>Nobody online has that item in their inventory.",
   "administration.command.whohas.somebody": "<info>Players with item <white><item></white>: <white><players></white>",
 

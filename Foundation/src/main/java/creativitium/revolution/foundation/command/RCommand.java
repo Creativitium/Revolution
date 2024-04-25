@@ -99,6 +99,11 @@ public abstract class RCommand
         Bukkit.broadcast(foundation.getMessageService().getMessage("revolution.action.format", Placeholder.unparsed("name", sender.getName()), Placeholder.component("action", action)));
     }
 
+    protected void action(CommandSender sender, String text, TagResolver... placeholders)
+    {
+        action(sender, foundation.getMessageService().getMessage(text, placeholders));
+    }
+
     protected final List<String> getOnlinePlayers()
     {
         return Bukkit.getOnlinePlayers().stream().map(HumanEntity::getName).toList();

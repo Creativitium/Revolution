@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CommandParameters(name = "crash",
-        description = "Crash a player's client",
+        description = "Crash a player's client.",
         usage = "/crash <player> <method>",
         aliases = {"mc9000", "mc9k"},
         permission = "administration.command.crash", source = SourceType.BOTH)

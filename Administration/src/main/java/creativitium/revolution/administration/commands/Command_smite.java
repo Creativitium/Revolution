@@ -33,7 +33,7 @@ public class Command_smite extends RCommand
 
         final String reason = (args.length > 1) ? StringUtils.join(ArrayUtils.remove(args, 0), " ") : null;
 
-        Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresentOrElse(player ->{
+        getPlayer(args[0]).ifPresentOrElse(player ->{
             Shortcuts.broadcast("administration.broadcast.smite", Placeholder.unparsed("player", player.getName()));
             if (reason != null) Shortcuts.broadcast("administration.broadcast.reason", Placeholder.unparsed("reason", reason));
 

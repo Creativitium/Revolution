@@ -37,13 +37,13 @@ public class Command_kill extends RCommand
         }
         else
         {
-            if (!sender.hasPermission("revolution.command.kill.others"))
+            if (!sender.hasPermission("basics.command.kill.others"))
             {
                 msg(sender, "revolution.command.error.no_permission.subcommand");
                 return true;
             }
 
-            target = Optional.ofNullable(Bukkit.getPlayer(args[0]));
+            target = getPlayer(args[0]);
         }
 
         target.ifPresentOrElse(player -> player.setHealth(0.0), () ->
@@ -61,6 +61,6 @@ public class Command_kill extends RCommand
     @Override
     public @Nullable List<String> tabCompleteOptions(CommandSender sender, Player playerSender, String commandLabel, String[] args)
     {
-        return args.length == 1 && sender.hasPermission("revolution.command.kill.others") ? match(getOnlinePlayers(), args[0]) : null;
+        return args.length == 1 && sender.hasPermission("basics.command.kill.others") ? match(getOnlinePlayers(), args[0]) : null;
     }
 }
