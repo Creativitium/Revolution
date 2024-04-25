@@ -1,17 +1,23 @@
-package creativitium.revolution.commands;
+package creativitium.revolution.basics.commands;
 
-import creativitium.revolution.players.PlayerData;
-import creativitium.revolution.templates.RCommand;
-import creativitium.revolution.utilities.MM;
+import creativitium.revolution.basics.Basics;
+import creativitium.revolution.basics.data.BPlayer;
+import creativitium.revolution.foundation.command.CommandParameters;
+import creativitium.revolution.foundation.command.RCommand;
+import creativitium.revolution.foundation.command.SourceType;
+import creativitium.revolution.foundation.utilities.MM;
+import creativitium.revolution.foundation.utilities.Shortcuts;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -45,13 +51,27 @@ public class Command_tag extends RCommand
                     return true;
                 }
 
-                PlayerData data = plugin.pls.getPlayerData(playerSender.getUniqueId());
+                BPlayer data = ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(playerSender.getUniqueId()));
 
                 String tag = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
-                Matcher useLegacy = AMPERSAND_PATTERN.matcher(tag);
-                data.setTag(useLegacy.find() ? LegacyComponentSerializer.legacyAmpersand().deserialize(tag) : MM.getLessExploitable().deserialize(tag));
+                if (tag.length() > 128)
+                {
+                    msg(sender, "basics.command.tag.too_long_upper");
+                    return true;
+                }
 
-                msg(sender, "revolution.command.tag.set", Placeholder.component("tag", data.getTag()));
+                Matcher useLegacy = AMPERSAND_PATTERN.matcher(tag);
+                Component outcome = useLegacy.find() ? LegacyComponentSerializer.legacyAmpersand().deserialize(tag) : MM.getLessExploitable().deserialize(tag);
+                String plainText = PlainTextComponentSerializer.plainText().serialize(outcome).trim();
+
+                if (plainText.length() > 32)
+                {
+                    msg(sender, "basics.command.tag.too_long_lower");
+                    return true;
+                }
+
+                data.setTag(outcome);
+                msg(sender, "basics.command.tag.set", Placeholder.component("tag", outcome));
             }
             case "clear" ->
             {
@@ -59,7 +79,7 @@ public class Command_tag extends RCommand
 
                 if (args.length >= 2)
                 {
-                    if (!sender.hasPermission("revolution.command.tag.clear_others"))
+                    if (!sender.hasPermission("basics.command.tag.clear_others"))
                     {
                         msg(sender, "revolution.command.error.no_permission.subcommand");
                         return true;
@@ -79,27 +99,28 @@ public class Command_tag extends RCommand
                 }
 
                 target.ifPresentOrElse(player -> {
-                    plugin.pls.getPlayerData(player.getUniqueId()).setTag(Component.empty());
-                    msg((player.getName().equalsIgnoreCase(sender.getName()) ? sender : player), "revolution.command.tag.cleared");
+                    ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId())).setTag(null);
+                    msg((player.getName().equalsIgnoreCase(sender.getName()) ? sender : player), "basics.command.tag.cleared");
                     if (!player.getName().equalsIgnoreCase(sender.getName()))
                     {
-                        msg(sender, "revolution.command.tag.cleared.other", Placeholder.unparsed("name", player.getName()));
+                        msg(sender, "basics.command.tag.cleared.other", Placeholder.unparsed("name", player.getName()));
                     }
                 }, () -> msg(sender, "revolution.command.error.player_not_found"));
             }
             case "clearall" ->
             {
-                if (!sender.hasPermission("revolution.command.tag.clear_all"))
+                if (!sender.hasPermission("basics.command.tag.clear_all"))
                 {
                     msg(sender, "revolution.command.error.no_permission.subcommand");
                     return true;
                 }
 
-                action(sender, plugin.msg.getMessage("revolution.action.tag.clearing_all", new TagResolver[0]));
+                action(sender, "basics.action.tag.clearing_all");
                 Bukkit.getOnlinePlayers().forEach(player ->
                 {
-                    plugin.pls.getPlayerData(player.getUniqueId()).setTag(Component.empty());
-                    msg(player, "revolution.command.tag.cleared");
+                    ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId()))
+                            .setTag(null);
+                    msg(player, "basics.command.tag.cleared");
                 });
             }
             default ->
@@ -109,5 +130,11 @@ public class Command_tag extends RCommand
         }
 
         return true;
+    }
+
+    @Override
+    public Plugin getPlugin()
+    {
+        return Basics.getInstance();
     }
 }

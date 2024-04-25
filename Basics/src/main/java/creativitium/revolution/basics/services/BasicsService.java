@@ -3,7 +3,11 @@ package creativitium.revolution.basics.services;
 import creativitium.revolution.basics.Basics;
 import creativitium.revolution.basics.data.BPlayer;
 import creativitium.revolution.foundation.templates.RService;
+import creativitium.revolution.foundation.utilities.MM;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -56,6 +60,24 @@ public class BasicsService extends RService
         {
             data.setName(player.getName());
         }
+
+        if (data.getNickname() != null)
+        {
+            player.displayName(data.getNickname());
+        }
+    }
+
+    @EventHandler
+    public void onPlayerChat(AsyncChatEvent event)
+    {
+        final BPlayer data = (BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(event.getPlayer().getUniqueId());
+
+        event.renderer((source, sourceDisplayName, message, viewer) -> base.getMessageService().getMessage("basics.components.chat",
+                Placeholder.component("tag", data.getTag() != null ? data.getTag().append(Component.space()) : Component.empty()),
+                Placeholder.component("display", event.getPlayer().displayName()),
+                Placeholder.component("nickname", data.getNickname() != null ? data.getNickname() : Component.text(event.getPlayer().getName())),
+                Placeholder.unparsed("name", event.getPlayer().getName()),
+                Placeholder.component("message", message)));
     }
 
     @EventHandler

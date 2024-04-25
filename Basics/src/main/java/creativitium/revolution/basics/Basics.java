@@ -45,6 +45,8 @@ public class Basics extends JavaPlugin
                 new Command_god(),
                 new Command_home(),
                 new Command_kill(),
-                new Command_sethome());
+                new Command_nickname(),
+                new Command_sethome(),
+                new Command_tag());
     }
 }

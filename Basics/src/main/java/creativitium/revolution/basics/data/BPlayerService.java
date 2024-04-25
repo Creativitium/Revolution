@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,5 +34,10 @@ public class BPlayerService extends RPlayerService<BPlayer>
     {
         final OfflinePlayer cached = Bukkit.getOfflinePlayerIfCached(name);
         return Optional.ofNullable(cached != null ? getPlayerData(cached.getUniqueId()) : null);
+    }
+
+    public Collection<BPlayer> getAllPlayerData()
+    {
+        return getData().values();
     }
 }

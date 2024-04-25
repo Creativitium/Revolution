@@ -1,4 +1,7 @@
 {
+  "basics.action.nickname.clearing_all": "Clearing nicknames for all players on the server",
+  "basics.action.tag.clearing_all": "Clearing tags for all players on the server",
+
   "basics.command.berserk.enabled": "<info><red>Berserk!",
   "basics.command.berserk.disabled": "<info>You suddenly feel calmer.",
   "basics.command.delhome.deleted.all": "<success>All of your homes have been successfully deleted.",
@@ -14,6 +17,18 @@
   "basics.command.home.others.how_to": "<info>In order to warp to other people's homes, you must put the name, then a comma, and then the name of the home in question.",
   "basics.command.home.others.list": "<info><white><name></white>'s homes: <white><homes>",
   "basics.command.home.teleporting": "<info>Teleporting...",
+  "basics.command.nickname.another_player_has_that_nickname": "<error>Somebody else already has that nickname.",
+  "basics.command.nickname.cleared": "<success>Your nickname has been cleared.",
+  "basics.command.nickname.cleared.other": "<success>You have successfully cleared <dark_green><name><green>'s nickname.",
+  "basics.command.nickname.set": "<success>Your nickname has been set to: <nickname>",
+  "basics.command.nickname.too_long": "<error>That nickname is too long.",
   "basics.command.sethome.invalid_home_name": "<error>Invalid home name: <dark_red><name>",
-  "basics.command.sethome.set": "<success>Home set."
+  "basics.command.sethome.set": "<success>Home set.",
+  "basics.command.tag.cleared": "<success>Your tag has been cleared.",
+  "basics.command.tag.cleared.other": "<success>You have successfully cleared <dark_green><name><green>'s tag.",
+  "basics.command.tag.set": "<success>Your tag has been set to: <tag>",
+  "basics.command.tag.too_long_lower": "<error>Your tag is too long.",
+  "basics.command.tag.too_long_upper": "<error>Your tag is too long.",
+
+  "basics.components.chat": "<tag><display> <yellow>:</yellow> <gray><message>"
 }
