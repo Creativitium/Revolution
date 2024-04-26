@@ -10,6 +10,9 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 @CommandParameters(name = "unban",
         description = "Unban a player.",
@@ -33,6 +36,12 @@ public class Command_unban extends RCommand
         }, () -> msg(sender, "administration.command.unban.not_banned"));
 
         return true;
+    }
+
+    @Override
+    public @Nullable List<String> tabCompleteOptions(CommandSender sender, Player playerSender, String commandLabel, String[] args)
+    {
+        return args.length == 1 ? match(Administration.getInstance().getBanService().getBannedNames(), args[0]) : null;
     }
 
     @Override

@@ -1,9 +1,12 @@
 {
   "administration.action.ban": "Banning <player> from the server<reason>",
   "administration.action.ban.reason": ", Reason: <yellow><reason></yellow>",
+  "administration.action.banip": "Banning an IP from the server",
+  "administration.action.banip.reason": ", Reason: <yellow><reason></yellow>",
   "administration.action.kick": "Kicking <player> from the server<reason>",
   "administration.action.kick.reason": ", Reason: <yellow><reason></yellow>",
   "administration.action.unban": "Unbanning <player> from the server",
+  "administration.action.unbanip": "Unbanning an IP address from the server",
 
   "administration.broadcast.smite": "<red><player> has been a naughty, naughty boy.",
   "administration.broadcast.reason": "<red>  Reason: <yellow><reason>",
@@ -17,12 +20,14 @@
 
   "administration.command.adminchat.enabled": "<info>Your chat messages from now on will be sent to the admin chat.",
   "administration.command.adminchat.disabled": "<info>Your chat messages from now on will no longer be sent to the admin chat",
+  "administration.command.banip.invalid_ip_address": "<error>That is not a valid IP address.",
   "administration.command.crash.done": "<success>The deed has been done.",
   "administration.command.crash.invalid_method": "<error>That is not a valid method.",
   "administration.command.commandspy.enabled": "<info>CommandSpy enabled.",
   "administration.command.commandspy.disabled": "<info>CommandSpy disabled.",
   "administration.command.say.broadcast": "<light_purple>[Server:<name>] <message>",
   "administration.command.unban.not_banned": "<error>That player isn't banned.",
+  "administration.command.unbanip.not_banned": "<error>That IP address isn't banned.",
   "administration.command.whohas.nobody": "<info>Nobody online has that item in their inventory.",
   "administration.command.whohas.somebody": "<info>Players with item <white><item></white>: <white><players></white>",
 

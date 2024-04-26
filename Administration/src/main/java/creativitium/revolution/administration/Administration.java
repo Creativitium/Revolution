@@ -53,6 +53,7 @@ public class Administration extends JavaPlugin
         Foundation.getInstance().getCommandLoader().loadCommandsManually("administration",
                 new Command_adminchat(),
                 new Command_ban(),
+                new Command_banip(),
                 new Command_crash(),
                 new Command_commandspy(),
                 new Command_kick(),
@@ -60,6 +61,7 @@ public class Administration extends JavaPlugin
                 new Command_smite(),
                 new Command_stop(),
                 new Command_unban(),
+                new Command_unbanip(),
                 new Command_whohas());
     }
 

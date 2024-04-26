@@ -22,8 +22,6 @@ public class BanService extends RService
     private final Map<UUID, Ban> bans = new HashMap<>();
     @Getter
     private final File dataFile = new File(getPlugin().getDataFolder(), "bans.yml");
-    @Getter
-    private YamlConfiguration configuration = new YamlConfiguration();
 
     public BanService()
     {
@@ -73,8 +71,8 @@ public class BanService extends RService
 
     public Optional<Ban> getEntryByOfflinePlayer(OfflinePlayer player)
     {
-        return bans.values().stream().filter(original -> original.getUuid().equals(player.getUniqueId())
-                || original.getUsername().equalsIgnoreCase(player.getName())).findAny();
+        return bans.values().stream().filter(original -> original.hasUuid() && original.getUuid().equals(player.getUniqueId())
+                || original.hasUsername() && original.getUsername().equalsIgnoreCase(player.getName())).findAny();
     }
 
     public Optional<Ban> getEntryByUUID(UUID player)
@@ -84,12 +82,17 @@ public class BanService extends RService
 
     public Optional<Ban> getEntryByUsername(String player)
     {
-        return bans.values().stream().filter(original -> original.getUsername().equalsIgnoreCase(player)).findAny();
+        return bans.values().stream().filter(original -> original.hasUsername() && original.getUsername().equalsIgnoreCase(player)).findAny();
     }
 
     public Optional<Ban> getEntryByIP(InetAddress address)
     {
         return bans.values().stream().filter(entry -> entry.getIps().contains(address.getHostAddress())).findAny();
+    }
+
+    public Optional<Ban> getEntryByIP(String address)
+    {
+        return bans.values().stream().filter(entry -> entry.getIps().contains(address)).findAny();
     }
 
     public Optional<Ban> getEntryWherePossible(UUID uuid, String username, InetAddress address)
@@ -99,15 +102,20 @@ public class BanService extends RService
             return Optional.of(bans.get(uuid));
         }
 
-        return bans.values().stream().filter(entry -> entry.getUsername().equalsIgnoreCase(username)
+        return bans.values().stream().filter(entry -> entry.hasUsername() && entry.getUsername().equalsIgnoreCase(username)
                 || entry.getIps().contains(address.getHostAddress())).findAny();
+    }
+
+    public List<String> getBannedNames()
+    {
+        return bans.values().stream().filter(Ban::hasUsername).map(Ban::getUsername).toList();
     }
 
     public void load()
     {
         if (dataFile.exists())
         {
-            configuration = YamlConfiguration.loadConfiguration(dataFile);
+            final YamlConfiguration configuration = YamlConfiguration.loadConfiguration(dataFile);
             for (String ban : configuration.getKeys(false))
             {
                 UUID uuid;
@@ -139,8 +147,8 @@ public class BanService extends RService
                 }
 
                 bans.put(uuid, Ban.builder()
-                        .username(section.getString("username", "Unknown"))
-                        .uuid(UUID.fromString(Objects.requireNonNull(section.getString("uuid"))))
+                        .username(section.getString("username", null))
+                        .uuid(section.getString("uuid") != null ? UUID.fromString(Objects.requireNonNull(section.getString("uuid"))) : null)
                         .ips(section.getStringList("ips"))
                         .issued(section.getLong("issued"))
                         .reason(section.getString("reason", null))
@@ -153,11 +161,7 @@ public class BanService extends RService
 
     public void save()
     {
-        // This is a pretty ugly way of removing everything from a configuration, but it works so ¯\_(ツ)_/¯
-        for (String key : configuration.getKeys(false))
-        {
-            configuration.set(key, null);
-        }
+        final YamlConfiguration configuration = new YamlConfiguration();
 
         for (Map.Entry<UUID, Ban> ban : bans.entrySet())
         {

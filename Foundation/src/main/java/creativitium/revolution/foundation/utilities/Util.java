@@ -27,7 +27,7 @@ public class Util
     {
         calendar.setTime(new Date());
         calendar.add(unit.type, amount);
-        return calendar.getTime().getTime();
+        return calendar.getTime().getTime() / 1000;
     }
 
     @RequiredArgsConstructor

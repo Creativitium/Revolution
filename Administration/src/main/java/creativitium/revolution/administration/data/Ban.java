@@ -28,6 +28,16 @@ public class Ban
         return Instant.now().getEpochSecond() >= expires;
     }
 
+    public boolean hasUsername()
+    {
+        return username != null;
+    }
+
+    public boolean hasUuid()
+    {
+        return uuid != null;
+    }
+
     public Component craftBanMessage()
     {
         return Foundation.getInstance().getMessageService().getMessage("administration.ban.message",
@@ -36,7 +46,7 @@ public class Ban
                                 Placeholder.unparsed("reason", reason)) : Component.empty()),
                 Placeholder.component("expires", expires != Long.MAX_VALUE ?
                         Foundation.getInstance().getMessageService().getMessage("administration.ban.expires",
-                                Placeholder.unparsed("expires", Util.DATE_FORMAT.format(new Date(expires * 1000)))) : Component.empty()),
+                                Placeholder.unparsed("expires", Util.DATE_FORMAT.format(new Date(expires)))) : Component.empty()),
                 Placeholder.unparsed("by", by));
     }
 
