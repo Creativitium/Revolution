@@ -4,8 +4,18 @@ import creativitium.revolution.basics.Basics;
 import creativitium.revolution.basics.data.Warp;
 import creativitium.revolution.foundation.templates.RService;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +41,46 @@ public class WarpsService extends RService
     public void onStop()
     {
         save();
+    }
+
+    @EventHandler
+    public void onSignModified(SignChangeEvent event)
+    {
+        final PlainTextComponentSerializer plainText = PlainTextComponentSerializer.plainText();
+        if (event.line(0) != null && event.line(1) != null && plainText.serialize(Objects.requireNonNull(event.line(0))).equalsIgnoreCase("[Warp]"))
+        {
+            event.line(0, Component.text("[Warp]").color(warpExists(plainText.serialize(event.line(1))) ? NamedTextColor.DARK_BLUE : NamedTextColor.DARK_RED));
+        }
+    }
+
+    @EventHandler
+    public void onSignInteract(PlayerInteractEvent event)
+    {
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock() != null
+                && event.getClickedBlock().getState() instanceof Sign sign)
+        {
+            final PlainTextComponentSerializer plainText = PlainTextComponentSerializer.plainText();
+
+            if (plainText.serialize(sign.line(0)).equalsIgnoreCase("[Warp]"))
+            {
+                event.setCancelled(true);
+                final Player player = event.getPlayer();
+                final String warpName = plainText.serialize(sign.line(1));
+                getWarp(warpName).ifPresentOrElse(warp ->
+                {
+                    if (warp.getPosition() == null)
+                    {
+                        player.sendMessage(base.getMessageService().getMessage("basics.command.warp.corrupted"));
+                        removeWarp(warpName);
+                        return;
+                    }
+
+                    player.sendMessage(base.getMessageService().getMessage("basics.command.warp.teleporting",
+                            Placeholder.unparsed("warp", warpName)));
+                    player.teleportAsync(warp.getPosition(), PlayerTeleportEvent.TeleportCause.COMMAND);
+                }, () -> player.sendMessage(base.getMessageService().getMessage("basics.command.warp.not_found")));
+            }
+        }
     }
 
     public void load()
