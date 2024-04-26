@@ -17,8 +17,6 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.event.server.RemoteServerCommandEvent;
-import org.bukkit.event.server.ServerCommandEvent;
 
 public class BasicWorldProtection extends RService
 {
@@ -195,10 +193,5 @@ public class BasicWorldProtection extends RService
                 event.setCancelled(true);
             }
         }
-    }
-
-    private CustomWorld getWorld(String name)
-    {
-        return Dimension.getInstance().getWorldManager().getCustomWorld(name);
     }
 }
