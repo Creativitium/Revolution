@@ -50,6 +50,13 @@ public class Command_warp extends RCommand
         }
 
         service.getWarp(args[0]).ifPresentOrElse(warp -> {
+            if (warp.getPosition() == null)
+            {
+                msg(sender, "basics.command.warp.corrupted");
+                service.removeWarp(args[0]);
+                return;
+            }
+
             msg(sender, "basics.command.warp.teleporting", Placeholder.unparsed("warp", args[0]));
             playerSender.teleportAsync(warp.getPosition(), PlayerTeleportEvent.TeleportCause.COMMAND);
         }, () -> msg(sender, "basics.command.warp.not_found"));

@@ -33,6 +33,7 @@
   "basics.command.tag.set": "<success>Your tag has been set to: <tag>",
   "basics.command.tag.too_long_lower": "<error>Your tag is too long.",
   "basics.command.tag.too_long_upper": "<error>Your tag is too long.",
+  "basics.command.warp.corrupted": "<error>This warp was corrupted and has since been deleted.",
   "basics.command.warp.list": "<info>List of warps:",
   "basics.command.warp.list.continued": "<info><white><warps>",
   "basics.command.warp.none_set": "<info>No warps have been set.",

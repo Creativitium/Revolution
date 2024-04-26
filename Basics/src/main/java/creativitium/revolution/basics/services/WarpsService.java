@@ -36,7 +36,17 @@ public class WarpsService extends RService
     public void load()
     {
         final YamlConfiguration configuration = YamlConfiguration.loadConfiguration(warpsFile);
-        configuration.getKeys(false).forEach(key -> warps.put(key, configuration.getSerializable(key, Warp.class)));
+        configuration.getKeys(false).forEach(key -> {
+            try
+            {
+                warps.put(key, configuration.getSerializable(key, Warp.class));
+            }
+            catch (Throwable ex)
+            {
+                getPlugin().getSLF4JLogger().warn("An error occurred while attempting to load warp {}", key, ex);
+                warps.remove(key);
+            }
+        });
     }
 
     public void save()

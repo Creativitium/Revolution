@@ -2,6 +2,7 @@ package creativitium.revolution.dimension.data;
 
 import creativitium.revolution.dimension.Dimension;
 import creativitium.revolution.foundation.Foundation;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import org.bukkit.*;
@@ -11,13 +12,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data
+@Builder
 public class CustomWorld
 {
     private String name;
+    @Builder.Default
     private Command command = null;
     private Generation generation;
     private Flags flags;
-    private Permissions permissions = new Permissions();
+    @Builder.Default
+    private Permissions permissions = Permissions.builder().build();
     //--
     private World world = null;
 
@@ -96,6 +100,7 @@ public class CustomWorld
         return world;
     }
 
+    @Builder
     @Getter
     public static class Command
     {
@@ -106,24 +111,31 @@ public class CustomWorld
         private String permission;
     }
 
+    @Builder
     @Getter
     public static class Flags
     {
+        @Builder.Default
         private boolean autosave = true;
+        @Builder.Default
         private Difficulty difficulty = Difficulty.EASY;
         private boolean hardcore;
         private boolean pvp;
         private SpawnFlags spawn;
         private Distances distances;
+        @Builder.Default
         private Map<String, Object> gameRules = new HashMap<>();
 
+        @Builder
         public static class SpawnFlags
         {
             private boolean allowAnimals;
             private boolean allowMonsters;
+            @Builder.Default
             private boolean keepInMemory = true;
         }
 
+        @Builder
         public static class Distances
         {
             private int sendViewDistance = -1;
@@ -131,29 +143,47 @@ public class CustomWorld
         }
     }
 
+    @Builder
     @Getter
     public static class Generation
     {
+        @Builder.Default
         private World.Environment environment = World.Environment.NORMAL;
+        @Builder.Default
         private boolean generateStructures = true;
+        @Builder.Default
         private WorldType type = WorldType.NORMAL;
+        @Builder.Default
         private String generator = null;
+        @Builder.Default
         private String generatorSettings = null;
+        @Builder.Default
         private String biomeProvider = null;
+        @Builder.Default
         private long seed = Instant.now().getEpochSecond();
     }
 
+    @Builder
     @Getter
     public static class Permissions
     {
+        @Builder.Default
         private String access = "dimension.default.access";
+        @Builder.Default
         private String blockBreak = "dimension.default.block_break";
+        @Builder.Default
         private String blockPlace = "dimension.default.block_place";
+        @Builder.Default
         private String die = "dimension.default.die";
+        @Builder.Default
         private String entityAttack = "dimension.default.entity_attack";
+        @Builder.Default
         private String entityInteract = "dimension.default.entity_interact";
+        @Builder.Default
         private String entityTarget = "dimension.default.entity_target";
-        private String generalInteract = "dimension.default.block_interact";
+        @Builder.Default
+        private String generalInteract = "dimension.default.general_interact";
+        @Builder.Default
         private String dropItemsOnDeath = "dimension.default.drop_items_on_death";
     }
 }

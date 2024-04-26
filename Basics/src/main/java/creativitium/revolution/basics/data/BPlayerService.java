@@ -20,7 +20,16 @@ public class BPlayerService extends RPlayerService<BPlayer>
     @Override
     public void loadDataFromConfiguration()
     {
-        getConfiguration().getKeys(false).forEach(key -> getData().put(UUID.fromString(key), getConfiguration().getSerializable(key, BPlayer.class)));
+        getConfiguration().getKeys(false).forEach(key -> {
+            try
+            {
+                getData().put(UUID.fromString(key), getConfiguration().getSerializable(key, BPlayer.class));
+            }
+            catch (Throwable ex)
+            {
+                getPlugin().getSLF4JLogger().warn("Failed to load player data for {}", key, ex);
+            }
+        });
     }
 
     @Override
