@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 @CommandParameters(name = "sethome",
         description = "Sets a location for you to teleport to later on.",
         usage = "/sethome [name]",
-        permission = "revolution.command.sethome",
+        permission = "basics.command.sethome",
         source = SourceType.ONLY_IN_GAME)
 public class Command_sethome extends RCommand
 {

@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,7 +74,7 @@ public class Command_home extends RCommand
                     else
                     {
                         msg(sender, "basics.command.home.teleporting");
-                        playerSender.teleportAsync(loc);
+                        playerSender.teleportAsync(loc, PlayerTeleportEvent.TeleportCause.COMMAND);
                     }
                 }, () -> msg(sender, "revolution.command.error.player_not_found"));
             }

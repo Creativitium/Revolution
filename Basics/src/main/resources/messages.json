@@ -10,6 +10,8 @@
   "basics.command.delhome.home_not_found": "<error>You can't delete a home that doesn't already exist!",
   "basics.command.delhome.others.how_to": "<info>In order to delete other people's homes, you must put the name, then a comma, and then the name of the home in question.",
   "basics.command.delhome.deleted": "<success>The home <dark_green><home></dark_green> has been successfully deleted.",
+  "basics.command.delwarp.deleted": "<success>The warp <dark_green><warp></dark_green> has been successfully deleted.",
+  "basics.command.delwarp.no_permission": "<error>You don't have permission to delete other users' warps.",
   "basics.command.god.enabled": "<info>God mode enabled.",
   "basics.command.god.disabled": "<info>God mode disabled.",
   "basics.command.home.invalid_home": "<error>Invalid home: <dark_red><home>",
@@ -24,11 +26,18 @@
   "basics.command.nickname.too_long": "<error>That nickname is too long.",
   "basics.command.sethome.invalid_home_name": "<error>Invalid home name: <dark_red><name>",
   "basics.command.sethome.set": "<success>Home set.",
+  "basics.command.setwarp.no_permission": "<error>This warp already exists and you do not have permission to overwrite it.",
+  "basics.command.setwarp.set": "<success>Warp set.",
   "basics.command.tag.cleared": "<success>Your tag has been cleared.",
   "basics.command.tag.cleared.other": "<success>You have successfully cleared <dark_green><name><green>'s tag.",
   "basics.command.tag.set": "<success>Your tag has been set to: <tag>",
   "basics.command.tag.too_long_lower": "<error>Your tag is too long.",
   "basics.command.tag.too_long_upper": "<error>Your tag is too long.",
+  "basics.command.warp.list": "<info>List of warps:",
+  "basics.command.warp.list.continued": "<info><white><warps>",
+  "basics.command.warp.none_set": "<info>No warps have been set.",
+  "basics.command.warp.not_found": "<error>That warp could not be found.",
+  "basics.command.warp.teleporting": "<info>Teleporting to warp <white><warp></white>...",
 
   "basics.components.chat": "<tag><display> <yellow>:</yellow> <gray><message>"
 }
