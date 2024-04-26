@@ -1,0 +1,6 @@
+name: Dimension
+version: '${project.version}'
+main: creativitium.revolution.dimension.Dimension
+api-version: 1.19
+authors: [ videogamesm12 ]
+description: Custom world manager for Revolution

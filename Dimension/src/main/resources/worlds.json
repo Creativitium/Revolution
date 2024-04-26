@@ -1,0 +1,60 @@
+{
+  "settings": {
+    "enabled": true
+  },
+  "worlds": {
+    "flatlands": {
+      "name": "flatlands",
+      "command": {
+        "enabled": true,
+        "description": "Teleports you to the Flatlands.",
+        "usage": "/<command>",
+        "permission": "dimension.command.flatlands",
+        "sourceType": "ONLY_IN_GAME"
+      },
+      "generation": {
+        "environment": "NORMAL",
+        "generateStructures": false,
+        "type": "NORMAL"
+      },
+      "flags": {
+        "autosave": true,
+        "difficulty": "EASY",
+        "hardcore": false,
+        "pvp": true,
+        "spawn": {
+          "allowAnimals": false,
+          "allowMonsters": false,
+          "keepInMemory": true
+        }
+      }
+    },
+    "adminworld": {
+      "name": "adminworld",
+      "command": {
+        "enabled": true,
+        "description": "Teleports you to the Adminworld.",
+        "usage": "/<command>",
+        "aliases": ["aw", "sw", "staffworld"],
+        "permission": "dimension.command.adminworld",
+        "sourceType": "ONLY_IN_GAME"
+      },
+      "generation": {
+        "environment": "NORMAL",
+        "generateStructures": false,
+        "type": "NORMAL"
+      },
+      "flags": {
+        "autosave": true,
+        "difficulty": "EASY",
+        "hardcore": false,
+        "pvp": true,
+        "spawn": {
+          "allowAnimals": false,
+          "allowMonsters": false,
+          "keepInMemory": true
+        }
+      }
+    }
+  }
+}

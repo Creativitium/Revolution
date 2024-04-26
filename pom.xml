@@ -16,6 +16,7 @@
         <module>Foundation</module>
         <module>Basics</module>
         <module>Administration</module>
+        <module>Dimension</module>
     </modules>
     <properties>
         <java.version>17</java.version>

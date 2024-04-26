@@ -36,7 +36,7 @@ public class RServiceGroup
             }
             catch (Throwable ex)
             {
-                Foundation.getSlf4jLogger().warn("Failed to start service " + service.getClass().getName());
+                Foundation.getSlf4jLogger().warn("Failed to start service " + service.getClass().getName(), ex);
             }
         });
     }
