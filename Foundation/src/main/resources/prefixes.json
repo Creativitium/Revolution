@@ -1,0 +1,5 @@
+{
+  "success": "<dark_gray>[<green>✔<dark_gray>] <green>",
+  "error": "<dark_gray>[<red>✕<dark_gray>] <red>",
+  "info": "<dark_gray>[<white>ⓘ<dark_gray>] <gray>"
+}
