@@ -4,6 +4,7 @@ import creativitium.revolution.administration.commands.*;
 import creativitium.revolution.administration.services.AdminChatService;
 import creativitium.revolution.administration.services.BanService;
 import creativitium.revolution.administration.services.CommandSpyService;
+import creativitium.revolution.administration.services.InventorySeeService;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
 import creativitium.revolution.administration.data.APlayerService;
@@ -24,6 +25,8 @@ public class Administration extends JavaPlugin
     private AdminChatService adminChatService;
     @Getter
     private BanService banService;
+    @Getter
+    private InventorySeeService invSeeService;
 
     @Override
     public void onLoad()
@@ -44,6 +47,7 @@ public class Administration extends JavaPlugin
         commandSpyService = services.addService(NamespacedKey.fromString("adm:commandspy"), new CommandSpyService());
         adminChatService = services.addService(NamespacedKey.fromString("adm:adminchat"), new AdminChatService());
         banService = services.addService(NamespacedKey.fromString("adm:bans"), new BanService());
+        invSeeService = services.addService(NamespacedKey.fromString("adm:invsee"), new InventorySeeService());
         services.startServices();
 
         // Set up our commands
@@ -56,6 +60,7 @@ public class Administration extends JavaPlugin
                 new Command_banip(),
                 new Command_crash(),
                 new Command_commandspy(),
+                new Command_invsee(),
                 new Command_kick(),
                 new Command_say(),
                 new Command_smite(),
