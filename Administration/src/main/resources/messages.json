@@ -26,6 +26,8 @@
   "administration.command.commandspy.enabled": "<info>CommandSpy enabled.",
   "administration.command.commandspy.disabled": "<info>CommandSpy disabled.",
   "administration.command.say.broadcast": "<light_purple>[Server:<name>] <message>",
+  "administration.command.sudo.immune": "<error>You can't perform commands as that user.",
+  "administration.command.sudo.performing_command": "<info>Running <white><command></white> as <white><username></white>... ",
   "administration.command.unban.not_banned": "<error>That player isn't banned.",
   "administration.command.unbanip.not_banned": "<error>That IP address isn't banned.",
   "administration.command.whohas.nobody": "<info>Nobody online has that item in their inventory.",

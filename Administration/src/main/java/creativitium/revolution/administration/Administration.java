@@ -60,6 +60,7 @@ public class Administration extends JavaPlugin
                 new Command_say(),
                 new Command_smite(),
                 new Command_stop(),
+                new Command_sudo(),
                 new Command_unban(),
                 new Command_unbanip(),
                 new Command_whohas());
