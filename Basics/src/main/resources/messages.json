@@ -38,6 +38,7 @@
   "basics.command.warp.none_set": "<info>No warps have been set.",
   "basics.command.warp.not_found": "<error>That warp could not be found.",
   "basics.command.warp.teleporting": "<info>Teleporting to warp <white><warp></white>...",
-
+  "basics.command.world.teleporting": "<info>Teleporting...",
+  "basics.command.world.world_not_found": "<error>That world could not be found.",
   "basics.components.chat": "<tag><display> <yellow>:</yellow> <gray><message>"
 }

@@ -13,6 +13,7 @@
   "administration.ban.expires": "<newline><red>Expires: <yellow><expires></yellow>",
   "administration.kick.message": "<red>You have been kicked from the server.<newline>By: <yellow><by></yellow><reason>",
   "administration.kick.reason": "<newline>Reason: <yellow><reason></yellow>",
+  "administration.shutdown.message": "<green>The server is going offline, come back in about a minute.",
 
   "administration.command.adminchat.enabled": "<info>Your chat messages from now on will be sent to the admin chat.",
   "administration.command.adminchat.disabled": "<info>Your chat messages from now on will no longer be sent to the admin chat",
