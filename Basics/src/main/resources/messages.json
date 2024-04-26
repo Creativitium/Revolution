@@ -24,6 +24,8 @@
   "basics.command.nickname.cleared.other": "<success>You have successfully cleared <dark_green><name><green>'s nickname.",
   "basics.command.nickname.set": "<success>Your nickname has been set to: <nickname>",
   "basics.command.nickname.too_long": "<error>That nickname is too long.",
+  "basics.command.realname.player_is": "<info><white><nickname></white> is <white><username></white>.",
+  "basics.command.realname.nobody": "<info>Nobody on the server has that nickname.",
   "basics.command.sethome.invalid_home_name": "<error>Invalid home name: <dark_red><name>",
   "basics.command.sethome.set": "<success>Home set.",
   "basics.command.setwarp.no_permission": "<error>This warp already exists and you do not have permission to overwrite it.",
