@@ -2,14 +2,13 @@ package creativitium.revolution.dimension.data;
 
 import creativitium.revolution.dimension.Dimension;
 import creativitium.revolution.foundation.Foundation;
-import creativitium.revolution.foundation.command.SourceType;
 import lombok.Data;
 import lombok.Getter;
 import org.bukkit.*;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 public class CustomWorld
@@ -75,6 +74,23 @@ public class CustomWorld
                 if (flags.distances.sendViewDistance != -1) world.setSendViewDistance(flags.distances.sendViewDistance);
                 if (flags.distances.simulationDistance != -1) world.setSimulationDistance(flags.distances.simulationDistance);
             }
+
+            flags.gameRules.entrySet().stream().forEach(entry -> {
+                final String rule = entry.getKey();
+                final GameRule gameRule = GameRule.getByName(rule);
+                if (gameRule == null)
+                {
+                    Dimension.getInstance().getSLF4JLogger().warn("Skipping unknown gamerule {}", rule);
+                    return;
+                }
+                else if (!gameRule.getType().isInstance(entry.getValue()))
+                {
+                    Dimension.getInstance().getSLF4JLogger().warn("Skipping gamerule of incorrect type {}", rule);
+                    return;
+                }
+
+                world.setGameRule(gameRule, entry.getValue());
+            });
         }
 
         return world;
@@ -99,6 +115,7 @@ public class CustomWorld
         private boolean pvp;
         private SpawnFlags spawn;
         private Distances distances;
+        private Map<String, Object> gameRules = new HashMap<>();
 
         public static class SpawnFlags
         {
