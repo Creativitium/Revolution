@@ -1,6 +1,8 @@
 package creativitium.revolution.dimension;
 
+import creativitium.revolution.dimension.services.BasicWorldProtection;
 import creativitium.revolution.dimension.services.WorldManager;
+import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
@@ -15,6 +17,8 @@ public class Dimension extends JavaPlugin
     private RServiceGroup group = new RServiceGroup();
     @Getter
     private WorldManager worldManager;
+    @Getter
+    private BasicWorldProtection basicProtection;
 
     @Override
     public void onLoad()
@@ -25,7 +29,12 @@ public class Dimension extends JavaPlugin
     @Override
     public void onEnable()
     {
-        worldManager = group.addService(NamespacedKey.fromString("dim:world_mgr"), new WorldManager());
+        // Import the messages
+        Foundation.getInstance().getMessageService().importFrom(this);
+
+        // Setup our services
+        worldManager = group.addService(NamespacedKey.fromString("dim:worlds"), new WorldManager());
+        basicProtection = group.addService(NamespacedKey.fromString("dim:protection"), new BasicWorldProtection());
         group.startServices();
     }
 

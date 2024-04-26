@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import creativitium.revolution.dimension.Dimension;
 import creativitium.revolution.dimension.data.CustomWorld;
 import creativitium.revolution.foundation.templates.RService;
+import lombok.Getter;
+import org.bukkit.World;
 
 import java.io.File;
 import java.io.FileReader;
@@ -12,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+@Getter
 public class WorldManager extends RService
 {
     private static final Gson gson = new Gson();
@@ -25,6 +28,7 @@ public class WorldManager extends RService
     @Override
     public void onStart()
     {
+        getPlugin().getSLF4JLogger().info("World management service started");
         final File file = new File(getPlugin().getDataFolder(), "worlds.json");
         if (!file.exists())
         {
@@ -46,20 +50,38 @@ public class WorldManager extends RService
 
         try
         {
-            WorldConfig config = gson.fromJson(new FileReader(file), WorldConfig.class);
+            getPlugin().getSLF4JLogger().info("Loading worlds configuration file...");
+            WorldConfig worldConfig = gson.fromJson(new FileReader(file), WorldConfig.class);
 
             if (this.config == null)
-                this.config = config;
+            {
+                this.config = worldConfig;
+            }
             else
-                this.config.combine(config);
+            {
+                getPlugin().getSLF4JLogger().info("Combining what's in memory already...");
+                this.config.combine(worldConfig);
+            }
+
+            if (this.config.settings.enabled)
+            {
+                this.config.worlds.values().forEach(CustomWorld::load);
+            }
         }
         catch (Exception ex)
         {
             getPlugin().getSLF4JLogger().error("Failed to load the world configuration. Worlds will not be generated!", ex);
         }
+    }
 
-        if (this.config.settings.enabled)
-            this.config.worlds.values().forEach(CustomWorld::load);
+    public boolean isCustomWorld(World world)
+    {
+        return config.worlds.containsKey(world.getName());
+    }
+
+    public CustomWorld getCustomWorld(String name)
+    {
+        return config.worlds.get(name);
     }
 
     @Override

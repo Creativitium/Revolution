@@ -1,10 +1,13 @@
 package creativitium.revolution.dimension.data;
 
+import creativitium.revolution.dimension.Dimension;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.command.SourceType;
 import lombok.Data;
 import lombok.Getter;
 import org.bukkit.*;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 
 import java.time.Instant;
 
@@ -15,6 +18,7 @@ public class CustomWorld
     private Command command = null;
     private Generation generation;
     private Flags flags;
+    private Permissions permissions = new Permissions();
     //--
     private World world = null;
 
@@ -120,5 +124,19 @@ public class CustomWorld
         private String generatorSettings = null;
         private String biomeProvider = null;
         private long seed = Instant.now().getEpochSecond();
+    }
+
+    @Getter
+    public static class Permissions
+    {
+        private String access = "dimension.default.access";
+        private String blockBreak = "dimension.default.block_break";
+        private String blockPlace = "dimension.default.block_place";
+        private String die = "dimension.default.die";
+        private String entityAttack = "dimension.default.entity_attack";
+        private String entityInteract = "dimension.default.entity_interact";
+        private String entityTarget = "dimension.default.entity_target";
+        private String generalInteract = "dimension.default.block_interact";
+        private String dropItemsOnDeath = "dimension.default.drop_items_on_death";
     }
 }
