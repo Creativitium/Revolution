@@ -1,8 +1,5 @@
 {
   "revolution.action.format": "<red><name> - <action>",
-  "revolution.action.ban": "Banning <player><reason>",
-  "revolution.action.ban.reason": ", Reason: <reason>",
-  "revolution.action.unban": "Unbanning <player> from the server",
 
   "revolution.command.error.internal": "<error>Command error: <yellow><exception>",
   "revolution.command.error.no_permission.command": "<error>You don't have permission to use that command.",
@@ -12,13 +9,5 @@
 
   "revolution.command.messages.reload": "<success>The messages system has been reloaded.",
   "revolution.command.messages.stats": "<info>There are currently <white><prefixcount> <gray>prefixes and <white><messagescount> <gray>messages loaded.",
-  "revolution.command.messages.test": "Output:<newline><output>",
-  "revolution.components.guardian.format": "<header><newline><message>",
-  "revolution.components.guardian.lockdown.header": "<#0000FF><bold>NOTICE</bold>",
-  "revolution.components.guardian.lockdown.message": "<light_blue>This server is currently in lockdown mode.<newline>Non-admins cannot join at this current moment in time.",
-  "revolution.components.guardian.shutdown.header": "<#0000FF><bold>NOTICE</bold>",
-  "revolution.components.guardian.shutdown.message": "<light_blue>The server is restarting. Come back in a few minutes.",
-  "revolution.components.chat": "<tag> <name> <yellow>:</yellow> <gray><message>",
-  "revolution.components.join_message": "<dark_gray>[<green>+<dark_gray>] <name>",
-  "revolution.components.leave_message": "<dark_gray>[<red>-<dark_gray>] <name>"
+  "revolution.command.messages.test": "Output:<newline><output>"
 }
