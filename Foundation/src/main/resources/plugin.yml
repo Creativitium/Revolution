@@ -4,5 +4,6 @@ main: creativitium.revolution.foundation.Foundation
 api-version: 1.19
 authors: [ videogamesm12 ]
 description: The core of Creativitium
+load: STARTUP
 libraries:
   - org.javassist:javassist:3.29.1-GA
