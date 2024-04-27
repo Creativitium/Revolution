@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.util.Vector;
@@ -78,6 +79,16 @@ public class BasicsService extends RService
         final Player player = event.getPlayer();
 
         event.quitMessage(base.getMessageService().getMessage("basics.components.leave_message",
+                Placeholder.component("display", player.displayName()),
+                Placeholder.unparsed("username", player.getName())));
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event)
+    {
+        final Player player = event.getPlayer();
+
+        event.deathMessage(base.getMessageService().getMessage("basics.components.death_message",
                 Placeholder.component("display", player.displayName()),
                 Placeholder.unparsed("username", player.getName())));
     }

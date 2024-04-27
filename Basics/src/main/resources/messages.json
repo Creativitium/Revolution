@@ -19,6 +19,9 @@
   "basics.command.home.others.how_to": "<info>In order to warp to other people's homes, you must put the name, then a comma, and then the name of the home in question.",
   "basics.command.home.others.list": "<info><white><name></white>'s homes: <white><homes>",
   "basics.command.home.teleporting": "<info>Teleporting...",
+  "basics.command.near.nearby_players": "<info>Nearby players: <white><players></white>",
+  "basics.command.near.nearby_players.format": "<player> (<distance>m)",
+  "basics.command.near.nobody_is_nearby": "<info>Nobody is currently near you within a <white><radius>m</white> radius.",
   "basics.command.nickname.another_player_has_that_nickname": "<error>Somebody else already has that nickname.",
   "basics.command.nickname.cleared": "<success>Your nickname has been cleared.",
   "basics.command.nickname.cleared.other": "<success>You have successfully cleared <dark_green><name><green>'s nickname.",
@@ -45,6 +48,7 @@
   "basics.command.world.world_not_found": "<error>That world could not be found.",
 
   "basics.components.chat": "<tag><display> <yellow>:</yellow> <gray><message>",
+  "basics.components.death_message": "<dark_gray>[<white>☠</white>]</dark_gray> <display>",
   "basics.components.join_message": "<dark_gray>[<green>+</green>]</dark_gray> <display>",
   "basics.components.leave_message": "<dark_gray>[<red>-</red>]</dark_gray> <display>"
 }
