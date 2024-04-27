@@ -47,8 +47,8 @@ public class Command_seen extends RCommand
                             Placeholder.component("nickname", data.getNickname() != null ? data.getNickname() : Component.text(data.getName())),
                             Placeholder.unparsed("date", Util.DATE_FORMAT.format(new Date(data.getLastOnline() * 1000))));
 
-                    if (sender.hasPermission("basics.command.seen.see_ips") && data.getLastIP() != null)
-                        msg(sender, "basics.command.seen.info.ip", Placeholder.unparsed("ip", data.getLastIP()));
+                    if (sender.hasPermission("basics.command.seen.see_ips") && (player.isOnline() || data.getLastIP() != null))
+                        msg(sender, "basics.command.seen.info.ip", Placeholder.unparsed("ip", player.isOnline() ? player.getPlayer().getAddress().getAddress().getHostAddress() : data.getLastIP()));
 
                     if (sender.hasPermission("basics.command.seen.see_location") && (player.isOnline() || data.getLoginLocation() != null))
                     {

@@ -32,8 +32,9 @@ public class Command_realname extends RCommand
         final PlainTextComponentSerializer serializer = PlainTextComponentSerializer.plainText();
         final BPlayerService service = (BPlayerService) Shortcuts .getExternalPlayerService(Basics.getInstance());
 
-        Bukkit.getOnlinePlayers().stream().filter(p -> serializer.serialize(service.getPlayerData(p.getUniqueId()).getNickname())
-                .equalsIgnoreCase(nickname)).findAny().ifPresentOrElse(player -> msg(sender, "basics.command.realname.player_is",
+        Bukkit.getOnlinePlayers().stream().filter(p -> service.getPlayerData(p.getUniqueId()).getNickname() != null
+                && serializer.serialize(service.getPlayerData(p.getUniqueId()).getNickname()).equalsIgnoreCase(nickname))
+                .findAny().ifPresentOrElse(player -> msg(sender, "basics.command.realname.player_is",
                         Placeholder.component("nickname", service.getPlayerData(player.getUniqueId()).getNickname()),
                         Placeholder.unparsed("username", player.getName())),
                 () -> msg(sender, "basics.command.realname.nobody"));
