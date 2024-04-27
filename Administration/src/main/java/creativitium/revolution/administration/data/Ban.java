@@ -46,7 +46,7 @@ public class Ban
                                 Placeholder.unparsed("reason", reason)) : Component.empty()),
                 Placeholder.component("expires", expires != Long.MAX_VALUE ?
                         Foundation.getInstance().getMessageService().getMessage("administration.ban.expires",
-                                Placeholder.unparsed("expires", Util.DATE_FORMAT.format(new Date(expires)))) : Component.empty()),
+                                Placeholder.unparsed("expires", Util.DATE_FORMAT.format(new Date(expires * 1000)))) : Component.empty()),
                 Placeholder.unparsed("by", by));
     }
 

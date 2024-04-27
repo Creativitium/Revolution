@@ -53,6 +53,7 @@ public class Basics extends JavaPlugin
                 new Command_near(),
                 new Command_nickname(),
                 new Command_realname(),
+                new Command_seen(),
                 new Command_sethome(),
                 new Command_setwarp(),
                 new Command_tag(),

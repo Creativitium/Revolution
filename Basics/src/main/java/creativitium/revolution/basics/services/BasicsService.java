@@ -19,6 +19,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.util.Vector;
 
+import java.time.Instant;
 import java.util.List;
 
 public class BasicsService extends RService
@@ -71,6 +72,10 @@ public class BasicsService extends RService
         event.joinMessage(base.getMessageService().getMessage("basics.components.join_message",
                 Placeholder.component("display", player.displayName()),
                 Placeholder.unparsed("username", player.getName())));
+
+
+        data.setLastOnline(Instant.now().getEpochSecond());
+        data.setLastIP(event.getPlayer().getAddress().getAddress().getHostAddress());
     }
 
     @EventHandler
@@ -81,6 +86,11 @@ public class BasicsService extends RService
         event.quitMessage(base.getMessageService().getMessage("basics.components.leave_message",
                 Placeholder.component("display", player.displayName()),
                 Placeholder.unparsed("username", player.getName())));
+
+        final BPlayer data = (BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId());
+        data.setLoginLocation(event.getPlayer().getLocation());
+        data.setLastOnline(Instant.now().getEpochSecond());
+        data.setLastIP(event.getPlayer().getAddress().getAddress().getHostAddress());
     }
 
     @EventHandler
