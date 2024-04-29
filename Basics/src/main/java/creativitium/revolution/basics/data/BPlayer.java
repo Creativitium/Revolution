@@ -24,6 +24,7 @@ public class BPlayer implements ConfigurationSerializable
     private Map<String, Location> homes = new HashMap<>();
     private long lastOnline = 0L;
     private Location loginLocation = null;
+    private Location lastLocation = null;
     private String lastIP = null;
 
     public BPlayer()

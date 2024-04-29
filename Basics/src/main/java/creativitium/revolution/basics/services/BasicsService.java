@@ -17,6 +17,7 @@ import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.util.Vector;
 
 import java.time.Instant;
@@ -101,6 +102,12 @@ public class BasicsService extends RService
         event.deathMessage(base.getMessageService().getMessage("basics.components.death_message",
                 Placeholder.component("display", player.displayName()),
                 Placeholder.unparsed("username", player.getName())));
+
+        if (player.hasPermission("basics.command.back"))
+        {
+            ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId())).setLastLocation(player.getLocation());
+            player.sendMessage(base.getMessageService().getMessage("basics.general.use_back"));
+        }
     }
 
     @EventHandler
@@ -114,6 +121,17 @@ public class BasicsService extends RService
                 Placeholder.component("nickname", data.getNickname() != null ? data.getNickname() : Component.text(event.getPlayer().getName())),
                 Placeholder.unparsed("name", event.getPlayer().getName()),
                 Placeholder.component("message", message)));
+    }
+
+    @EventHandler
+    public void onPlayerTeleport(PlayerTeleportEvent event)
+    {
+        final Player player = event.getPlayer();
+
+        if (event.getCause() == PlayerTeleportEvent.TeleportCause.COMMAND && player.hasPermission("basics.command.back"))
+        {
+            ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId())).setLastLocation(player.getLocation());
+        }
     }
 
     @EventHandler

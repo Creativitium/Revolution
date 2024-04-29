@@ -99,7 +99,7 @@ public class Command_home extends RCommand
             if (data.getHomes().containsKey(args[0]))
             {
                 msg(sender, "basics.command.home.teleporting");
-                playerSender.teleportAsync(data.getHomes().get(args[0]));
+                playerSender.teleportAsync(data.getHomes().get(args[0]), PlayerTeleportEvent.TeleportCause.COMMAND);
             }
             else
             {

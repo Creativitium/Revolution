@@ -2,6 +2,8 @@
   "basics.action.nickname.clearing_all": "Clearing nicknames for all players on the server",
   "basics.action.tag.clearing_all": "Clearing tags for all players on the server",
 
+  "basics.command.back.no_place_to_go": "<error>You have no place to teleport to.",
+  "basics.command.back.teleporting": "<info>Teleporting...",
   "basics.command.berserk.enabled": "<info><red>Berserk!",
   "basics.command.berserk.disabled": "<info>You suddenly feel calmer.",
   "basics.command.delhome.deleted.all": "<success>All of your homes have been successfully deleted.",
@@ -53,6 +55,8 @@
   "basics.command.warp.teleporting": "<info>Teleporting to warp <white><warp></white>...",
   "basics.command.world.teleporting": "<info>Teleporting...",
   "basics.command.world.world_not_found": "<error>That world could not be found.",
+
+  "basics.general.use_back": "<info>Use <white>/back</white> to return to your death point.",
 
   "basics.components.chat": "<tag><display> <yellow>:</yellow> <gray><message>",
   "basics.components.death_message": "<dark_gray>[<white>☠</white>]</dark_gray> <display>",
