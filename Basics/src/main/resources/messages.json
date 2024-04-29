@@ -16,6 +16,7 @@
   "basics.command.god.disabled": "<info>God mode disabled.",
   "basics.command.home.invalid_home": "<error>Invalid home: <dark_red><home>",
   "basics.command.home.list": "<info>Your homes: <white><homes>",
+  "basics.command.home.no_homes": "<info>You don't have any homes set.",
   "basics.command.home.others.how_to": "<info>In order to warp to other people's homes, you must put the name, then a comma, and then the name of the home in question.",
   "basics.command.home.others.list": "<info><white><name></white>'s homes: <white><homes>",
   "basics.command.home.teleporting": "<info>Teleporting...",

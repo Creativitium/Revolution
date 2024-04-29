@@ -16,6 +16,7 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CommandParameters(name = "home",
@@ -33,7 +34,21 @@ public class Command_home extends RCommand
 
         if (args.length == 0)
         {
-            msg(sender, "basics.command.home.list", Placeholder.unparsed("homes", StringUtils.join(data.getHomes().keySet(), ", ")));
+            final Map<String, Location> homes = data.getHomes();
+
+            if (homes.isEmpty())
+            {
+                msg(sender, "basics.command.home.no_homes");
+            }
+            else if (homes.size() == 1)
+            {
+                msg(sender, "basics.command.home.teleporting");
+                playerSender.teleportAsync(homes.values().iterator().next(), PlayerTeleportEvent.TeleportCause.COMMAND);
+            }
+            else
+            {
+                msg(sender, "basics.command.home.list", Placeholder.unparsed("homes", StringUtils.join(homes.keySet(), ", ")));
+            }
             return true;
         }
 
