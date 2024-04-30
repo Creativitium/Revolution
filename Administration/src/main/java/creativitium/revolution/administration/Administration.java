@@ -75,7 +75,8 @@ public class Administration extends JavaPlugin
                 new Command_sudo(),
                 new Command_unban(),
                 new Command_unbanip(),
-                new Command_whohas());
+                new Command_whohas(),
+                new Command_wildcard());
     }
 
     @Override

@@ -1,3 +1,9 @@
+wildcard:
+  placeholder: '@p'
+  blacklist:
+    - multirun
+    - wildcard
+
 multirun:
   placeholder: '@n'
   limits:
