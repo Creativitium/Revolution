@@ -9,7 +9,6 @@ import creativitium.revolution.foundation.utilities.MM;
 import creativitium.revolution.foundation.utilities.Shortcuts;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.apache.commons.lang3.ArrayUtils;
@@ -18,6 +17,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -133,7 +133,7 @@ public class Command_tag extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Basics.getInstance();
     }

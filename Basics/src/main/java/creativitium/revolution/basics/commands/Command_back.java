@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 @CommandParameters(name = "back",
         description = "Return to your last location.",
@@ -37,7 +38,7 @@ public class Command_back extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Basics.getInstance();
     }

@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 public class WorldCommand extends RCommand
 {
@@ -29,7 +30,7 @@ public class WorldCommand extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Dimension.getInstance();
     }

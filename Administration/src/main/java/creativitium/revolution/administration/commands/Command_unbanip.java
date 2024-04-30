@@ -2,25 +2,15 @@ package creativitium.revolution.administration.commands;
 
 import com.google.common.net.InetAddresses;
 import creativitium.revolution.administration.Administration;
-import creativitium.revolution.administration.data.Ban;
 import creativitium.revolution.administration.services.BanService;
-import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
-import creativitium.revolution.foundation.utilities.Util;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-
-import java.time.Instant;
-import java.util.Collections;
-import java.util.UUID;
+import org.jetbrains.annotations.NotNull;
 
 @CommandParameters(name = "unbanip",
         description = "Unban an IP address.",
@@ -53,7 +43,7 @@ public class Command_unbanip extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Administration.getInstance();
     }

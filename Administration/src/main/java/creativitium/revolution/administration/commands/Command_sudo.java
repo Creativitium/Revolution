@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -53,7 +54,7 @@ public class Command_sudo extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Administration.getInstance();
     }

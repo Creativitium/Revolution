@@ -4,10 +4,10 @@ import creativitium.revolution.basics.Basics;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -53,7 +53,7 @@ public class Command_kill extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Basics.getInstance();
     }

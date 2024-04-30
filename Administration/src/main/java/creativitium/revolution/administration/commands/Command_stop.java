@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 @CommandParameters(name = "stop",
         description = "Disconnects all players from the server and shuts it down.",
@@ -27,7 +28,7 @@ public class Command_stop extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Administration.getInstance();
     }

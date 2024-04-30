@@ -40,6 +40,10 @@ public abstract class RCommand
     @Getter
     private final RCommandInternal internalCommand;
 
+    /**
+     * Constructor for RCommand that does not take any parameters on its own, but rather pulls them from the
+     *  CommandParameters annotation. If the annotation is not present, the command will fail to initialize.
+     */
     public RCommand()
     {
         if (!getClass().isAnnotationPresent(CommandParameters.class))
@@ -61,6 +65,17 @@ public abstract class RCommand
         internalCommand = new RCommandInternal(this);
     }
 
+    /**
+     * Constructor for RCommand that takes parameters on its own and does not require an annotation to be included
+     *  as part of the class. Useful for creating a single boilerplate/template command that will be generated
+     *  dynamically during runtime.
+     * @param name          String
+     * @param description   String
+     * @param usage         String
+     * @param aliases       String[]
+     * @param permission    String
+     * @param source        SourceType
+     */
     public RCommand(String name, String description, String usage, String[] aliases, String permission, SourceType source)
     {
         this.name = name;
@@ -76,7 +91,12 @@ public abstract class RCommand
 
     public abstract boolean run(CommandSender sender, Player playerSender, String commandLabel, String[] args);
 
-    public abstract Plugin getPlugin();
+    /**
+     * Get the plugin that is responsible for the command. This should never be null because if it is, the server will
+     *  crash upon attempting to initialize the commands.
+     * @return  Plugin
+     */
+    public abstract @NotNull Plugin getPlugin();
 
     @Nullable
     public List<String> tabCompleteOptions(CommandSender sender, Player playerSender, String commandLabel, String[] args)
@@ -84,26 +104,52 @@ public abstract class RCommand
         return Collections.emptyList();
     }
 
+    /**
+     * Send a message to a CommandSender with optional placeholders.
+     * @param sender        CommandSender
+     * @param text          String
+     * @param placeholders  TagResolver...
+     */
     protected void msg(CommandSender sender, String text, TagResolver... placeholders)
     {
         sender.sendMessage(foundation.getMessageService().getMessage(text, placeholders));
     }
 
+    /**
+     * Broadcast a message to the server with optional placeholders.
+     * @param text          String
+     * @param placeholders  TagResolver...
+     */
     protected void broadcast(String text, TagResolver... placeholders)
     {
         Bukkit.broadcast(foundation.getMessageService().getMessage(text, placeholders));
     }
 
+    /**
+     * Broadcast an administrative action to the server as a Component.
+     * @param sender    CommandSender
+     * @param action    Component
+     */
     protected void action(CommandSender sender, Component action)
     {
         Bukkit.broadcast(foundation.getMessageService().getMessage("revolution.action.format", Placeholder.unparsed("name", sender.getName()), Placeholder.component("action", action)));
     }
 
+    /**
+     * Broadcast an administrative action to the server with optional placeholders.
+     * @param sender        CommandSender
+     * @param text          String
+     * @param placeholders  TagResolver...
+     */
     protected void action(CommandSender sender, String text, TagResolver... placeholders)
     {
         action(sender, foundation.getMessageService().getMessage(text, placeholders));
     }
 
+    /**
+     * Gets a list of all online players' names.
+     * @return  List<String>
+     */
     protected final List<String> getOnlinePlayers()
     {
         return Bukkit.getOnlinePlayers().stream().map(HumanEntity::getName).toList();
@@ -121,6 +167,11 @@ public abstract class RCommand
         }
     }
 
+    protected final Optional<OfflinePlayer> getOfflinePlayerIfCached(String name)
+    {
+        return Optional.ofNullable(Bukkit.getOfflinePlayerIfCached(name));
+    }
+
     protected final Optional<Player> getPlayer(String nameOrUuid)
     {
         try
@@ -133,6 +184,12 @@ public abstract class RCommand
         }
     }
 
+    /**
+     * Get all the Strings in a list that start with the given input String.
+     * @param args  List<String>
+     * @param input String
+     * @return      List<String>
+     */
     protected final List<String> match(List<String> args, String input)
     {
         return args.stream().filter(string -> string.toLowerCase().equalsIgnoreCase(input) || string.toLowerCase().startsWith(input.toLowerCase())).toList();
@@ -163,7 +220,7 @@ public abstract class RCommand
             {
                 if (!external.run(sender, sender instanceof Player player ? player : null, commandLabel, args))
                 {
-                    sender.sendMessage(Component.text(getUsage()));
+                    external.msg(sender, "revolution.command.error.usage", Placeholder.unparsed("usage", getUsage()));
                 }
             }
             catch (Throwable ex)

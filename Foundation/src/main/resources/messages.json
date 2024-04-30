@@ -1,6 +1,8 @@
 {
   "revolution.action.format": "<red><name> - <action>",
 
+  "revolution.command.error.description": "<info><description>",
+  "revolution.command.error.usage": "<info>Usage: <white><usage></white>",
   "revolution.command.error.internal": "<error>Command error: <yellow><exception>",
   "revolution.command.error.no_permission.command": "<error>You don't have permission to use that command.",
   "revolution.command.error.no_permission.subcommand": "<error>You don't have permission to do that!",

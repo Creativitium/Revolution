@@ -1,6 +1,5 @@
 package creativitium.revolution.administration.commands;
 
-import com.destroystokyo.paper.MaterialTags;
 import creativitium.revolution.administration.Administration;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
@@ -13,10 +12,10 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 @CommandParameters(name = "whohas",
         description = "List all the players who have a certain item in their inventory.",
@@ -57,7 +56,7 @@ public class Command_whohas extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Administration.getInstance();
     }

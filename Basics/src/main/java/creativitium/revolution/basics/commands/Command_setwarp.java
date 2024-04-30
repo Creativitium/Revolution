@@ -1,21 +1,18 @@
 package creativitium.revolution.basics.commands;
 
 import creativitium.revolution.basics.Basics;
-import creativitium.revolution.basics.data.BPlayer;
 import creativitium.revolution.basics.data.Warp;
 import creativitium.revolution.basics.services.WarpsService;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
-import creativitium.revolution.foundation.utilities.Shortcuts;
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 @CommandParameters(name = "setwarp",
         description = "Sets a location for anyone to teleport to later on.",
@@ -52,7 +49,7 @@ public class Command_setwarp extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Basics.getInstance();
     }

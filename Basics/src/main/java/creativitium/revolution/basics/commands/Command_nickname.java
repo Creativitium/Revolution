@@ -2,7 +2,6 @@ package creativitium.revolution.basics.commands;
 
 import creativitium.revolution.basics.Basics;
 import creativitium.revolution.basics.data.BPlayer;
-import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
@@ -10,13 +9,13 @@ import creativitium.revolution.foundation.utilities.MM;
 import creativitium.revolution.foundation.utilities.Shortcuts;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -125,7 +124,7 @@ public class Command_nickname extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Basics.getInstance();
     }

@@ -9,6 +9,7 @@ import creativitium.revolution.foundation.utilities.Shortcuts;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 @CommandParameters(name = "berserk",
         description = "Go berserk!",
@@ -29,7 +30,7 @@ public class Command_berserk extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Basics.getInstance();
     }

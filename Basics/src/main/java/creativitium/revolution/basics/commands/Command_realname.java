@@ -1,21 +1,18 @@
 package creativitium.revolution.basics.commands;
 
 import creativitium.revolution.basics.Basics;
-import creativitium.revolution.basics.data.BPlayer;
 import creativitium.revolution.basics.data.BPlayerService;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-
-import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 
 @CommandParameters(name = "realname",
         description = "Unmask the user behind a nickname.",
@@ -42,7 +39,7 @@ public class Command_realname extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Basics.getInstance();
     }

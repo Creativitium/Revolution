@@ -6,10 +6,10 @@ import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 @CommandParameters(name = "commandspy",
         description = "Toggles CommandSpy - a tool that lets you see other players' commands.",
@@ -30,7 +30,7 @@ public class Command_commandspy extends RCommand
     }
 
     @Override
-    public Plugin getPlugin()
+    public @NotNull Plugin getPlugin()
     {
         return Administration.getInstance();
     }
