@@ -233,7 +233,7 @@ public abstract class RCommand
                 Component exceptionMessage = Component.text(ex.getMessage() != null ? ex.getMessage() : ex.getClass().getName());
                 if (sender.hasPermission("foundation.command.see_stacktrace"))
                 {
-                    exceptionMessage = exceptionMessage.hoverEvent(HoverEvent.showText(Component.translatable("chat.copy.click").color(NamedTextColor.WHITE).appendNewline().appendNewline().append(Component.text(ExceptionUtils.getStackTrace(ex).replaceAll("\t", "    ")).color(NamedTextColor.GRAY).decorate(TextDecoration.ITALIC))))
+                    exceptionMessage = exceptionMessage.hoverEvent(HoverEvent.showText(Component.translatable("chat.copy.click").color(NamedTextColor.WHITE).appendNewline().append(Component.text(ExceptionUtils.getStackTrace(ex).replaceAll("\t", "    ")).color(NamedTextColor.GRAY).decorate(TextDecoration.ITALIC))))
                         .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, ExceptionUtils.getStackTrace(ex)));
                 }
 
@@ -261,7 +261,7 @@ public abstract class RCommand
                 Component exceptionMessage = Component.text(ex.getMessage() != null ? ex.getMessage() : ex.getClass().getName());
                 if (sender.hasPermission("foundation.command.see_stacktrace"))
                 {
-                    exceptionMessage = exceptionMessage.hoverEvent(HoverEvent.showText(Component.translatable("chat.copy.click").color(NamedTextColor.WHITE).appendNewline().appendNewline().append(Component.text(ExceptionUtils.getStackTrace(ex).replaceAll("\t", "    ")).color(NamedTextColor.GRAY).decorate(TextDecoration.ITALIC))))
+                    exceptionMessage = exceptionMessage.hoverEvent(HoverEvent.showText(Component.translatable("chat.copy.click").color(NamedTextColor.WHITE).appendNewline().append(Component.text(ExceptionUtils.getStackTrace(ex).replaceAll("\t", "    ")).color(NamedTextColor.GRAY).decorate(TextDecoration.ITALIC))))
                             .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, ExceptionUtils.getStackTrace(ex)));
                 }
 
