@@ -7,7 +7,6 @@ import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -238,7 +237,7 @@ public abstract class RCommand
                 }
 
                 external.msg(sender, "revolution.command.error.internal", Placeholder.component("exception", exceptionMessage));
-                ex.printStackTrace();
+                getPlugin().getSLF4JLogger().error("Command exception details:", ex);
             }
 
             return true;
@@ -266,7 +265,7 @@ public abstract class RCommand
                 }
 
                 external.msg(sender, "revolution.command.error.internal", Placeholder.component("exception", exceptionMessage));
-                ex.printStackTrace();
+                getPlugin().getSLF4JLogger().error("Command exception details:", ex);
             }
 
             return options != null ? options : new ArrayList<>();

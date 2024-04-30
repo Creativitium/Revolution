@@ -3,8 +3,6 @@ package creativitium.revolution.foundation;
 import creativitium.revolution.foundation.command.RCommand;
 import org.bukkit.Bukkit;
 import org.reflections.Reflections;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;

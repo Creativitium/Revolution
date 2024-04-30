@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class RServiceGroup
 {
-    private Map<NamespacedKey, RService> services = new HashMap<>();
+    private final Map<NamespacedKey, RService> services = new HashMap<>();
 
     public <T extends RService> T addService(NamespacedKey tag, T service)
     {
