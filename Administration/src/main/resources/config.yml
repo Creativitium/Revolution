@@ -1,0 +1,8 @@
+multirun:
+  placeholder: '@n'
+  limits:
+    cutoff: 500
+    warning: 25
+  blacklist:
+    - multirun
+    - wildcard

@@ -32,11 +32,17 @@ public class Administration extends JavaPlugin
     public void onLoad()
     {
         instance = this;
+
+        // Save our configuration if it doesn't exist already
+        this.saveDefaultConfig();
     }
 
     @Override
     public void onEnable()
     {
+        // Load the configuration
+        this.reloadConfig();
+
         // Import our messages
         Foundation.getInstance().getMessageService().importFrom(this);
 
@@ -62,6 +68,7 @@ public class Administration extends JavaPlugin
                 new Command_commandspy(),
                 new Command_invsee(),
                 new Command_kick(),
+                new Command_multirun(),
                 new Command_say(),
                 new Command_smite(),
                 new Command_stop(),
