@@ -70,6 +70,7 @@ public class Administration extends JavaPlugin
                 new Command_invsee(),
                 new Command_kick(),
                 new Command_multirun(),
+                new Command_rawsay(),
                 new Command_say(),
                 new Command_smite(),
                 new Command_stop(),

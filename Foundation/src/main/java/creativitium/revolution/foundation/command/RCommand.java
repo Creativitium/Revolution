@@ -1,6 +1,7 @@
 package creativitium.revolution.foundation.command;
 
 import creativitium.revolution.foundation.Foundation;
+import creativitium.revolution.foundation.utilities.MM;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -127,6 +128,15 @@ public abstract class RCommand
     protected void broadcast(String text, TagResolver... placeholders)
     {
         Bukkit.broadcast(foundation.getMessageService().getMessage(text, placeholders));
+    }
+
+    /**
+     * Broadcast a message to the server.
+     * @param text          String
+     */
+    protected void broadcast(String text)
+    {
+        Bukkit.broadcast(MM.getMiniMessageAll().deserialize(text));
     }
 
     /**
