@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @CommandParameters(name = "entitywipe",
         description = "Remove entities of a specific type from the server.",
-        usage = "/entitywipe [mobs | all | types]",
+        usage = "/entitywipe [mobs | all | types...]",
         aliases = {"ew", "mp", "mobpurge", "killall", "rd"},
         permission = "administration.command.entitywipe",
         source = SourceType.BOTH)
@@ -50,18 +50,17 @@ public class Command_entitywipe extends RCommand
                 }
                 default ->
                 {
-                    for (String type : args[0].toUpperCase().split(","))
-                    {
+                    types.addAll(Arrays.stream(args).filter(type -> {
                         try
                         {
-                            types.add(EntityType.valueOf(type));
-                        }
-                        catch (IllegalArgumentException ex)
-                        {
-                            msg(sender, "revolution.command.error.invalid_type", Placeholder.unparsed("type", type));
+                            EntityType.valueOf(type.toUpperCase());
                             return true;
                         }
-                    }
+                        catch (Throwable ex)
+                        {
+                            return false;
+                        }
+                    }).map(type -> EntityType.valueOf(type.toUpperCase())).toList());
                 }
             }
         }
@@ -87,14 +86,21 @@ public class Command_entitywipe extends RCommand
     @Override
     public @Nullable List<String> tabCompleteOptions(CommandSender sender, Player playerSender, String commandLabel, String[] args)
     {
-        if (args.length != 1) return null;
-
+        if (args.length == 0) return null;
         final List<String> results = new ArrayList<>();
-        results.add("all");
-        results.add("mobs");
-        results.addAll(Arrays.stream(EntityType.values()).map(type -> type.name().toLowerCase()).toList());
 
-        return match(results, args[0]);
+        if (args.length == 1)
+        {
+            results.add("all");
+            results.add("mobs");
+        }
+        else
+        {
+            if (args[0].equalsIgnoreCase("all") || args[0].equalsIgnoreCase("mobs")) return null;
+        }
+
+        results.addAll(Arrays.stream(EntityType.values()).map(type -> type.name().toLowerCase()).toList());
+        return match(results, args[args.length - 1]);
     }
 
     @Override
