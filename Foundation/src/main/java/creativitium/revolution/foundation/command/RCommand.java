@@ -3,9 +3,14 @@ package creativitium.revolution.foundation.command;
 import creativitium.revolution.foundation.Foundation;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -225,7 +230,14 @@ public abstract class RCommand
             }
             catch (Throwable ex)
             {
-                external.msg(sender, "revolution.command.error.internal", TagResolver.resolver("exception", Tag.inserting(Component.text(ex.getMessage() != null ? ex.getMessage() : ex.getClass().getName()))));
+                Component exceptionMessage = Component.text(ex.getMessage() != null ? ex.getMessage() : ex.getClass().getName());
+                if (sender.hasPermission("foundation.command.see_stacktrace"))
+                {
+                    exceptionMessage = exceptionMessage.hoverEvent(HoverEvent.showText(Component.translatable("chat.copy.click").color(NamedTextColor.WHITE).appendNewline().appendNewline().append(Component.text(ExceptionUtils.getStackTrace(ex).replaceAll("\t", "    ")).color(NamedTextColor.GRAY).decorate(TextDecoration.ITALIC))))
+                        .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, ExceptionUtils.getStackTrace(ex)));
+                }
+
+                external.msg(sender, "revolution.command.error.internal", Placeholder.component("exception", exceptionMessage));
                 ex.printStackTrace();
             }
 
@@ -246,7 +258,14 @@ public abstract class RCommand
             }
             catch (Throwable ex)
             {
-                external.msg(sender, "revolution.command.error.internal", TagResolver.resolver("exception", Tag.inserting(Component.text(ex.getMessage()))));
+                Component exceptionMessage = Component.text(ex.getMessage() != null ? ex.getMessage() : ex.getClass().getName());
+                if (sender.hasPermission("foundation.command.see_stacktrace"))
+                {
+                    exceptionMessage = exceptionMessage.hoverEvent(HoverEvent.showText(Component.translatable("chat.copy.click").color(NamedTextColor.WHITE).appendNewline().appendNewline().append(Component.text(ExceptionUtils.getStackTrace(ex).replaceAll("\t", "    ")).color(NamedTextColor.GRAY).decorate(TextDecoration.ITALIC))))
+                            .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, ExceptionUtils.getStackTrace(ex)));
+                }
+
+                external.msg(sender, "revolution.command.error.internal", Placeholder.component("exception", exceptionMessage));
                 ex.printStackTrace();
             }
 
