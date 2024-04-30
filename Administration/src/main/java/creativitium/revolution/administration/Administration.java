@@ -66,6 +66,7 @@ public class Administration extends JavaPlugin
                 new Command_banip(),
                 new Command_crash(),
                 new Command_commandspy(),
+                new Command_entitywipe(),
                 new Command_invsee(),
                 new Command_kick(),
                 new Command_multirun(),

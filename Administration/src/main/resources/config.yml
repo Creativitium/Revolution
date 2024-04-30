@@ -1,3 +1,12 @@
+entitywipe:
+  blacklists:
+    entities:
+      - ITEM_FRAME
+      - GLOW_ITEM_FRAME
+      - PAINTING
+      - ARMOR_STAND
+    worlds: {}
+
 wildcard:
   placeholder: '@p'
   blacklist:

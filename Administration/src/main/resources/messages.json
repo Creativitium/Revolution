@@ -1,4 +1,5 @@
 {
+  "administration.action.entitywipe": "Removing entities of <types> types from <worlds> worlds",
   "administration.action.ban": "Banning <player> from the server<reason>",
   "administration.action.ban.reason": ", Reason: <yellow><reason></yellow>",
   "administration.action.banip": "Banning an IP from the server",
@@ -25,6 +26,7 @@
   "administration.command.crash.invalid_method": "<error>That is not a valid method.",
   "administration.command.commandspy.enabled": "<info>CommandSpy enabled.",
   "administration.command.commandspy.disabled": "<info>CommandSpy disabled.",
+  "administration.command.entitywipe.done": "<info><white><count></white> entities were removed.",
   "administration.command.multirun.blacklisted": "<error>Did you really think that was going to work?",
   "administration.command.multirun.executing": "<info>Running command <white><u><command></u> <amount></white> times...",
   "administration.command.multirun.excessive": "<warning>Running a command an excessive amount of times all at once may lag the server.",
