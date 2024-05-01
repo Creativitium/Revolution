@@ -14,7 +14,7 @@ public class Dimension extends JavaPlugin
     private static Dimension instance;
 
     @Getter
-    private RServiceGroup group = new RServiceGroup();
+    private final RServiceGroup group = new RServiceGroup();
     @Getter
     private WorldManager worldManager;
     @Getter

@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.UUID;
 
 @CommandParameters(name = "banip",
@@ -58,7 +59,7 @@ public class Command_banip extends RCommand
         action(sender, "administration.action.banip", Placeholder.unparsed("ip", ipAddress.trim()),
                 Placeholder.component("reason", reason != null ? Foundation.getInstance().getMessageService().getMessage("administration.action.banip.reason", Placeholder.unparsed("reason", reason)) : Component.empty()));
 
-        Bukkit.getOnlinePlayers().stream().filter(player -> player.getAddress().getAddress().getHostAddress().equalsIgnoreCase(ipAddress)).forEach(player ->
+        Bukkit.getOnlinePlayers().stream().filter(player -> Objects.requireNonNull(player.getAddress()).getAddress().getHostAddress().equalsIgnoreCase(ipAddress)).forEach(player ->
                 player.kick(ban.craftBanMessage()));
 
         return true;

@@ -40,28 +40,19 @@ public class Command_entitywipe extends RCommand
         {
             switch (args[0].toLowerCase())
             {
-                case "mobs" ->
-                {
-                    types.addAll(Arrays.stream(EntityType.values()).filter(EntityType::isAlive).toList());
-                }
-                case "all" ->
-                {
-                    types.addAll(Arrays.stream(EntityType.values()).toList());
-                }
-                default ->
-                {
-                    types.addAll(Arrays.stream(args).filter(type -> {
-                        try
-                        {
-                            EntityType.valueOf(type.toUpperCase());
-                            return true;
-                        }
-                        catch (Throwable ex)
-                        {
-                            return false;
-                        }
-                    }).map(type -> EntityType.valueOf(type.toUpperCase())).toList());
-                }
+                case "mobs" -> types.addAll(Arrays.stream(EntityType.values()).filter(EntityType::isAlive).toList());
+                case "all" -> types.addAll(Arrays.stream(EntityType.values()).toList());
+                default -> types.addAll(Arrays.stream(args).filter(type -> {
+                    try
+                    {
+                        EntityType.valueOf(type.toUpperCase());
+                        return true;
+                    }
+                    catch (Throwable ex)
+                    {
+                        return false;
+                    }
+                }).map(type -> EntityType.valueOf(type.toUpperCase())).toList());
             }
         }
         types.removeIf(type -> type == EntityType.PLAYER || getPlugin().getConfig().getStringList("entitywipe.blacklists.entities").contains(type.name()));

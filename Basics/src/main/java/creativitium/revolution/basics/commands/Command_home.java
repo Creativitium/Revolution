@@ -126,7 +126,7 @@ public class Command_home extends RCommand
             {
                 String[] split = args[0].split(":");
                 if (split.length == 0) return null;
-                Optional<BPlayer> data = (Optional<BPlayer>) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(split[0]);;
+                Optional<BPlayer> data = (Optional<BPlayer>) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(split[0]);
 
                 if (data.isPresent())
                 {

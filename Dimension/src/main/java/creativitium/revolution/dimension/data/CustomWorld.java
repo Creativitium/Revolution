@@ -83,21 +83,21 @@ public class CustomWorld
             }
 
             // Sets the gamerules for the world
-            flags.gameRules.entrySet().stream().forEach(entry -> {
-                final String rule = entry.getKey();
+            flags.gameRules.forEach((rule, value) ->
+            {
                 final GameRule gameRule = GameRule.getByName(rule);
                 if (gameRule == null)
                 {
                     Dimension.getInstance().getSLF4JLogger().warn("Skipping unknown gamerule {}", rule);
                     return;
                 }
-                else if (!gameRule.getType().isInstance(entry.getValue()))
+                else if (!gameRule.getType().isInstance(value))
                 {
                     Dimension.getInstance().getSLF4JLogger().warn("Skipping gamerule of incorrect type {}", rule);
                     return;
                 }
 
-                world.setGameRule(gameRule, entry.getValue());
+                world.setGameRule(gameRule, value);
             });
         }
 

@@ -21,10 +21,10 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.util.Vector;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -83,7 +83,7 @@ public class BasicsService extends RService
 
 
         data.setLastOnline(Instant.now().getEpochSecond());
-        data.setLastIP(event.getPlayer().getAddress().getAddress().getHostAddress());
+        data.setLastIP(Objects.requireNonNull(event.getPlayer().getAddress()).getAddress().getHostAddress());
     }
 
     @EventHandler
@@ -98,7 +98,11 @@ public class BasicsService extends RService
         final BPlayer data = (BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId());
         data.setLoginLocation(event.getPlayer().getLocation());
         data.setLastOnline(Instant.now().getEpochSecond());
-        data.setLastIP(event.getPlayer().getAddress().getAddress().getHostAddress());
+
+        if (!data.getLastIP().equalsIgnoreCase(Objects.requireNonNull(player.getAddress()).getAddress().getHostAddress()))
+        {
+            data.setLastIP(Objects.requireNonNull(event.getPlayer().getAddress()).getAddress().getHostAddress());
+        }
     }
 
     @EventHandler
@@ -174,7 +178,7 @@ public class BasicsService extends RService
 
         if (event.getDamager() instanceof Player player
                 && ((BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId())).isBerserkEnabled()
-                && player.getItemInHand().getType() == Material.AIR
+                && player.getInventory().getItemInMainHand().getType() == Material.AIR
                 && !event.isCancelled())
         {
             event.setDamage(EntityDamageEvent.DamageModifier.BASE, Double.MAX_VALUE);

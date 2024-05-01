@@ -5,11 +5,9 @@ import creativitium.revolution.foundation.utilities.MM;
 import lombok.Data;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 

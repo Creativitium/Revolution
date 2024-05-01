@@ -20,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @CommandParameters(name = "seen",
@@ -49,11 +50,11 @@ public class Command_seen extends RCommand
                             Placeholder.unparsed("date", Util.DATE_FORMAT.format(new Date(data.getLastOnline() * 1000))));
 
                     if (sender.hasPermission("basics.command.seen.see_ips") && (player.isOnline() || data.getLastIP() != null))
-                        msg(sender, "basics.command.seen.info.ip", Placeholder.unparsed("ip", player.isOnline() ? player.getPlayer().getAddress().getAddress().getHostAddress() : data.getLastIP()));
+                        msg(sender, "basics.command.seen.info.ip", Placeholder.unparsed("ip", player.isOnline() ? Objects.requireNonNull(Objects.requireNonNull(player.getPlayer()).getAddress()).getAddress().getHostAddress() : data.getLastIP()));
 
                     if (sender.hasPermission("basics.command.seen.see_location") && (player.isOnline() || data.getLoginLocation() != null))
                     {
-                        final Location location = player.isOnline() ? player.getPlayer().getLocation() : data.getLoginLocation();
+                        final Location location = player.isOnline() ? Objects.requireNonNull(player.getPlayer()).getLocation() : data.getLoginLocation();
                         msg(sender, "basics.command.seen.info.location", Placeholder.component("location",
                                 Foundation.getInstance().getMessageService().getMessage("basics.command.seen.info.location.format",
                                         Placeholder.unparsed("world", location.getWorld().getName()),

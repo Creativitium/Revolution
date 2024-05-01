@@ -3,7 +3,6 @@ package creativitium.revolution.basics.services;
 import creativitium.revolution.basics.Basics;
 import creativitium.revolution.basics.data.Warp;
 import creativitium.revolution.foundation.templates.RService;
-import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -18,12 +17,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 public class WarpsService extends RService
 {
-    private Map<String, Warp> warps = new HashMap<>();
+    private final Map<String, Warp> warps = new HashMap<>();
     private final File warpsFile = new File(getPlugin().getDataFolder(), "warps.yml");
 
     public WarpsService()
@@ -49,7 +47,7 @@ public class WarpsService extends RService
         final PlainTextComponentSerializer plainText = PlainTextComponentSerializer.plainText();
         if (event.line(0) != null && event.line(1) != null && plainText.serialize(Objects.requireNonNull(event.line(0))).equalsIgnoreCase("[Warp]"))
         {
-            event.line(0, Component.text("[Warp]").color(warpExists(plainText.serialize(event.line(1))) ? NamedTextColor.DARK_BLUE : NamedTextColor.DARK_RED));
+            event.line(0, Component.text("[Warp]").color(warpExists(plainText.serialize(Objects.requireNonNull(event.line(1)))) ? NamedTextColor.DARK_BLUE : NamedTextColor.DARK_RED));
         }
     }
 
@@ -85,6 +83,8 @@ public class WarpsService extends RService
 
     public void load()
     {
+        warps.clear();
+
         final YamlConfiguration configuration = YamlConfiguration.loadConfiguration(warpsFile);
         configuration.getKeys(false).forEach(key -> {
             try

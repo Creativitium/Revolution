@@ -1,6 +1,5 @@
 package creativitium.revolution.basics.data;
 
-import creativitium.revolution.foundation.utilities.MM;
 import lombok.Builder;
 import lombok.Data;
 import org.bukkit.Location;

@@ -16,11 +16,10 @@ import java.net.InetAddress;
 import java.time.Instant;
 import java.util.*;
 
+@Getter
 public class BanService extends RService
 {
-    @Getter
     private final Map<UUID, Ban> bans = new HashMap<>();
-    @Getter
     private final File dataFile = new File(getPlugin().getDataFolder(), "bans.yml");
 
     public BanService()
@@ -50,6 +49,11 @@ public class BanService extends RService
 
         getEntryWherePossible(event.getPlayer().getUniqueId(), event.getPlayer().getName(), event.getAddress()).ifPresent(entry ->
         {
+            if (entry.isExpired())
+            {
+                return;
+            }
+
             event.disallow(PlayerLoginEvent.Result.KICK_BANNED, entry.craftBanMessage());
         });
     }
@@ -139,8 +143,14 @@ public class BanService extends RService
 
                 ConfigurationSection section = configuration.getConfigurationSection(ban);
 
+                // WTF?
+                if (section == null)
+                {
+                    continue;
+                }
+
                 // Has this entry expired?
-                if (section.getLong("expires") <= Instant.now().getEpochSecond())
+                if (section.getLong("expires", 0L) <= Instant.now().getEpochSecond())
                 {
                     // In that case, don't even bother trying to load it
                     continue;

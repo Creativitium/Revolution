@@ -42,10 +42,8 @@ public class Command_warp extends RCommand
             {
                 msg(sender, "basics.command.warp.list");
                 Lists.partition(service.getWarpNames(), 25).forEach(partition ->
-                {
-                    msg(sender, "basics.command.warp.list.continued", Placeholder.component("warps", Component.join(JoinConfiguration.commas(true),
-                            partition.stream().map(Component::text).toList())));
-                });
+                        msg(sender, "basics.command.warp.list.continued", Placeholder.component("warps", Component.join(JoinConfiguration.commas(true),
+                                partition.stream().map(Component::text).toList()))));
                 return false;
             }
         }

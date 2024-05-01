@@ -16,12 +16,11 @@ import java.util.concurrent.CompletableFuture;
  * <h1>RPlayerService</h1>
  * <p>Handles mission-critical information like player data for other plugins</p>
  */
+@Getter
 public abstract class RPlayerService<T extends ConfigurationSerializable> extends RService
 {
-    @Getter
     private YamlConfiguration configuration = new YamlConfiguration();
-    @Getter
-    private Map<UUID, T> data = new HashMap<>();
+    private final Map<UUID, T> data = new HashMap<>();
 
     public RPlayerService(Plugin plugin)
     {

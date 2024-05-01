@@ -1,6 +1,5 @@
 package creativitium.revolution.foundation.base;
 
-import creativitium.revolution.foundation.RServiceGroup;
 import creativitium.revolution.foundation.templates.RPlayerService;
 import creativitium.revolution.foundation.templates.RService;
 import org.bukkit.plugin.Plugin;
@@ -14,7 +13,7 @@ import java.util.Map;
  */
 public class PlayerDataService extends RService
 {
-    private Map<Plugin, RPlayerService<?>> playerDataMap = new HashMap<>();
+    private final Map<Plugin, RPlayerService<?>> playerDataMap = new HashMap<>();
 
     @Override
     public void onStart()

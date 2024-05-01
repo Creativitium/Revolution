@@ -21,7 +21,6 @@ public abstract class RService implements Listener
 
     /**
      * Constructor for an instance of RService that uses Foundation as the main class.
-     * @deprecated Internal use only
      */
     protected RService()
     {

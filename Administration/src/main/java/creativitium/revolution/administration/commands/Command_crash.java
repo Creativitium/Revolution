@@ -42,10 +42,7 @@ public class Command_crash extends RCommand
 
             switch (method)
             {
-                case PARTICLES ->
-                {
-                    player.spawnParticle(Particle.ASH, player.getLocation(), 999999999);
-                }
+                case PARTICLES -> player.spawnParticle(Particle.ASH, player.getLocation(), 999999999);
                 case DECIMATOR ->
                 {
                     player.getInventory().clear();

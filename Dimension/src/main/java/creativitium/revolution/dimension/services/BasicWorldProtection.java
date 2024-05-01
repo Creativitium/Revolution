@@ -85,9 +85,9 @@ public class BasicWorldProtection extends RService
             if (!player.hasPermission(world.getPermissions().getAccess()))
             {
                 Bukkit.getWorlds().stream().filter(w -> !plugin.getWorldManager().isCustomWorld(w) ||
-                        player.hasPermission(plugin.getWorldManager().getCustomWorld(w.getName()).getPermissions().getAccess())).findFirst().ifPresentOrElse(w -> {
-                    event.getPlayer().teleportAsync(w.getSpawnLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN);
-                }, () -> event.getPlayer().kick(base.getMessageService().getMessage("dimension.no_worlds.accessible")));
+                        player.hasPermission(plugin.getWorldManager().getCustomWorld(w.getName()).getPermissions().getAccess())).findFirst().ifPresentOrElse(w ->
+                                event.getPlayer().teleportAsync(w.getSpawnLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN),
+                        () -> event.getPlayer().kick(base.getMessageService().getMessage("dimension.no_worlds.accessible")));
             }
         }
     }
