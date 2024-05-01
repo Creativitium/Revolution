@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class WorldCommand extends RCommand
 {
-    private CustomWorld world;
+    private final CustomWorld world;
 
     public WorldCommand(CustomWorld world)
     {

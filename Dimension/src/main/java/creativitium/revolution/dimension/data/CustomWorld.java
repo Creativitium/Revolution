@@ -27,11 +27,13 @@ public class CustomWorld
 
     public final void load()
     {
+        // Generate the world if it isn't present already
         if (world == null || Bukkit.getWorld(name) == null || !Bukkit.getWorlds().contains(world))
         {
             world = generate();
         }
 
+        // Register the command if it's enabled and hasn't been registered already
         if (command != null && command.enabled && Bukkit.getCommandMap().getCommand(name.replace(" ", "_").toLowerCase()) == null)
             Foundation.getInstance().getCommandLoader().loadCommandsManually("dimension", new WorldCommand(this));
     }
@@ -54,6 +56,7 @@ public class CustomWorld
 
         world = creator.createWorld();
 
+        // The world should have generated, but if it hasn't then we've got some serious problems
         if (world == null)
         {
             throw new IllegalStateException("World did not generate properly.");
@@ -79,6 +82,7 @@ public class CustomWorld
                 if (flags.distances.simulationDistance != -1) world.setSimulationDistance(flags.distances.simulationDistance);
             }
 
+            // Sets the gamerules for the world
             flags.gameRules.entrySet().stream().forEach(entry -> {
                 final String rule = entry.getKey();
                 final GameRule gameRule = GameRule.getByName(rule);

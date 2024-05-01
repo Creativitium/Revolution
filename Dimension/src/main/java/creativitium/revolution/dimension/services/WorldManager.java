@@ -10,7 +10,6 @@ import lombok.Getter;
 import org.bukkit.Difficulty;
 import org.bukkit.World;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -45,6 +44,7 @@ public class WorldManager extends RService
                     getPlugin().getDataFolder().mkdirs();
                 }
 
+                // Build a configuration from scratch using defaults.
                 this.config = WorldConfig.builder()
                         .settings(WorldConfig.Settings.builder().enabled(true).build())
                         .build();
