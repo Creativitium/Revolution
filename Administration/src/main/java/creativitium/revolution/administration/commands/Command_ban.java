@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @CommandParameters(name = "ban",
         description = "Ban a player.",
@@ -47,7 +48,7 @@ public class Command_ban extends RCommand
         final Ban ban = Ban.builder()
                 .username(player.getName())
                 .uuid(player.getUniqueId())
-                .ips(player.isOnline() ? List.of(player.getPlayer().getAddress().getAddress().getHostAddress()) : new ArrayList<>())
+                .ips(player.isOnline() ? List.of(Objects.requireNonNull(Objects.requireNonNull(player.getPlayer()).getAddress()).getAddress().getHostAddress()) : new ArrayList<>())
                 .issued(Instant.now().getEpochSecond())
                 .reason(reason)
                 .by(sender.getName())
@@ -56,12 +57,12 @@ public class Command_ban extends RCommand
 
         Administration.getInstance().getBanService().addEntry(ban);
 
-        action(sender, "administration.action.ban", Placeholder.unparsed("player", player.getName()),
+        action(sender, "administration.action.ban", Placeholder.unparsed("player", player.getName() != null ? player.getName() : args[0]),
                 Placeholder.component("reason", reason != null ? Foundation.getInstance().getMessageService().getMessage("administration.action.ban.reason", Placeholder.unparsed("reason", reason)) : Component.empty()));
 
         if (player.isOnline())
         {
-            player.getPlayer().kick(ban.craftBanMessage());
+            Objects.requireNonNull(player.getPlayer()).kick(ban.craftBanMessage());
         }
 
         return true;

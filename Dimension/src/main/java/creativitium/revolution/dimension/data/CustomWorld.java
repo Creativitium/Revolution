@@ -107,6 +107,7 @@ public class CustomWorld
         private boolean enabled;
         private String description;
         private String usage;
+        @Builder.Default
         private String[] aliases = {""};
         private String permission;
     }
@@ -138,7 +139,9 @@ public class CustomWorld
         @Builder
         public static class Distances
         {
+            @Builder.Default
             private int sendViewDistance = -1;
+            @Builder.Default
             private int simulationDistance = -1;
         }
     }

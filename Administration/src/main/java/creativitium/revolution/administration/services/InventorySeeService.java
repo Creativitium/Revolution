@@ -33,7 +33,8 @@ public class InventorySeeService extends RService
         final Player player = (Player) event.getWhoClicked();
         final Inventory clickedInventory = event.getClickedInventory();
 
-        if (player != clickedInventory.getHolder() && Bukkit.getOnlinePlayers().contains(clickedInventory.getHolder())
+        if (player != clickedInventory.getHolder() && clickedInventory.getHolder() instanceof Player target
+                && Bukkit.getOnlinePlayers().contains(target)
                 && !player.hasPermission("administration.invsee.modify"))
         {
             event.setCancelled(true);

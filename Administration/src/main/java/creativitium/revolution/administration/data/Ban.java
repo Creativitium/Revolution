@@ -16,6 +16,7 @@ public class Ban
 {
     private String username;
     private UUID uuid;
+    @Builder.Default
     private List<String> ips = new ArrayList<>();
     private long issued;
     private String reason;
