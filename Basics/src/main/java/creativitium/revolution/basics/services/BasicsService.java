@@ -7,10 +7,13 @@ import creativitium.revolution.foundation.utilities.MM;
 import creativitium.revolution.foundation.utilities.Shortcuts;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
@@ -22,9 +25,13 @@ import org.bukkit.util.Vector;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BasicsService extends RService
 {
+    private static final Pattern AMPERSAND_PATTERN = Pattern.compile("(&(?i)[a-fklmnor\\d]{1})");
+
     private static final List<EntityPotionEffectEvent.Cause> GOD_IMMUNE_EFFECTS = List.of(
             EntityPotionEffectEvent.Cause.POTION_SPLASH,
             EntityPotionEffectEvent.Cause.AREA_EFFECT_CLOUD,
@@ -111,6 +118,20 @@ public class BasicsService extends RService
     }
 
     @EventHandler
+    public void formatPlayerChat(AsyncChatEvent event)
+    {
+        if (getPlugin().getConfig().getBoolean("formatChatMessages", true));
+        {
+            final String message = ((TextComponent) event.originalMessage()).content();
+            final Matcher useLegacy = AMPERSAND_PATTERN.matcher(message);
+            final Component outcome = useLegacy.find() ? LegacyComponentSerializer.legacyAmpersand().deserialize(message)
+                    : MM.getNonExploitable().deserialize(message);
+
+            event.message(outcome);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.LOW)
     public void onPlayerChat(AsyncChatEvent event)
     {
         final BPlayer data = (BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(event.getPlayer().getUniqueId());

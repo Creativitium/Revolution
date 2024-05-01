@@ -18,18 +18,34 @@ public class CommandLoader
         {
             try
             {
-                Foundation.getSlf4jLogger().info("Found command " + commandClass.getName());
                 final RCommand command = commandClass.getDeclaredConstructor().newInstance();
                 Bukkit.getCommandMap().register(prefix.toLowerCase(), command.getInternalCommand());
                 commands.add(command);
             }
             catch (Throwable ex)
             {
-                Foundation.getSlf4jLogger().error("Failed to load command " + commandClass.getName(), ex);
+                Foundation.getSlf4jLogger().error("Failed to load command {}", commandClass.getName(), ex);
             }
         });
 
-        Foundation.getSlf4jLogger().info("Successfully loaded and registered " + commands.size() + " commands");
+        Foundation.getSlf4jLogger().info("Successfully loaded and registered {} commands", commands.size());
+    }
+
+    public void loadCommandsManually(String prefix, Class<RCommand>... cmds)
+    {
+        Arrays.stream(cmds).forEach(command ->
+        {
+            try
+            {
+                final RCommand cmd = command.getDeclaredConstructor().newInstance();
+                Bukkit.getCommandMap().register(prefix.toLowerCase(), cmd.getInternalCommand());
+                commands.add(cmd);
+            }
+            catch (Throwable ex)
+            {
+                Foundation.getSlf4jLogger().error("Failed to load command {}", command.getName(), ex);
+            }
+        });
     }
 
     public void loadCommandsManually(String prefix, RCommand... cmds)
