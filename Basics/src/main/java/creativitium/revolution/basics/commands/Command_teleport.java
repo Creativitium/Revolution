@@ -1,11 +1,10 @@
 package creativitium.revolution.basics.commands;
 
 import creativitium.revolution.basics.Basics;
-import creativitium.revolution.basics.data.BPlayer;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
-import creativitium.revolution.foundation.utilities.Shortcuts;
+import creativitium.revolution.foundation.utilities.BiOptional;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -36,18 +35,32 @@ public class Command_teleport extends RCommand
             return true;
         }
 
-        // This is a pretty bad way of doing things, but it will work for now
-        final Optional<Player> teleporter = args.length == 1 ? Optional.of(playerSender) : getPlayer(args[0]);
-        final Optional<Player> target = args.length == 1 ? getPlayer(args[0]) : getPlayer(args[1]);
+        final BiOptional<Player, Player> targets = BiOptional.fromOptionals(
+                args.length == 1 ? Optional.of(playerSender) : getPlayer(args[0]),
+                args.length == 1 ? getPlayer(args[0]) : getPlayer(args[1]));
 
-        if (teleporter.isEmpty() || target.isEmpty())
+        if (targets.areBothEqual() && targets.areBothPresent())
         {
-            msg(sender, "revolution.command.error.player_not_found");
+            msg(sender, "basics.command.teleport.cannot_teleport_to_" + (targets.getLeft() == playerSender ? "yourself" : "themselves"));
             return true;
         }
 
-        msg(teleporter.get(), "basics.command.teleport.teleporting", Placeholder.unparsed("player", target.get().getName()));
-        teleporter.get().teleportAsync(target.get().getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
+        targets.ifBothPresentOrElse((player, player2) ->
+        {
+            if (player2 == playerSender)
+            {
+                msg(sender, "basics.command.teleport.teleporting_to_you", Placeholder.unparsed("player", player.getName()));
+            }
+            else if (player != playerSender)
+            {
+                msg(sender, "basics.command.teleport.teleporting_others", Placeholder.unparsed("player", player.getName()),
+                        Placeholder.unparsed("player2", player2.getName()));
+            }
+
+            msg(player, "basics.command.teleport.teleporting", Placeholder.unparsed("player", player2.getName()));
+            player.teleportAsync(player2.getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
+        }, () -> msg(sender, "revolution.command.error.player_not_found"));
+
         return true;
     }
 
