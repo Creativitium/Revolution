@@ -139,7 +139,7 @@ public class BasicsService extends RService
         data.setLoginLocation(event.getPlayer().getLocation());
         data.setLastOnline(Instant.now().getEpochSecond());
 
-        if (!data.getLastIP().equalsIgnoreCase(Objects.requireNonNull(player.getAddress()).getAddress().getHostAddress()))
+        if (data.getLastIP() == null || !data.getLastIP().equalsIgnoreCase(Objects.requireNonNull(player.getAddress()).getAddress().getHostAddress()))
         {
             data.setLastIP(Objects.requireNonNull(event.getPlayer().getAddress()).getAddress().getHostAddress());
         }
