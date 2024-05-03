@@ -7,6 +7,7 @@ import creativitium.revolution.basics.services.WarpsService;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
 import lombok.Getter;
+import org.bukkit.GameMode;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -49,6 +50,11 @@ public class Basics extends JavaPlugin
                 new Command_delhome(),
                 new Command_delwarp(),
                 new Command_fly(),
+                new Command_gamemode(),
+                new Command_gamemode(GameMode.ADVENTURE),
+                new Command_gamemode(GameMode.CREATIVE),
+                new Command_gamemode(GameMode.SURVIVAL),
+                new Command_gamemode(GameMode.SPECTATOR, (short) 2),
                 new Command_god(),
                 new Command_heal(),
                 new Command_home(),
