@@ -6,8 +6,9 @@
   "revolution.command.error.internal": "<error>Command error: <yellow><exception>",
   "revolution.command.error.no_permission.command": "<error>You don't have permission to use that command.",
   "revolution.command.error.no_permission.subcommand": "<error>You don't have permission to do that!",
-  "revolution.command.error.item_not_found": "<error>That item could not be found.",
+  "revolution.command.error.item_not_found": "<error>That item type could not be found.",
   "revolution.command.error.invalid_number": "<error>Invalid number: <dark_red><number></dark_red>",
+  "revolution.command.error.invalid_number_unknown": "<error>Invalid number.",
   "revolution.command.error.invalid_type": "<error>Invalid type: <dark_red><type></dark_red>",
   "revolution.command.error.player_not_found": "<error>That player could not be found.",
 
