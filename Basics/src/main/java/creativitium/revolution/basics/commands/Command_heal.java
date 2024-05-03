@@ -12,7 +12,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -55,6 +57,14 @@ public class Command_heal extends RCommand
         }, () -> msg(sender, "revolution.command.error.player_not_found"));
 
         return true;
+    }
+
+    @Override
+    public @Nullable List<String> tabCompleteOptions(CommandSender sender, Player playerSender, String commandLabel, String[] args)
+    {
+        if (args.length != 1 || !sender.hasPermission("basics.command.heal.others")) return null;
+
+        return match(getOnlinePlayers(), args[0]);
     }
 
     @Override
