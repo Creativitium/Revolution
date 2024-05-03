@@ -41,7 +41,7 @@ public class Command_gamemode extends RCommand
                 "Sets your gamemode to " + gameMode.name().toLowerCase() + ".",
                 "/" + gameMode.name().toLowerCase() + " [player]",
                 new String[]{"gm" + gameMode.name().substring(0, Math.min(gameMode.name().length(), abbreviationLength)).toLowerCase()},
-                "basics.command.gamemode." + gameMode.name(),
+                "basics.command.gamemode." + gameMode.name().toLowerCase(),
                 SourceType.BOTH);
         this.mode = gameMode;
     }
@@ -112,7 +112,7 @@ public class Command_gamemode extends RCommand
             return true;
         }
 
-        if (!sender.hasPermission("basics.command.gamemode." + mode.name()))
+        if (!sender.hasPermission("basics.command.gamemode." + mode.name().toLowerCase()))
         {
             msg(sender, "basics.command.gamemode.no_permission",
                     Placeholder.unparsed("mode", StringUtils.capitalize(mode.name().toLowerCase()) + " Mode"),
