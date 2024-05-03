@@ -60,6 +60,7 @@ public class Basics extends JavaPlugin
                 new Command_sethome(),
                 new Command_setwarp(),
                 new Command_tag(),
+                new Command_teleport(),
                 new Command_warp(),
                 new Command_world());
     }
