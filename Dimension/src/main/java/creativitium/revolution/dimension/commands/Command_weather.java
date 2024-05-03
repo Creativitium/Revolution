@@ -25,10 +25,10 @@ public class Command_weather extends RCommand
     @Override
     public boolean run(CommandSender sender, Player playerSender, String commandLabel, String[] args)
     {
-        if (args.length == 0 || args.length == 1 && SourceType.ONLY_CONSOLE.matchesSourceType(sender)) return false;
+        if (args.length == 0) return false;
 
         // We use this slightly convoluted way of getting worlds based on the argument length and the sender type.
-        final World world = args.length == 1 ? SourceType.ONLY_IN_GAME.matchesSourceType(sender) ? playerSender.getWorld() : null : Bukkit.getWorld(args[1]);
+        final World world = args.length == 1 ? SourceType.ONLY_IN_GAME.matchesSourceType(sender) ? playerSender.getWorld() : Bukkit.getWorlds().get(0) : Bukkit.getWorld(args[1]);
 
         if (world == null)
         {

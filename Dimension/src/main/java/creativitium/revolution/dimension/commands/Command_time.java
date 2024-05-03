@@ -22,7 +22,7 @@ public class Command_time extends RCommand
     public boolean run(CommandSender sender, Player playerSender, String commandLabel, String[] args)
     {
         if (args.length < 2) return false;
-        final World world = args.length == 2 ? SourceType.ONLY_IN_GAME.matchesSourceType(sender) ? playerSender.getWorld() : null : Bukkit.getWorld(args[2]);
+        final World world = args.length == 2 ? SourceType.ONLY_IN_GAME.matchesSourceType(sender) ? playerSender.getWorld() : Bukkit.getWorlds().get(0) : Bukkit.getWorld(args[2]);
 
         if (world == null)
         {
@@ -106,7 +106,7 @@ public class Command_time extends RCommand
         }
         else
         {
-            options = Bukkit.getWorlds().stream().map(World::getName).filter(world ->sender.hasPermission("dimension." + world.toLowerCase().replaceAll(" ", "_") + ".change_time")).toList();
+            options = Bukkit.getWorlds().stream().map(World::getName).filter(world -> sender.hasPermission("dimension." + world.toLowerCase().replaceAll(" ", "_") + ".change_time")).toList();
         }
 
         return match(options, args[args.length - 1]);
