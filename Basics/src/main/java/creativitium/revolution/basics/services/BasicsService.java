@@ -6,11 +6,16 @@ import creativitium.revolution.foundation.templates.RService;
 import creativitium.revolution.foundation.utilities.MM;
 import creativitium.revolution.foundation.utilities.Shortcuts;
 import io.papermc.paper.event.player.AsyncChatEvent;
+import lombok.Getter;
+import lombok.Setter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,8 +25,10 @@ import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
+import java.io.File;
 import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
@@ -45,6 +52,10 @@ public class BasicsService extends RService
             EntityPotionEffectEvent.Cause.DOLPHIN
     );
 
+    @Getter
+    @Setter
+    private Location spawnpoint = null;
+
     public BasicsService()
     {
         super(Basics.getInstance());
@@ -53,12 +64,41 @@ public class BasicsService extends RService
     @Override
     public void onStart()
     {
+        loadSpawn();
     }
 
     @Override
     public void onStop()
     {
     }
+
+    public void loadSpawn()
+    {
+        final File spawn = new File(getPlugin().getDataFolder(), "spawn.yml");
+
+        if (spawn.exists())
+        {
+            final FileConfiguration fileConfiguration = YamlConfiguration.loadConfiguration(spawn);
+            spawnpoint = fileConfiguration.getLocation("location");
+        }
+    }
+
+    public void saveSpawn()
+    {
+        final File spawn = new File(getPlugin().getDataFolder(), "spawn.yml");
+        final YamlConfiguration config = new YamlConfiguration();
+        config.set("location", spawnpoint);
+
+        try
+        {
+            config.save(spawn);
+        }
+        catch (Exception ex)
+        {
+            getPlugin().getSLF4JLogger().error("Failed to save spawnpoint data", ex);
+        }
+    }
+
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event)
@@ -193,6 +233,15 @@ public class BasicsService extends RService
                 && ((BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId())).isGodEnabled())
         {
             event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event)
+    {
+        if (getPlugin().getConfig().getBoolean("respawnAtSpawn", true) && spawnpoint != null)
+        {
+            event.setRespawnLocation(spawnpoint);
         }
     }
 }
