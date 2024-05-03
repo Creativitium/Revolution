@@ -1,3 +1,13 @@
 {
-  "dimension.no_worlds.accessible": "<red>You joined the server in a world that you had no permission to access and we couldn't find a world that you could be moved to. Please notify the owner of this server immediately as this should never happen!"
+  "dimension.no_worlds.accessible": "<red>You joined the server in a world that you had no permission to access and we couldn't find a world that you could be moved to. Please notify the owner of this server immediately as this should never happen!",
+
+  "dimension.command.error.world_not_found": "<error>That world could not be found.",
+  "dimension.command.time.add_negative_time": "<error>Just use /time set and do the math yourself.",
+  "dimension.command.time.no_permission_time": "<error>You don't have permission to change the time for that world.",
+  "dimension.command.time.set_negative_time": "<error>Setting the time to something negative would most likely cause the space-time continuum to collapse. No thank you.",
+  "dimension.command.time.time_added": "<success>The time for world <dark_green><world></dark_green> has increased by <dark_green><time></dark_green> ticks.",
+  "dimension.command.time.time_set": "<success>The time for world <dark_green><world></dark_green> has been set to <dark_green><time></dark_green> ticks.",
+  "dimension.command.weather.invalid_mode": "<error>Invalid weather mode: <dark_red><mode></dark_red>",
+  "dimension.command.weather.no_permission_weather": "<error>You don't have permission to change the weather for that world.",
+  "dimension.command.weather.set_weather": "<success>The weather for world <dark_green><world></dark_green> has been set to <dark_green><mode></dark_green>."
 }

@@ -72,11 +72,6 @@
                 <version>1.18.24</version>
             </dependency>
             <dependency>
-                <groupId>io.github.nvx</groupId>
-                <artifactId>CleanroomGenerator</artifactId>
-                <version>a5180b570a87964ce72135c78ab526e3975572b9</version>
-            </dependency>
-            <dependency>
                 <groupId>creativitium.revolution</groupId>
                 <artifactId>Foundation</artifactId>
                 <version>13.0-INDEV</version>

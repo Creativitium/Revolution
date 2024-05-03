@@ -86,11 +86,9 @@ public class MessageService extends RService
             try
             {
                 prefixes.putAll(gson.fromJson(Files.newBufferedReader(prefixesFile.toPath(), StandardCharsets.UTF_8),
-                        new TypeToken<Map<String, String>>()
-                        {
-                        }.getType()));
+                        new TypeToken<Map<String, String>>() {}.getType()));
 
-                Foundation.getSlf4jLogger().info(prefixes.size() + " prefixes loaded from plugin " + plugin.getName());
+                Foundation.getSlf4jLogger().info("{} prefixes loaded from plugin {}", prefixes.size(), plugin.getName());
             }
             catch (Throwable ex)
             {
@@ -116,7 +114,7 @@ public class MessageService extends RService
             {
                 messages.putAll(gson.fromJson(Files.newBufferedReader(messagesFile.toPath(), StandardCharsets.UTF_8),
                         new TypeToken<Map<String, String>>() {}.getType()));
-                Foundation.getSlf4jLogger().info(messages.size() + " messages loaded from plugin " + plugin.getName());
+                Foundation.getSlf4jLogger().info("{} messages loaded from plugin {}", messages.size(), plugin.getName());
             }
             catch (Throwable ex)
             {
