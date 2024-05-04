@@ -2,5 +2,7 @@
   "success": "<dark_gray>[<green>✔<dark_gray>] <green>",
   "error": "<dark_gray>[<red>✕<dark_gray>] <red>",
   "info": "<dark_gray>[<white>ⓘ<dark_gray>] <gray>",
-  "warning": "<dark_gray>[<yellow>⚠</yellow>]</dark_gray> <yellow>"
+  "warning": "<dark_gray>[<yellow>⚠</yellow>]</dark_gray> <yellow>",
+
+  "motd": "<white>Creativitium</white> <dark_gray>|</dark_gray> <i><gray>Creative, Reimagined.</gray></i><newline> <b><dark_gray>></dark_gray></b> <gray>"
 }

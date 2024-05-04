@@ -3,6 +3,7 @@ package creativitium.revolution.basics;
 import creativitium.revolution.basics.commands.*;
 import creativitium.revolution.basics.data.BPlayerService;
 import creativitium.revolution.basics.services.BasicsService;
+import creativitium.revolution.basics.services.ExtrasService;
 import creativitium.revolution.basics.services.WarpsService;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
@@ -22,6 +23,8 @@ public class Basics extends JavaPlugin
     private BasicsService basicsService;
     @Getter
     private WarpsService warpsService;
+    @Getter
+    private ExtrasService extrasService;
 
     @Override
     public void onLoad()
@@ -41,6 +44,7 @@ public class Basics extends JavaPlugin
         // Set up our other services
         basicsService = services.addService(NamespacedKey.fromString("basics:main"), new BasicsService());
         warpsService = services.addService(NamespacedKey.fromString("basics:warps"), new WarpsService());
+        extrasService = services.addService(NamespacedKey.fromString("basics:extras"), new ExtrasService());
         services.startServices();
 
         // Set up our commands

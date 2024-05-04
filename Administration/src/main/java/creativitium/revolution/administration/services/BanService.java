@@ -1,6 +1,5 @@
 package creativitium.revolution.administration.services;
 
-import com.destroystokyo.paper.event.server.PaperServerListPingEvent;
 import creativitium.revolution.administration.Administration;
 import creativitium.revolution.administration.data.Ban;
 import creativitium.revolution.foundation.templates.RService;
@@ -61,7 +60,7 @@ public class BanService extends RService
         });
     }
 
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onServerPing(ServerListPingEvent event)
     {
         getEntryByIP(event.getAddress()).filter(ban -> !ban.isExpired()).ifPresent(entry ->
