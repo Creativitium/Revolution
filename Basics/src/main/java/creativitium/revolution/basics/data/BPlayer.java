@@ -48,6 +48,7 @@ public class BPlayer implements ConfigurationSerializable
         map.put("loginLocation", loginLocation);
         // I really wish I didn't have to do this, but apparently I can't serialize Longs... for some retarded reason
         map.put("lastOnline", String.valueOf(lastOnline));
+        map.put("lastIP", lastIP);
 
         return map;
     }
@@ -78,6 +79,7 @@ public class BPlayer implements ConfigurationSerializable
         }
         // My hope is that this is so awful that Bukkit's API developers learn that Long is a thing that exists
         data.lastOnline = Long.parseLong((String) map.getOrDefault("lastOnline", "0"));
+        data.setLastIP((String) map.getOrDefault("lastIP", null));
 
         return data;
     }
