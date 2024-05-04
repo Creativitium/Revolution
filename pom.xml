@@ -76,6 +76,11 @@
                 <artifactId>Foundation</artifactId>
                 <version>13.0-INDEV</version>
             </dependency>
+            <dependency>
+                <groupId>creativitium.revolution</groupId>
+                <artifactId>Basics</artifactId>
+                <version>13.0-INDEV</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

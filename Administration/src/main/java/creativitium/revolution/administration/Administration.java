@@ -64,6 +64,7 @@ public class Administration extends JavaPlugin
                 new Command_adminchat(),
                 new Command_ban(),
                 new Command_banip(),
+                new Command_bans(),
                 new Command_crash(),
                 new Command_commandspy(),
                 new Command_entitywipe(),

@@ -2,15 +2,19 @@ package creativitium.revolution.administration.commands;
 
 import creativitium.revolution.administration.Administration;
 import creativitium.revolution.administration.data.Ban;
+import creativitium.revolution.basics.Basics;
+import creativitium.revolution.basics.data.BPlayer;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
+import creativitium.revolution.foundation.utilities.Shortcuts;
 import creativitium.revolution.foundation.utilities.Util;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -44,11 +48,28 @@ public class Command_ban extends RCommand
         }
 
         final String reason = args.length > 1 ? StringUtils.join(ArrayUtils.remove(args, 0), " ") : null;
+        final List<String> ips = new ArrayList<>();
+
+        if (player.isOnline())
+        {
+            ips.add(Objects.requireNonNull(Objects.requireNonNull(player.getPlayer()).getAddress()).getAddress().getHostAddress());
+        }
+        else
+        {
+            if (Bukkit.getPluginManager().isPluginEnabled("Basics"))
+            {
+                final BPlayer bPlayer = (BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId());
+                if (bPlayer.getLastIP() != null)
+                {
+                    ips.add(bPlayer.getLastIP().trim());
+                }
+            }
+        }
 
         final Ban ban = Ban.builder()
                 .username(player.getName())
                 .uuid(player.getUniqueId())
-                .ips(player.isOnline() ? List.of(Objects.requireNonNull(Objects.requireNonNull(player.getPlayer()).getAddress()).getAddress().getHostAddress()) : new ArrayList<>())
+                .ips(ips)
                 .issued(Instant.now().getEpochSecond())
                 .reason(reason)
                 .by(sender.getName())

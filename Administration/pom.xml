@@ -23,5 +23,9 @@
             <groupId>creativitium.revolution</groupId>
             <artifactId>Foundation</artifactId>
         </dependency>
+        <dependency>
+            <groupId>creativitium.revolution</groupId>
+            <artifactId>Basics</artifactId>
+        </dependency>
     </dependencies>
 </project>

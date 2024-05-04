@@ -23,6 +23,8 @@ public class Ban
     private String by;
     private UUID byUuid;
     private long expires;
+    @Builder.Default
+    private boolean evil = false;
 
     public boolean isExpired()
     {
@@ -63,6 +65,7 @@ public class Ban
         map.put("by", by);
         if (byUuid != null) map.put("by_uuid", byUuid.toString());
         map.put("expires", expires);
+        map.put("evil", evil);
 
         return map;
     }

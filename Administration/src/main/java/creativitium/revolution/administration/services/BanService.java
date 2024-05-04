@@ -1,15 +1,18 @@
 package creativitium.revolution.administration.services;
 
+import com.destroystokyo.paper.event.server.PaperServerListPingEvent;
 import creativitium.revolution.administration.Administration;
 import creativitium.revolution.administration.data.Ban;
 import creativitium.revolution.foundation.templates.RService;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.server.ServerListPingEvent;
 
 import java.io.File;
 import java.net.InetAddress;
@@ -55,6 +58,46 @@ public class BanService extends RService
             }
 
             event.disallow(PlayerLoginEvent.Result.KICK_BANNED, entry.craftBanMessage());
+        });
+    }
+
+    @EventHandler(priority = EventPriority.LOW)
+    public void onServerPing(ServerListPingEvent event)
+    {
+        getEntryByIP(event.getAddress()).filter(ban -> !ban.isExpired()).ifPresent(entry ->
+        {
+            // HAHAHAHAHAHAHAHA
+            if (entry.isEvil())
+            {
+                event.motd(Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                    Component.text("GET ABSOLUTELY FUCKED!")))))))))))))))))))))))));
+            }
+            else
+            {
+                event.motd(base.getMessageService().getMessage("administration.ban.motd"));
+            }
         });
     }
 
@@ -164,7 +207,8 @@ public class BanService extends RService
                         .reason(section.getString("reason", null))
                         .by(section.getString("by", "Unknown"))
                         .byUuid(section.getString("by_uuid", null) != null ? UUID.fromString(Objects.requireNonNull(configuration.getString(ban + ".by_uuid"))) : null)
-                        .expires(section.getLong("expires", 253402300799L)).build());
+                        .expires(section.getLong("expires", 253402300799L))
+                        .evil(section.getBoolean("evil", false)).build());
             }
         }
     }
