@@ -41,7 +41,14 @@ public class Command_sudo extends RCommand
             msg(sender, "administration.command.sudo.performing_command", Placeholder.unparsed("command", command),
                     Placeholder.unparsed("username", player.getName()));
 
-            player.performCommand(command);
+            if (command.startsWith("c:"))
+            {
+                player.chat(command.replace("c:", ""));
+            }
+            else
+            {
+                player.performCommand(command);
+            }
         }, () -> msg(sender, "revolution.command.error.player_not_found"));
 
         return true;

