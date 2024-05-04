@@ -12,8 +12,10 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.command.Command;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -114,6 +116,11 @@ public class BasicsService extends RService
         if (data.getNickname() != null)
         {
             player.displayName(data.getNickname());
+        }
+
+        if (getPlugin().getConfig().isList("autoexec.onJoin"))
+        {
+            getPlugin().getConfig().getStringList("autoexec.onJoin").forEach(player::performCommand);
         }
 
         event.joinMessage(base.getMessageService().getMessage("basics.components.join_message",

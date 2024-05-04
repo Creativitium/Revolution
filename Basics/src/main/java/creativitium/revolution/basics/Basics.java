@@ -1,5 +1,6 @@
 package creativitium.revolution.basics;
 
+import creativitium.revolution.basics.command.CustomCommandLoader;
 import creativitium.revolution.basics.commands.*;
 import creativitium.revolution.basics.data.BPlayerService;
 import creativitium.revolution.basics.services.BasicsService;
@@ -11,6 +12,8 @@ import lombok.Getter;
 import org.bukkit.GameMode;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 
 public class Basics extends JavaPlugin
 {
@@ -25,11 +28,14 @@ public class Basics extends JavaPlugin
     private WarpsService warpsService;
     @Getter
     private ExtrasService extrasService;
+    //--
+    private CustomCommandLoader customCommandLoader;
 
     @Override
     public void onLoad()
     {
         instance = this;
+        this.saveDefaultConfig();
     }
 
     @Override
@@ -77,6 +83,10 @@ public class Basics extends JavaPlugin
                 new Command_teleport(),
                 new Command_warp(),
                 new Command_world());
+
+        // Set up our YML commands
+        this.customCommandLoader = new CustomCommandLoader(new File(getDataFolder(), "commands"));
+        customCommandLoader.loadCommands();
     }
 
     @Override

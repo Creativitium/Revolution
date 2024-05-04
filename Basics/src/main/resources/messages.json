@@ -84,6 +84,8 @@
   "basics.command.warp.teleporting": "<info>Teleporting to warp <white><warp></white>...",
   "basics.command.world.teleporting": "<info>Teleporting...",
   "basics.command.world.world_not_found": "<error>That world could not be found.",
+  "basics.custom_command.header": " <gradient:black:gray>====</gradient> <name> <gray>--</gray> Page <page><gray>/</gray><pages> <gradient:gray:black>====</gradient>",
+  "basics.custom_command.footer": " <gradient:black:gray>====</gradient> <prev> Page <page><gray>/</gray><pages> <next> <gradient:gray:black>====</gradient>",
 
   "basics.general.use_back": "<info>Use <white>/back</white> to return to your death point.",
 

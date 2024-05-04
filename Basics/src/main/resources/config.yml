@@ -1,2 +1,11 @@
+# Whether to process chat messages with color codes. This does not affect the formatting of the chat itself.
 formatChatMessages: true
+
+# Whether to respawn dead players at the main spawnpoint
 respawnAtSpawn: true
+
+# Whenever a specified event occurs, execute commands on the affected player's behalf
+autoexec:
+  # When a player joins the server
+  onJoin:
+    - motd
