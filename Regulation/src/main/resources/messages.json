@@ -1,0 +1,23 @@
+{
+  "regulation.command.toggle.list": "<info>List of available toggles:",
+  "regulation.command.toggle.list.format": "<info> - <name>: <description>",
+  "regulation.command.toggle.enabled.singular": "<success><toggle> is now enabled.",
+  "regulation.command.toggle.enabled.plural": "<success><toggle> are now enabled.",
+  "regulation.command.toggle.disabled.singular": "<success><toggle> is now disabled.",
+  "regulation.command.toggle.disabled.plural": "<success><toggle> are now disabled.",
+
+  "regulations.setting.decaying_leaves.name": "Decaying Leaves",
+  "regulations.setting.decaying_leaves.description": "The ability for leaves to decay if there are no logs of wood nearby..",
+  "regulations.setting.explosions.name": "Explosions",
+  "regulations.setting.explosions.description": "Self-explanatory, anything that can blow up.",
+  "regulations.setting.minecarts.name": "Minecarts",
+  "regulations.setting.minecarts.description": "A popular mode of transportation which can sometimes be abused to lag servers.",
+  "regulations.setting.physics.name": "Block Physics",
+  "regulations.setting.physics.description": "General block physics",
+  "regulations.setting.redstone.name": "Redstone",
+  "regulations.setting.redstone.description": "It's like electricity, but in Minecraft!",
+  "regulations.setting.spawn_egg_nbt.name": "Spawn Egg NBT",
+  "regulations.setting.spawn_egg_nbt.description": "Who on earth thought this was a good idea?",
+  "regulations.setting.spawners.name": "Spawners",
+  "regulations.setting.spawners.description": "An exploiter's wet dream (and your worst nightmare)."
+}

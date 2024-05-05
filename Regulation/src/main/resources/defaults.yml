@@ -1,0 +1,10 @@
+# Toggles - You can toggle them in-game with /toggle. If these are set to true, their respective mechanics will be
+#           enabled.
+toggles:
+  decaying_leaves: true
+  explosions: true
+  minecarts: true
+  redstone: true
+  physics: true
+  spawn_egg_nbt: true
+  spawners: true
