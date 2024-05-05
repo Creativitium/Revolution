@@ -85,7 +85,7 @@ public class Basics extends JavaPlugin
                 new Command_warp(),
                 new Command_world());
 
-        // Set up our YML commands
+        // Set up our custom commands
         this.customCommandLoader = new CustomCommandLoader(new File(getDataFolder(), "commands"));
         customCommandLoader.loadCommands();
     }
