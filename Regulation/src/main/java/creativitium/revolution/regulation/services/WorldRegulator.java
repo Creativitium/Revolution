@@ -4,33 +4,30 @@ import creativitium.revolution.foundation.templates.RService;
 import creativitium.revolution.regulation.Regulation;
 import creativitium.revolution.regulation.Setting;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.CreatureSpawner;
 import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Piston;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.*;
+import org.bukkit.event.inventory.InventoryCreativeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.world.WorldInitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SpawnEggMeta;
-import org.bukkit.material.SpawnEgg;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -49,9 +46,7 @@ public class WorldRegulator extends RService
     @Override
     public void onStart()
     {
-        worldRegulations.clear();
-
-        Bukkit.getWorlds().forEach(world -> worldRegulations.put(world, loadWorldRegulations(world)));
+        loadAll();
     }
 
     @Override
@@ -80,6 +75,50 @@ public class WorldRegulator extends RService
         }
     }
 
+    /*--== Block Filtering ==--*/
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event)
+    {
+        final World world = event.getBlock().getWorld();
+
+        if (Setting.BLOCK_FILTERING.getBoolean(world, false)
+                && Setting.ITEM_BLACKLIST.getStringList(world).contains(event.getBlock().getType().name()))
+        {
+            event.getPlayer().sendMessage(base.getMessageService().getMessage("regulation.component.block_filtering.filtered_" + (event.getBlock().getType().isBlock() ? "block" : "item")));
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event)
+    {
+        final World world = event.getPlayer().getWorld();
+        final Player player = event.getPlayer();
+
+        if (Setting.BLOCK_FILTERING.getBoolean(world, false)
+                && event.getItem() != null
+                && Setting.ITEM_BLACKLIST.getStringList(world).contains(event.getItem().getType().name()))
+        {
+            player.getInventory().remove(event.getItem().getType());
+            player.sendMessage(base.getMessageService().getMessage("regulation.component.block_filtering.filtered_" + (event.getItem().getType().isBlock() ? "block" : "item")));
+            event.setCancelled(true);
+        }
+    }
+
+    /*--== Entity Filtering ==--*/
+    @EventHandler
+    public void onEntitySpawn(EntitySpawnEvent event)
+    {
+        final World world = event.getLocation().getWorld();
+
+        if (Setting.ENTITY_FILTERING.getBoolean(world) && event.getEntityType() != EntityType.PLAYER
+                && Setting.ENTITY_BLACKLIST.getStringList(world).contains(event.getEntity().getType().name()))
+        {
+            event.setCancelled(true);
+        }
+    }
+
+    /*--== Explosions ==--*/
     @EventHandler
     public void onExplosion(ExplosionPrimeEvent event)
     {
@@ -91,8 +130,9 @@ public class WorldRegulator extends RService
         }
     }
 
+    /*--== Minecarts ==--*/
     @EventHandler
-    public void onEntitySpawn(EntitySpawnEvent event)
+    public void onMinecartSpawn(EntitySpawnEvent event)
     {
         final World world = event.getLocation().getWorld();
 
@@ -102,6 +142,7 @@ public class WorldRegulator extends RService
         }
     }
 
+    /*--== Decaying Leaves ==--*/
     @EventHandler
     public void onLeavesDecay(LeavesDecayEvent event)
     {
@@ -113,6 +154,7 @@ public class WorldRegulator extends RService
         }
     }
 
+    /*--== Redstone ==--*/
     @EventHandler
     public void onRedstonePulse(BlockRedstoneEvent event)
     {
@@ -159,6 +201,7 @@ public class WorldRegulator extends RService
         }
     }
 
+    /*--== Block Physics ==--*/
     @EventHandler
     public void onBlockPhysics(EntityChangeBlockEvent event)
     {
@@ -170,8 +213,9 @@ public class WorldRegulator extends RService
         }
     }
 
+    /*--== Entity NBT ==--*/
     @EventHandler
-    public void onEntitySpawn(BlockDispenseEvent event)
+    public void onEntitySpawnFromDispenser(BlockDispenseEvent event)
     {
         final World world = event.getBlock().getWorld();
 
@@ -183,10 +227,14 @@ public class WorldRegulator extends RService
     }
 
     @EventHandler
-    public void onEntitySpawn(PlayerInteractEvent event)
+    public void onEntitySpawnByPlayerInteraction(PlayerInteractEvent event)
     {
         final World world = event.getPlayer().getWorld();
 
+        /* This solution isn't great, but I couldn't find a way to spawn entities of the type of the spawn egg itself,
+        *   and parsing the name of the spawn egg to get the entity type isn't an option as some entities (like Snow
+        *   Golems and Mooshrooms) don't have an equivalent in EntityType. So, the next best thing is to cancel the
+        *   event if the item in their hand is a spawn egg and has a custom entity type in its NBT. */
         if (!Setting.SPAWN_EGG_NBT.getBoolean(world) && event.getAction().isRightClick()
                 && event.getItem() != null && event.getItem().getType().name().endsWith("_SPAWN_EGG")
                 && ((SpawnEggMeta) event.getItem().getItemMeta()).getCustomSpawnedType() != null)
@@ -196,7 +244,7 @@ public class WorldRegulator extends RService
     }
 
     @EventHandler
-    public void onCreatureSpawn(CreatureSpawnEvent event)
+    public void onEntitySpawn(CreatureSpawnEvent event)
     {
         final World world = event.getLocation().getWorld();
 
@@ -208,6 +256,7 @@ public class WorldRegulator extends RService
         }
     }
 
+    /*--== Spawners ==--*/
     @EventHandler
     public void onSpawnerSpawn(SpawnerSpawnEvent event)
     {
@@ -217,6 +266,12 @@ public class WorldRegulator extends RService
         {
             event.setCancelled(true);
         }
+    }
+
+    public void loadAll()
+    {
+        worldRegulations.clear();
+        Bukkit.getWorlds().forEach(world -> worldRegulations.put(world, loadWorldRegulations(world)));
     }
 
     public YamlConfiguration getRegulations(World world)

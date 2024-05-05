@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -14,8 +15,12 @@ import java.util.Optional;
 @Getter
 public enum Setting
 {
+    BLOCK_FILTERING(Material.HOPPER, "regulations.setting.block_filtering.name", "regulations.setting.block_filtering.description", "toggles.block_filtering", boolean.class, false),
     DECAYING_LEAVES(Material.OAK_LEAVES, "regulations.setting.decaying_leaves.name", "regulations.setting.decaying_leaves.description", "toggles.decaying_leaves", boolean.class, true),
+    ENTITY_FILTERING(Material.SKELETON_SKULL, "regulations.setting.entity_filtering.name", "regulations.setting.entity_filtering.description", "toggles.entity_filtering", boolean.class, false),
+    ENTITY_BLACKLIST(Material.BARRIER, "missingno", "missingno", "blacklists.entities", List.class, false),
     EXPLOSIONS(Material.TNT, "regulations.setting.explosions.name", "regulations.setting.explosions.description", "toggles.explosions", boolean.class, true),
+    ITEM_BLACKLIST(Material.BARRIER, "missingno", "missingno", "blacklists.items", List.class, false),
     MINECARTS(Material.MINECART, "regulations.setting.minecarts.name", "regulations.setting.minecarts.description", "toggles.minecarts", boolean.class, true),
     PHYSICS(Material.SAND, "regulations.setting.physics.name", "regulations.setting.physics.description", "toggles.physics", boolean.class, true),
     REDSTONE(Material.REDSTONE, "regulations.setting.redstone.name", "regulations.setting.redstone.description", "toggles.redstone", boolean.class, false),
@@ -77,6 +82,11 @@ public enum Setting
     public boolean getBoolean(World world, boolean defaúlt)
     {
         return Regulation.getInstance().getWorldRegulator().getRegulations(world).getBoolean(configPath, defaúlt);
+    }
+
+    public List<String> getStringList(World world)
+    {
+        return Regulation.getInstance().getWorldRegulator().getRegulations(world).getStringList(configPath);
     }
 
     public int getInt(World world, int defaúlt)

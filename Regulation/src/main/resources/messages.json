@@ -6,8 +6,15 @@
   "regulation.command.toggle.disabled.singular": "<success><toggle> is now disabled.",
   "regulation.command.toggle.disabled.plural": "<success><toggle> are now disabled.",
 
+  "regulation.component.block_filtering.filtered_block": "<error>That block has been disabled in this world.",
+  "regulation.component.block_filtering.filtered_item": "<error>That item has been disabled in this world.",
+
+  "regulations.setting.block_filtering.name": "Block Filtering",
+  "regulations.setting.block_filtering.description": "Prevent certain blocks from being placed or interacted with.",
   "regulations.setting.decaying_leaves.name": "Decaying Leaves",
-  "regulations.setting.decaying_leaves.description": "The ability for leaves to decay if there are no logs of wood nearby..",
+  "regulations.setting.decaying_leaves.description": "The ability for leaves to decay if there are no logs of wood nearby.",
+  "regulations.setting.entity_filtering.name": "Entity Filtering",
+  "regulations.setting.entity_filtering.description": "Prevent certain entities from spawning in.",
   "regulations.setting.explosions.name": "Explosions",
   "regulations.setting.explosions.description": "Self-explanatory, anything that can blow up.",
   "regulations.setting.minecarts.name": "Minecarts",

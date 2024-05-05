@@ -1,10 +1,32 @@
 # Toggles - You can toggle them in-game with /toggle. If these are set to true, their respective mechanics will be
 #           enabled.
 toggles:
+  block_filtering: false
   decaying_leaves: true
+  entity_filtering: false
   explosions: true
   minecarts: true
   redstone: true
   physics: true
   spawn_egg_nbt: true
   spawners: true
+
+# Blacklists - Types of things that will get downright rejected when you try to use them.
+blacklists:
+  entities:
+    - ENDER_DRAGON
+    - GIANT
+    - MAGMA_CUBE
+    - SLIME
+    - WITHER
+  items:
+    - BEE_NEST
+    - BEEHIVE
+    - BELL
+    - GRINDSTNE
+    - LAVA
+    - LAVA_BUCKET
+    - SPAWNER
+    - TNT
+    - WATER
+    - WATER_BUCKET
