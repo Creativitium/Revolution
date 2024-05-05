@@ -65,6 +65,8 @@
   "basics.command.spawn.sent_to_spawn": "<info><white><player></white> sent you to the spawnpoint.",
   "basics.command.spawn.teleporting": "<info>Teleporting...",
   "basics.command.spawn.teleporting_other": "<info>Teleporting...",
+  "basics.command.speed.flight_speed_set": "<success>Your flight speed has been set to <dark_green><number></dark_green>.",
+  "basics.command.speed.walk_speed_set": "<success>Your walk speed has been set to <dark_green><number></dark_green>.",
   "basics.command.tag.cleared": "<success>Your tag has been cleared.",
   "basics.command.tag.cleared.other": "<success>You have successfully cleared <dark_green><name><green>'s tag.",
   "basics.command.tag.set": "<success>Your tag has been set to: <tag>",
