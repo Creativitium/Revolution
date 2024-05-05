@@ -1,6 +1,7 @@
 {
   "regulation.command.toggle.list": "<info>List of available toggles:",
   "regulation.command.toggle.list.format": "<info> - <name>: <description>",
+  "regulation.command.toggle.list.footer": "<info> <gray>--</gray> <prev> Page <white><page></white><gray>/</gray><white><pages></white> <next> <gray>--</gray>",
   "regulation.command.toggle.enabled.singular": "<success><toggle> is now enabled.",
   "regulation.command.toggle.enabled.plural": "<success><toggle> are now enabled.",
   "regulation.command.toggle.disabled.singular": "<success><toggle> is now disabled.",
