@@ -22,6 +22,8 @@ public enum Setting
     EXPLOSIONS(Material.TNT, "regulations.setting.explosions.name", "regulations.setting.explosions.description", "toggles.explosions", boolean.class, true),
     ITEM_BLACKLIST(Material.BARRIER, "missingno", "missingno", "blacklists.items", List.class, false),
     MINECARTS(Material.MINECART, "regulations.setting.minecarts.name", "regulations.setting.minecarts.description", "toggles.minecarts", boolean.class, true),
+    MOB_LIMIT(Material.BARRIER, "missingno", "missingno", "limits.mobs", int.class, false),
+    MOB_LIMITING(Material.PIGLIN_HEAD, "regulations.setting.mob_limiting.name", "regulations.setting.mob_limiting.", "toggles.mob_limiting", boolean.class, false),
     PHYSICS(Material.SAND, "regulations.setting.physics.name", "regulations.setting.physics.description", "toggles.physics", boolean.class, true),
     REDSTONE(Material.REDSTONE, "regulations.setting.redstone.name", "regulations.setting.redstone.description", "toggles.redstone", boolean.class, false),
     SPAWN_EGG_NBT(Material.SKELETON_SPAWN_EGG, "regulations.setting.spawn_egg_nbt.name", "regulations.setting.spawn_egg_nbt.description", "toggles.spawn_egg_nbt", boolean.class, false),

@@ -9,3 +9,8 @@ autoexec:
   # When a player joins the server
   onJoin:
     - motd
+
+# Settings for the /spawnmob command
+spawnmob:
+  # Maximum amount of mobs that can be spawned in at a time
+  limit: 10

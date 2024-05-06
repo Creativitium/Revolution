@@ -6,10 +6,15 @@ toggles:
   entity_filtering: false
   explosions: true
   minecarts: true
+  mob_limiting: false
   redstone: true
   physics: true
   spawn_egg_nbt: true
   spawners: true
+
+# Limits - Exactly as what the tin says.
+limits:
+  mobs: 50
 
 # Blacklists - Types of things that will get downright rejected when you try to use them.
 blacklists:
@@ -23,7 +28,7 @@ blacklists:
     - BEE_NEST
     - BEEHIVE
     - BELL
-    - GRINDSTNE
+    - GRINDSTONE
     - LAVA
     - LAVA_BUCKET
     - SPAWNER

@@ -13,6 +13,7 @@ import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Piston;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.*;
@@ -27,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -262,6 +264,22 @@ public class WorldRegulator extends RService
         final World world = event.getLocation().getWorld();
 
         if (!Setting.SPAWNERS.getBoolean(world))
+        {
+            event.setCancelled(true);
+        }
+    }
+
+    /*--== Mob Limiting ==--*/
+    @EventHandler
+    public void onCreatureSpawn(CreatureSpawnEvent event)
+    {
+        final World world = event.getLocation().getWorld();
+        if (!Setting.MOB_LIMITING.getBoolean(event.getLocation().getWorld())) return;
+
+        if (!List.of(CreatureSpawnEvent.SpawnReason.CUSTOM,
+                CreatureSpawnEvent.SpawnReason.COMMAND,
+                CreatureSpawnEvent.SpawnReason.SPAWNER_EGG).contains(event.getSpawnReason())
+                || world.getEntitiesByClass(Mob.class).size() > Setting.MOB_LIMIT.getInt(world, 50))
         {
             event.setCancelled(true);
         }
