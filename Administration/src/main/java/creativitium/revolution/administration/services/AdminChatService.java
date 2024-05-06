@@ -48,6 +48,7 @@ public class AdminChatService extends RService
     {
         Component sm = getMsg("administration.components.staffchat",
                 Placeholder.unparsed("name", sender.getName()),
+                Placeholder.component("prefix", Administration.getInstance().getVaultHook().getPrefixAsComponent(sender)),
                 Placeholder.component("message", message));
 
         Bukkit.getOnlinePlayers().stream().filter(player -> player.hasPermission("administration.components.staffchat"))

@@ -46,5 +46,5 @@
   "administration.command.wildcard.executing": "<info>Running command <white><command></white> for each player on the server...",
 
   "administration.components.commandspy": "<commandspy><underlined><hover:show_text:'<translate:chat.copy.click>'><click:copy_to_clipboard:<name>><name></click></hover></underlined>: <gray><command>",
-  "administration.components.staffchat": "<staffchat><name> <dark_gray>[<yellow>HfS<dark_gray>]<white>: <gold><message>"
+  "administration.components.staffchat": "<staffchat><name> <dark_gray><prefix><white>: <gold><message>"
 }
