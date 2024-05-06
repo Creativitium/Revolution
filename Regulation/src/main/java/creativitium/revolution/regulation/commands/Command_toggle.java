@@ -80,9 +80,9 @@ public class Command_toggle extends RCommand
 
         paginated.get(page - 1).forEach(setting ->
         {
-            final Component name = Foundation.getInstance().getMessageService().getMessage(setting.getName())
+            final Component name = getMessage(setting.getName())
                     .color(setting.getBoolean(world) ? NamedTextColor.DARK_GREEN : NamedTextColor.DARK_RED);
-            final Component description = Foundation.getInstance().getMessageService().getMessage(setting.getDescription())
+            final Component description = getMessage(setting.getDescription())
                     .color(setting.getBoolean(world) ? NamedTextColor.GREEN : NamedTextColor.RED);
 
             msg(sender, "regulation.command.toggle.list.format", Placeholder.component("name", name),

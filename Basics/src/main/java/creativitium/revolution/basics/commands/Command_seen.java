@@ -50,17 +50,17 @@ public class Command_seen extends RCommand
                             Placeholder.unparsed("date", Util.DATE_FORMAT.format(new Date(data.getLastOnline() * 1000))));
 
                     if (sender.hasPermission("basics.command.seen.see_ips") && (player.isOnline() || data.getLastIP() != null))
-                        msg(sender, "basics.command.seen.info.ip", Placeholder.unparsed("ip", player.isOnline() ? Objects.requireNonNull(Objects.requireNonNull(player.getPlayer()).getAddress()).getAddress().getHostAddress() : data.getLastIP()));
+                        msg(sender, "basics.command.seen.info.ip", Placeholder.parsed("ip", player.isOnline() ? Objects.requireNonNull(Objects.requireNonNull(player.getPlayer()).getAddress()).getAddress().getHostAddress() : data.getLastIP()));
 
                     if (sender.hasPermission("basics.command.seen.see_location") && (player.isOnline() || data.getLoginLocation() != null))
                     {
                         final Location location = player.isOnline() ? Objects.requireNonNull(player.getPlayer()).getLocation() : data.getLoginLocation();
                         msg(sender, "basics.command.seen.info.location", Placeholder.component("location",
-                                Foundation.getInstance().getMessageService().getMessage("basics.command.seen.info.location.format",
-                                        Placeholder.unparsed("world", location.getWorld().getName()),
-                                        Placeholder.unparsed("x", String.valueOf((int) location.x())),
-                                        Placeholder.unparsed("y", String.valueOf((int) location.y())),
-                                        Placeholder.unparsed("z", String.valueOf((int) location.z())))));
+                                getMessage("basics.command.seen.info.location.format",
+                                        Placeholder.parsed("world", location.getWorld().getName()),
+                                        Placeholder.parsed("x", String.valueOf((int) location.x())),
+                                        Placeholder.parsed("y", String.valueOf((int) location.y())),
+                                        Placeholder.parsed("z", String.valueOf((int) location.z())))));
                     }
                 });
 

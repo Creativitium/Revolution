@@ -57,7 +57,7 @@ public class Command_banip extends RCommand
         Administration.getInstance().getBanService().addEntry(ban);
 
         action(sender, "administration.action.banip", Placeholder.unparsed("ip", ipAddress.trim()),
-                Placeholder.component("reason", reason != null ? Foundation.getInstance().getMessageService().getMessage("administration.action.banip.reason", Placeholder.unparsed("reason", reason)) : Component.empty()));
+                Placeholder.component("reason", reason != null ? getMessage("administration.action.banip.reason", Placeholder.unparsed("reason", reason)) : Component.empty()));
 
         Bukkit.getOnlinePlayers().stream().filter(player -> Objects.requireNonNull(player.getAddress()).getAddress().getHostAddress().equalsIgnoreCase(ipAddress)).forEach(player ->
                 player.kick(ban.craftBanMessage()));

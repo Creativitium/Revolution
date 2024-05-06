@@ -74,7 +74,7 @@ public class Command_deafen extends RCommand
         final org.bukkit.Sound[] sounds = org.bukkit.Sound.values();
         int composition = random.nextInt(1, 23);
 
-        nowPlaying = BossBar.bossBar(Foundation.getInstance().getMessageService().getMessage("basics.command.deafen.now_playing",
+        nowPlaying = BossBar.bossBar(getMessage("basics.command.deafen.now_playing",
                 Placeholder.unparsed("composer", sender.getName()),
                 Placeholder.unparsed("number", String.valueOf(composition))), 0F, BossBar.Color.RED, BossBar.Overlay.PROGRESS);
 

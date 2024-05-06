@@ -9,7 +9,7 @@
 
   "regulation.component.block_filtering.filtered_block": "<error>That block has been disabled in this world.",
   "regulation.component.block_filtering.filtered_item": "<error>That item has been disabled in this world.",
-  "regulation.component.ratelimits.block_break.broadcast": "<warning><gold><player></gold> was automatically kicked for breaking blocks too fast!",
+  "regulation.component.ratelimits.block_break.broadcast": "<warning><gold><hover:show_text:Click to Teleport><click:run_command:/tppos <x> <y> <z> <world>><name></click></hover></gold> was automatically kicked for breaking blocks too fast!",
   "regulation.component.ratelimits.block_break": "<red>Please turn off your Nuker!",
   "regulation.component.ratelimits.chat": "<error>Please refrain from spamming the chat.",
   "regulation.component.ratelimits.commands": "<error>Please refrain from spamming commands.",
@@ -24,6 +24,8 @@
   "regulations.setting.explosions.description": "Self-explanatory, anything that can blow up.",
   "regulations.setting.minecarts.name": "Minecarts",
   "regulations.setting.minecarts.description": "A popular mode of transportation which can sometimes be abused to lag servers.",
+  "regulations.setting.mob_limiting.name": "Mob Limiting",
+  "regulations.setting.mob_limiting.description": "Prevent mobs from spawning after a given threshold has been met.",
   "regulations.setting.physics.name": "Block Physics",
   "regulations.setting.physics.description": "General block physics",
   "regulations.setting.redstone.name": "Redstone",

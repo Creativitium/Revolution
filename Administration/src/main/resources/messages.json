@@ -40,10 +40,11 @@
   "administration.command.unban.not_banned": "<error>That player isn't banned.",
   "administration.command.unbanip.not_banned": "<error>That IP address isn't banned.",
   "administration.command.whohas.nobody": "<info>Nobody online has that item in their inventory.",
-  "administration.command.whohas.somebody": "<info>Players with item <white><item></white>: <white><players></white>",
+  "administration.command.whohas.somebody": "<info>Players with item <white><translated></white>: <white><players></white>",
+  "administration.command.whohas.somebody.user_format": "<click:run_command:/invsee <name>><name></click>",
   "administration.command.wildcard.blacklisted": "<error>Did you really think that was going to work?",
   "administration.command.wildcard.executing": "<info>Running command <white><command></white> for each player on the server...",
 
-  "administration.components.commandspy": "<commandspy><underlined><player></underlined>: <gray><command>",
+  "administration.components.commandspy": "<commandspy><underlined><hover:show_text:'<translate:chat.copy.click>'><click:copy_to_clipboard:<name>><name></click></hover></underlined>: <gray><command>",
   "administration.components.staffchat": "<staffchat><name> <dark_gray>[<yellow>HfS<dark_gray>]<white>: <gold><message>"
 }

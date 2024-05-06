@@ -1,6 +1,7 @@
 {
   "revolution.action.format": "<red><name> - <action>",
 
+  "revolution.hover.click_to_open_inventory": "Click to Open Inventory",
   "revolution.hover.click_to_teleport": "Click to Teleport",
 
   "revolution.command.error.description": "<info><description>",

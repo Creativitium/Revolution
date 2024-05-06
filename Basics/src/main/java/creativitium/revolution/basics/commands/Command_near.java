@@ -1,14 +1,11 @@
 package creativitium.revolution.basics.commands;
 
 import creativitium.revolution.basics.Basics;
-import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.JoinConfiguration;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -51,12 +48,12 @@ public class Command_near extends RCommand
 
         final Location location = playerSender.getLocation();
         final List<Component> players = location.getNearbyPlayers(radius).stream().filter(player -> playerSender != player).map(player ->
-                Foundation.getInstance().getMessageService().getMessage("basics.command.near.nearby_players.format",
-                        Placeholder.unparsed("player", player.getName()),
+                getMessage("basics.command.near.nearby_players.format",
+                        Placeholder.parsed("name", player.getName()),
                         Placeholder.unparsed("distance", String.valueOf((int) player.getLocation().distance(location))),
                         Placeholder.component("display_name", player.displayName()))
-                        .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/tp " + player.getName()))
-                        .hoverEvent(HoverEvent.showText(Component.text("Click to Teleport")))).toList();
+                        /*.clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/tp " + player.getName()))
+                        .hoverEvent(HoverEvent.showText(Component.text("Click to Teleport")))*/).toList();
 
         if (players.isEmpty())
         {

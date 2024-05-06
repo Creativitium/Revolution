@@ -31,13 +31,13 @@ public class Command_kick extends RCommand
         {
             action(sender, "administration.action.kick", Placeholder.unparsed("player", player.getName()),
                     Placeholder.component("reason", reason != null ?
-                            Foundation.getInstance().getMessageService().getMessage("administration.action.kick.reason", Placeholder.unparsed("reason", reason)) :
+                            getMessage("administration.action.kick.reason", Placeholder.unparsed("reason", reason)) :
                             Component.empty()));
 
-            player.kick(Foundation.getInstance().getMessageService().getMessage("administration.kick.message",
+            player.kick(getMessage("administration.kick.message",
                     Placeholder.unparsed("by", sender.getName()),
                     Placeholder.component("reason", reason != null ?
-                            Foundation.getInstance().getMessageService().getMessage("administration.kick.reason", Placeholder.unparsed("reason", reason)) :
+                            getMessage("administration.kick.reason", Placeholder.unparsed("reason", reason)) :
                             Component.empty())));
 
         }, () -> msg(sender, "revolution.command.error.player_not_found"));

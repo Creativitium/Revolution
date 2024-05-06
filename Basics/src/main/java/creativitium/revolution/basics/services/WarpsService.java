@@ -68,15 +68,15 @@ public class WarpsService extends RService
                 {
                     if (warp.getPosition() == null)
                     {
-                        player.sendMessage(base.getMessageService().getMessage("basics.command.warp.corrupted"));
+                        player.sendMessage(getMsg("basics.command.warp.corrupted"));
                         removeWarp(warpName);
                         return;
                     }
 
-                    player.sendMessage(base.getMessageService().getMessage("basics.command.warp.teleporting",
+                    player.sendMessage(getMsg("basics.command.warp.teleporting",
                             Placeholder.unparsed("warp", warpName)));
                     player.teleportAsync(warp.getPosition(), PlayerTeleportEvent.TeleportCause.COMMAND);
-                }, () -> player.sendMessage(base.getMessageService().getMessage("basics.command.warp.not_found")));
+                }, () -> player.sendMessage(getMsg("basics.command.warp.not_found")));
             }
         }
     }

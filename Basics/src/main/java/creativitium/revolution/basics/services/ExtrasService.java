@@ -26,15 +26,15 @@ public class ExtrasService extends RService
     {
         if (Bukkit.hasWhitelist())
         {
-            event.motd(base.getMessageService().getMessage("basics.components.motd.whitelisted"));
+            event.motd(getMsg("basics.components.motd.whitelisted"));
         }
         else if (event.getNumPlayers() == Bukkit.getMaxPlayers())
         {
-            event.motd(base.getMessageService().getMessage("basics.components.motd.full"));
+            event.motd(getMsg("basics.components.motd.full"));
         }
         else
         {
-            event.motd(base.getMessageService().getMessage("basics.components.motd.normal",
+            event.motd(getMsg("basics.components.motd.normal",
                     Placeholder.unparsed("version", serverVersion.getName())));
         }
     }

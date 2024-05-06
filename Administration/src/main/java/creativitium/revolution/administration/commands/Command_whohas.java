@@ -42,7 +42,9 @@ public class Command_whohas extends RCommand
             {
                 msg(sender, "administration.command.whohas.somebody",
                         Placeholder.unparsed("item", material.name()),
-                        Placeholder.component("players", Component.join(JoinConfiguration.commas(true), players.stream().map(player -> Component.text(player.getName())).toList())));
+                        Placeholder.component("translated", Component.translatable(material.translationKey())),
+                        Placeholder.component("players", Component.join(JoinConfiguration.commas(true), players.stream().map(player ->
+                                getMessage("administration.command.whohas.somebody.user_format", Placeholder.parsed("name", player.getName()))).toList())));
             }
         }, () -> msg(sender, "revolution.command.error.item_not_found"));
 

@@ -4,8 +4,6 @@ import creativitium.revolution.foundation.templates.RService;
 import creativitium.revolution.regulation.Regulation;
 import creativitium.revolution.regulation.data.RegPlayer;
 import io.papermc.paper.event.player.AsyncChatEvent;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -70,7 +68,7 @@ public class GlobalRegulator extends RService
 
         if (player.getChat() > config.getInt("ratelimits.chat.threshold", 5))
         {
-            event.getPlayer().sendMessage(base.getMessageService().getMessage("regulation.component.ratelimits.chat"));
+            event.getPlayer().sendMessage(getMsg("regulation.component.ratelimits.chat"));
             event.setCancelled(true);
         }
 
@@ -86,7 +84,7 @@ public class GlobalRegulator extends RService
 
         if (player.getCommands() > config.getInt("ratelimits.commands.threshold", 5))
         {
-            event.getPlayer().sendMessage(base.getMessageService().getMessage("regulation.component.ratelimits.commands"));
+            event.getPlayer().sendMessage(getMsg("regulation.component.ratelimits.commands"));
             event.setCancelled(true);
         }
 
@@ -105,11 +103,13 @@ public class GlobalRegulator extends RService
             final Location loc = event.getPlayer().getLocation();
 
             Bukkit.getOnlinePlayers().stream().filter(pl -> pl.hasPermission("regulator.broadcast.see_alerts")).forEach(pl ->
-                    pl.sendMessage(base.getMessageService().getMessage("regulation.component.ratelimits.block_break.broadcast",
-                            Placeholder.unparsed("player", event.getPlayer().getName()))
-                            .hoverEvent(HoverEvent.showText(base.getMessageService().getMessage("revolution.hover.click_to_teleport")))
-                            .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/tppos " + loc.getBlockX() + " " + loc.getBlockY() + " " + loc.getBlockZ() + " " + loc.getWorld().getName()))));
-            event.getPlayer().kick(base.getMessageService().getMessage("regulation.component.ratelimits.block_break"));
+                    pl.sendMessage(getMsg("regulation.component.ratelimits.block_break.broadcast",
+                            Placeholder.parsed("name", event.getPlayer().getName()),
+                            Placeholder.parsed("x", String.valueOf(loc.getBlockX())),
+                            Placeholder.parsed("y", String.valueOf(loc.getBlockY())),
+                            Placeholder.parsed("z", String.valueOf(loc.getBlockZ())),
+                            Placeholder.parsed("world", loc.getWorld().getName()))));
+            event.getPlayer().kick(getMsg("regulation.component.ratelimits.block_break"));
             event.setCancelled(true);
         }
 

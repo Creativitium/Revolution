@@ -85,7 +85,7 @@ public class WorldRegulator extends RService
         if (Setting.BLOCK_FILTERING.getBoolean(world, false)
                 && Setting.ITEM_BLACKLIST.getStringList(world).contains(event.getBlock().getType().name()))
         {
-            event.getPlayer().sendMessage(base.getMessageService().getMessage("regulation.component.block_filtering.filtered_" + (event.getBlock().getType().isBlock() ? "block" : "item")));
+            event.getPlayer().sendMessage(getMsg("regulation.component.block_filtering.filtered_" + (event.getBlock().getType().isBlock() ? "block" : "item")));
             event.setCancelled(true);
         }
     }
@@ -101,7 +101,7 @@ public class WorldRegulator extends RService
                 && Setting.ITEM_BLACKLIST.getStringList(world).contains(event.getItem().getType().name()))
         {
             player.getInventory().remove(event.getItem().getType());
-            player.sendMessage(base.getMessageService().getMessage("regulation.component.block_filtering.filtered_" + (event.getItem().getType().isBlock() ? "block" : "item")));
+            player.sendMessage(getMsg("regulation.component.block_filtering.filtered_" + (event.getItem().getType().isBlock() ? "block" : "item")));
             event.setCancelled(true);
         }
     }

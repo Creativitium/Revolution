@@ -43,7 +43,7 @@
   "basics.command.home.teleporting": "<info>Teleporting...",
   "basics.command.item.given": "<info>You have received <white><amount></white> of <white><translated_type></white>.",
   "basics.command.near.nearby_players": "<info>Nearby players: <white><players></white>",
-  "basics.command.near.nearby_players.format": "<player> (<distance>m)",
+  "basics.command.near.nearby_players.format": "<hover:show_text:'Click to Teleport'><click:run_command:/tp <name>><name> (<distance>m)</click></hover>",
   "basics.command.near.nobody_is_nearby": "<info>Nobody is currently near you within a <white><radius>m</white> radius.",
   "basics.command.nickname.another_player_has_that_nickname": "<error>Somebody else already has that nickname.",
   "basics.command.nickname.cleared": "<success>Your nickname has been cleared.",
@@ -56,8 +56,8 @@
   "basics.command.seen.info.offline": "<info><white><nickname></white> is <red>offline</red> and was last seen on <white><date></white>.",
   "basics.command.seen.info.online": "<info><white><nickname></white> is <green>online</green> and has been since <white><date></white>.",
   "basics.command.seen.info.location": "<info> - Location: <white><location></white>",
-  "basics.command.seen.info.location.format": "<world> at <x>, <y>, <z>",
-  "basics.command.seen.info.ip": "<info> - IP Address: <white><ip></white>",
+  "basics.command.seen.info.location.format": "<hover:show_text:'Click to Teleport'><click:run_command:/tppos <x> <y> <z> <world>><world> at <x>, <y>, <z></click></hover>",
+  "basics.command.seen.info.ip": "<info> - IP Address: <white><hover:show_text:'<translate:chat.copy.click>'><click:copy_to_clipboard:<ip>><ip></click></hover></white>",
   "basics.command.sethome.invalid_home_name": "<error>Invalid home name: <dark_red><name>",
   "basics.command.sethome.set": "<success>Home set.",
   "basics.command.setspawn.set": "<success>Spawn set.",
@@ -103,7 +103,7 @@
   "basics.custom_command.header": " <gradient:black:gray>====</gradient> <name> <gray>--</gray> Page <page><gray>/</gray><pages> <gradient:gray:black>====</gradient>",
   "basics.custom_command.footer": " <gradient:black:gray>====</gradient> <prev> Page <page><gray>/</gray><pages> <next> <gradient:gray:black>====</gradient>",
 
-  "basics.general.use_back": "<info>Use <white>/back</white> to return to your death point.",
+  "basics.general.use_back": "<info>Use <white><hover:show_text:'Click to Execute'><click:run_command:/back>/back</click></hover></white> to return to your death point.",
 
   "basics.components.chat": "<tag><display> <yellow>:</yellow> <gray><message>",
   "basics.components.death_message": "<dark_gray>[<white>☠</white>]</dark_gray> <display>",

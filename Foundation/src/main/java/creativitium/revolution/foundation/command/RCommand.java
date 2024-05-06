@@ -161,6 +161,17 @@ public abstract class RCommand
     }
 
     /**
+     * Get a parsed message with optional placeholders.
+     * @param text          String
+     * @param placeholders  TagResolver...
+     * @return              Component
+     */
+    protected Component getMessage(String text, TagResolver... placeholders)
+    {
+        return foundation.getMessageService().getMessage(text, placeholders);
+    }
+
+    /**
      * Gets a list of all online players' names.
      * @return  List<String>
      */

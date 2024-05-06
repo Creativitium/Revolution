@@ -46,7 +46,7 @@ public class AdminChatService extends RService
 
     public void sendAdminChat(CommandSender sender, Component message)
     {
-        Component sm = Foundation.getInstance().getMessageService().getMessage("administration.components.staffchat",
+        Component sm = getMsg("administration.components.staffchat",
                 Placeholder.unparsed("name", sender.getName()),
                 Placeholder.component("message", message));
 

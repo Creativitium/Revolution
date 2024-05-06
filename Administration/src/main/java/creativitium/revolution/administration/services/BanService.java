@@ -95,7 +95,7 @@ public class BanService extends RService
             }
             else
             {
-                event.motd(base.getMessageService().getMessage("administration.ban.motd"));
+                event.motd(getMsg("administration.ban.motd"));
             }
         });
     }

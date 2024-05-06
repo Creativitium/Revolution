@@ -123,7 +123,7 @@ public class BasicsService extends RService
             getPlugin().getConfig().getStringList("autoexec.onJoin").forEach(player::performCommand);
         }
 
-        event.joinMessage(base.getMessageService().getMessage("basics.components.join_message",
+        event.joinMessage(getMsg("basics.components.join_message",
                 Placeholder.component("display", player.displayName()),
                 Placeholder.unparsed("username", player.getName())));
 
@@ -137,7 +137,7 @@ public class BasicsService extends RService
     {
         final Player player = event.getPlayer();
 
-        event.quitMessage(base.getMessageService().getMessage("basics.components.leave_message",
+        event.quitMessage(getMsg("basics.components.leave_message",
                 Placeholder.component("display", player.displayName()),
                 Placeholder.unparsed("username", player.getName())));
 
@@ -156,14 +156,14 @@ public class BasicsService extends RService
     {
         final Player player = event.getPlayer();
 
-        event.deathMessage(base.getMessageService().getMessage("basics.components.death_message",
+        event.deathMessage(getMsg("basics.components.death_message",
                 Placeholder.component("display", player.displayName()),
                 Placeholder.unparsed("username", player.getName())));
 
         if (player.hasPermission("basics.command.back"))
         {
             ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId())).setLastLocation(player.getLocation());
-            player.sendMessage(base.getMessageService().getMessage("basics.general.use_back"));
+            player.sendMessage(getMsg("basics.general.use_back"));
         }
     }
 
@@ -186,7 +186,7 @@ public class BasicsService extends RService
     {
         final BPlayer data = (BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(event.getPlayer().getUniqueId());
 
-        event.renderer((source, sourceDisplayName, message, viewer) -> base.getMessageService().getMessage("basics.components.chat",
+        event.renderer((source, sourceDisplayName, message, viewer) -> getMsg("basics.components.chat",
                 Placeholder.component("tag", data.getTag() != null ? data.getTag().append(Component.space()) : Component.empty()),
                 Placeholder.component("display", event.getPlayer().displayName()),
                 Placeholder.component("nickname", data.getNickname() != null ? data.getNickname() : Component.text(event.getPlayer().getName())),

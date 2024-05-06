@@ -22,7 +22,7 @@ public class Command_stop extends RCommand
     @Override
     public boolean run(CommandSender sender, Player playerSender, String commandLabel, String[] args)
     {
-        Bukkit.getOnlinePlayers().forEach(player -> player.kick(Foundation.getInstance().getMessageService().getMessage("administration.shutdown.message")));
+        Bukkit.getOnlinePlayers().forEach(player -> player.kick(getMessage("administration.shutdown.message")));
         Bukkit.shutdown();
         return true;
     }

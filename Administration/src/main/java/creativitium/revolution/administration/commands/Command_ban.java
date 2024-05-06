@@ -79,7 +79,7 @@ public class Command_ban extends RCommand
         Administration.getInstance().getBanService().addEntry(ban);
 
         action(sender, "administration.action.ban", Placeholder.unparsed("player", player.getName() != null ? player.getName() : args[0]),
-                Placeholder.component("reason", reason != null ? Foundation.getInstance().getMessageService().getMessage("administration.action.ban.reason", Placeholder.unparsed("reason", reason)) : Component.empty()));
+                Placeholder.component("reason", reason != null ? getMessage("administration.action.ban.reason", Placeholder.unparsed("reason", reason)) : Component.empty()));
 
         if (player.isOnline())
         {
