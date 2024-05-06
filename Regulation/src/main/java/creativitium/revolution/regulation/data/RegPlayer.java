@@ -14,8 +14,8 @@ public class RegPlayer
     public void decrement()
     {
         brokenBlocks = 0;
-        chat = chat < 5 ? 0 : chat - 5;
-        commands = commands < 5 ? 0 : commands - 5;
+        chat = Math.max(chat - 5, 0);
+        commands = Math.max(commands - 5, 0);
     }
 
     public void reset()

@@ -40,10 +40,14 @@ public class Command_near extends RCommand
             return true;
         }
 
+        // Lower limit
         if (!sender.hasPermission("basics.command.near.bypass_cap"))
         {
             radius = Math.min(250, radius);
         }
+
+        // Upper limit, anything higher will likely crash the server
+        radius = Math.min(radius, 50000);
 
         final Location location = playerSender.getLocation();
         final List<Component> players = location.getNearbyPlayers(radius).stream().filter(player -> playerSender != player).map(player ->
