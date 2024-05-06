@@ -19,6 +19,7 @@ public class BPlayer implements ConfigurationSerializable
     private Component tag = null;
     private boolean berserkEnabled = false;
     private boolean godEnabled = false;
+    private boolean tpEnabled = true;
     private Map<String, Location> homes = new HashMap<>();
     private long lastOnline = 0L;
     private Location loginLocation = null;
@@ -44,6 +45,7 @@ public class BPlayer implements ConfigurationSerializable
         map.put("tag", tag != null ? MM.getLessExploitable().serialize(tag) : null);
         map.put("berserkEnabled", berserkEnabled);
         map.put("godEnabled", godEnabled);
+        map.put("tpEnabled", tpEnabled);
         map.put("homes", homes);
         map.put("loginLocation", loginLocation);
         // I really wish I didn't have to do this, but apparently I can't serialize Longs... for some retarded reason
@@ -61,6 +63,7 @@ public class BPlayer implements ConfigurationSerializable
         data.tag = map.get("tag") != null ? MM.getLessExploitable().deserialize((String) map.get("tag")) : null;
         data.berserkEnabled = (boolean) map.getOrDefault("berserkEnabled", false);
         data.godEnabled = (boolean) map.getOrDefault("godEnabled", false);
+        data.tpEnabled = (boolean) map.getOrDefault("tpEnabled", true);
         try
         {
             data.homes = (Map<String, Location>) map.getOrDefault("homes", new HashMap<>());

@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * <h1>BiOptional</h1>
@@ -122,6 +123,62 @@ public class BiOptional<X, Y>
     }
 
     /**
+     * Verifies the value of both predicates and if both of their conditions are met, then return this object.
+     * @param left  Predicate
+     * @param right Predicate
+     * @return      This object if both values meet the Predicates' criteria.
+     */
+    public BiOptional<X, Y> filter(Predicate<X> left, Predicate<Y> right)
+    {
+        return left.test(this.left) && right.test(this.right) ? this : empty();
+    }
+
+    /**
+     * Verifies the value of both predicates and if both of their conditions are met, then run the given code.
+     * @param left      Predicate
+     * @param right     Predicate
+     * @param consumer  BiConsumer
+     */
+    public void ifConditionsMet(Predicate<X> left, Predicate<Y> right, BiConsumer<X, Y> consumer)
+    {
+        if (left.test(this.left) && right.test(this.right))
+        {
+            consumer.accept(this.left, this.right);
+        }
+    }
+
+    /**
+     * Verifies the value of both predicates and returns their combined outcome
+     * @param left  Predicate
+     * @param right Predicate
+     * @return      True if both values meet the Predicates' criteria.
+     */
+    public boolean areConditionsMet(Predicate<X> left, Predicate<Y> right)
+    {
+        return left.test(this.left) && right.test(this.right);
+    }
+
+    /**
+     * Verifies the value of the predicates pertaining to the left object and returns true if it is met.
+     * @param left  Predicate
+     * @return      True if the Predicate's criteria has been met.
+     */
+    public boolean leftMeetsConditions(Predicate<X> left)
+    {
+        return left.test(this.left);
+    }
+
+    /**
+     * Verifies the value of the predicates pertaining to the right object and returns true if it is met.
+     * @param right Predicate
+     * @return      True if the Predicate's criteria has been met.
+     */
+    public boolean rightMeetsConditions(Predicate<Y> right)
+    {
+        return right.test(this.right);
+    }
+
+    /**
      * Performs an action if both objects are present
      * @param consumer  A Consumer for the left and right object types
      */
@@ -171,5 +228,10 @@ public class BiOptional<X, Y>
     public static <X, Y> BiOptional<X, Y> fromOptionals(Optional<X> left, Optional<Y> right)
     {
         return new BiOptional<>(left.orElse(null), right.orElse(null));
+    }
+
+    public static <X, Y> BiOptional<X, Y> empty()
+    {
+        return ofNullables(null, null);
     }
 }
