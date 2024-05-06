@@ -32,7 +32,7 @@ public class Command_near extends RCommand
         int radius;
         try
         {
-            radius = args.length == 0 ? 100 : Integer.parseInt(args[0]);
+            radius = Math.abs(args.length == 0 ? 100 : Integer.parseInt(args[0]));
         }
         catch (NumberFormatException ex)
         {
