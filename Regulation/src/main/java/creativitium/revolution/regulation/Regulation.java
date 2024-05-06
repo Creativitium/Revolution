@@ -3,6 +3,7 @@ package creativitium.revolution.regulation;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
 import creativitium.revolution.regulation.commands.Command_toggle;
+import creativitium.revolution.regulation.services.GlobalRegulator;
 import creativitium.revolution.regulation.services.WorldRegulator;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
@@ -17,6 +18,8 @@ public class Regulation extends JavaPlugin
     private RServiceGroup services = new RServiceGroup();
     @Getter
     private WorldRegulator worldRegulator;
+    @Getter
+    private GlobalRegulator globalRegulator;
 
     @Override
     public void onLoad()
@@ -32,14 +35,10 @@ public class Regulation extends JavaPlugin
 
         // Set up our services
         this.worldRegulator = services.addService(NamespacedKey.fromString("regulation:regulator"), new WorldRegulator(getDataFolder()));
+        this.globalRegulator = services.addService(NamespacedKey.fromString("regulation:global"), new GlobalRegulator());
         this.services.startServices();
 
         // Set up our commands
         Foundation.getInstance().getCommandLoader().loadCommandsManually("regulation", new Command_toggle());
-    }
-
-    @Override
-    public void onDisable()
-    {
     }
 }

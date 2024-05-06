@@ -9,6 +9,10 @@
 
   "regulation.component.block_filtering.filtered_block": "<error>That block has been disabled in this world.",
   "regulation.component.block_filtering.filtered_item": "<error>That item has been disabled in this world.",
+  "regulation.component.ratelimits.block_break.broadcast": "<warning><gold><player></gold> was automatically kicked for breaking blocks too fast!",
+  "regulation.component.ratelimits.block_break": "<red>Please turn off your Nuker!",
+  "regulation.component.ratelimits.chat": "<error>Please refrain from spamming the chat.",
+  "regulation.component.ratelimits.commands": "<error>Please refrain from spamming commands.",
 
   "regulations.setting.block_filtering.name": "Block Filtering",
   "regulations.setting.block_filtering.description": "Prevent certain blocks from being placed or interacted with.",

@@ -1,6 +1,6 @@
 package creativitium.revolution.basics.commands;
 
-import creativitium.revolution.foundation.Foundation;
+import creativitium.revolution.basics.Basics;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
@@ -51,6 +51,6 @@ public class Command_world extends RCommand
     @Override
     public @NotNull Plugin getPlugin()
     {
-        return Foundation.getInstance();
+        return Basics.getInstance();
     }
 }

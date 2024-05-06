@@ -1,6 +1,8 @@
 {
   "revolution.action.format": "<red><name> - <action>",
 
+  "revolution.hover.click_to_teleport": "Click to Teleport",
+
   "revolution.command.error.description": "<info><description>",
   "revolution.command.error.usage": "<info>Usage: <white><usage></white>",
   "revolution.command.error.internal": "<error>Command error: <yellow><exception>",

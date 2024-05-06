@@ -1,0 +1,10 @@
+ratelimits:
+  chat:
+    enabled: true
+    threshold: 5
+  commands:
+    enabled: true
+    threshold: 5
+  block_break:
+    enabled: true
+    threshold: 10
