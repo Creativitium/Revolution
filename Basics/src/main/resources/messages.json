@@ -85,6 +85,7 @@
   "basics.command.teleport.teleporting": "<info>Teleporting to <white><player></white>...",
   "basics.command.teleport.teleporting_others": "<info>Teleporting <white><player></white> to <white><player2></white>...",
   "basics.command.teleport.teleporting_to_you": "<info>Teleporting <white><player></white> to you...",
+  "basics.command.top.teleporting": "<info>Teleporting...",
   "basics.command.tppos.out_of_this_world": "<error>That position is out of bounds!",
   "basics.command.tppos.teleporting": "<info>Teleporting...",
   "basics.command.tptoggle.no_permission_others": "<error>You don't have permission to change other players' tptoggle.",

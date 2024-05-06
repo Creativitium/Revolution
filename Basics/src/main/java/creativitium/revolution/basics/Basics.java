@@ -84,6 +84,7 @@ public class Basics extends JavaPlugin
                 new Command_speed(),
                 new Command_tag(),
                 new Command_teleport(),
+                new Command_top(),
                 new Command_tphere(),
                 new Command_tpo(),
                 new Command_tpohere(),
