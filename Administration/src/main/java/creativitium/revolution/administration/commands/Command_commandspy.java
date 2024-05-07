@@ -6,6 +6,7 @@ import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import net.kyori.adventure.key.Key;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -22,7 +23,7 @@ public class Command_commandspy extends RCommand
     @Override
     public boolean run(CommandSender sender, Player playerSender, String commandLabel, String[] args)
     {
-        APlayer data = (APlayer) Shortcuts.getExternalPlayerService(Administration.getInstance()).getPlayerData(playerSender.getUniqueId());
+        APlayer data = (APlayer) Shortcuts.getService(Key.key("administration", "admin_preferences")).getPlayerData(playerSender.getUniqueId());
         data.setCommandSpyEnabled(!data.isCommandSpyEnabled());
 
         msg(sender, "administration.command.commandspy." + (data.isCommandSpyEnabled() ? "enabled" : "disabled"));

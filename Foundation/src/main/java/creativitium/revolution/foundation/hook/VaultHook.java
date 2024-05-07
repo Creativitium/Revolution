@@ -17,16 +17,10 @@ public class VaultHook extends RService
     private static final LegacyComponentSerializer legacy = LegacyComponentSerializer.legacyAmpersand();
     //--
     private Chat chat = null;
-    private Economy economy = null;
 
     @Override
     public void onStart()
     {
-        if (!setupEconomy())
-        {
-            base.getSLF4JLogger().warn("Economy was not setup!");
-        }
-
         if (!setupChat())
         {
             base.getSLF4JLogger().warn("Chat was not setup!");
@@ -38,22 +32,6 @@ public class VaultHook extends RService
     {
     }
 
-    private boolean setupEconomy()
-    {
-        if (Bukkit.getPluginManager().isPluginEnabled("Vault"))
-        {
-            return false;
-        }
-
-        RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
-        if (rsp == null)
-        {
-            return false;
-        }
-
-        economy = rsp.getProvider();
-        return economy != null;
-    }
 
     private boolean setupChat()
     {

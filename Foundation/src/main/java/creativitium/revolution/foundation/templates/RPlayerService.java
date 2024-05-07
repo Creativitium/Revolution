@@ -22,10 +22,17 @@ public abstract class RPlayerService<T extends ConfigurationSerializable> extend
 {
     private YamlConfiguration configuration = new YamlConfiguration();
     private final Map<UUID, T> data = new HashMap<>();
+    private final String filename;
+
+    public RPlayerService(Plugin plugin, String filename)
+    {
+        super(plugin);
+        this.filename = filename;
+    }
 
     public RPlayerService(Plugin plugin)
     {
-        super(plugin);
+        this(plugin, "playerdata.yml");
     }
 
     @Override
@@ -42,7 +49,7 @@ public abstract class RPlayerService<T extends ConfigurationSerializable> extend
 
     public void load()
     {
-        final File dataFile = new File(getPlugin().getDataFolder(), "playerdata.yml");
+        final File dataFile = new File(getPlugin().getDataFolder(), filename);
 
         if (dataFile.exists())
         {
@@ -60,7 +67,7 @@ public abstract class RPlayerService<T extends ConfigurationSerializable> extend
         data.forEach((uuid, dataSet) -> configuration.set(uuid.toString(), dataSet));
         try
         {
-            configuration.save(new File(getPlugin().getDataFolder(), "playerdata.yml"));
+            configuration.save(new File(getPlugin().getDataFolder(), filename));
         }
         catch (Exception ex)
         {
@@ -77,6 +84,11 @@ public abstract class RPlayerService<T extends ConfigurationSerializable> extend
         }
 
         return data.get(uuid);
+    }
+
+    public boolean hasPlayerData(UUID uuid)
+    {
+        return data.containsKey(uuid);
     }
 
     public abstract T createPlayerData(UUID uuid);

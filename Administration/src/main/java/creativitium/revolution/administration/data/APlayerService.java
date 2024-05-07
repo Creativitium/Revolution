@@ -12,7 +12,7 @@ public class APlayerService extends RPlayerService<APlayer>
 {
     public APlayerService()
     {
-        super(Administration.getInstance());
+        super(Administration.getInstance(), "preferences.yml");
     }
 
     @Override

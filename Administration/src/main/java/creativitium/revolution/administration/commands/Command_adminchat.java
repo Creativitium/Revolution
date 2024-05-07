@@ -6,6 +6,7 @@ import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.administration.Administration;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import net.kyori.adventure.key.Key;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -31,7 +32,7 @@ public class Command_adminchat extends RCommand
                 return false;
             }
 
-            APlayer data = (APlayer) Shortcuts.getExternalPlayerService(Administration.getInstance()).getPlayerData(playerSender.getUniqueId());
+            APlayer data = (APlayer) Shortcuts.getService(Key.key("administration", "admin_preferences")).getPlayerData(playerSender.getUniqueId());
             data.setAdminChatEnabled(!data.isAdminChatEnabled());
 
             msg(sender, "administration.command.adminchat." + (data.isAdminChatEnabled() ? "enabled" : "disabled"));

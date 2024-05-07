@@ -6,6 +6,8 @@ import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.templates.RService;
 import creativitium.revolution.foundation.utilities.Shortcuts;
 import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
@@ -35,12 +37,15 @@ public class AdminChatService extends RService
     public void onPlayerChat(AsyncChatEvent event)
     {
         Player player = event.getPlayer();
-        APlayer data = (APlayer) Shortcuts.getExternalPlayerService(Administration.getInstance()).getPlayerData(player.getUniqueId());
 
-        if (player.hasPermission("administration.components.staffchat") && data.isAdminChatEnabled())
+        if (player.hasPermission("administration.components.staffchat"))
         {
-            sendAdminChat(player, event.message());
-            event.setCancelled(true);
+            APlayer data = (APlayer) Shortcuts.getService(Key.key("administration", "admin_preferences")).getPlayerData(player.getUniqueId());
+            if (data.isAdminChatEnabled())
+            {
+                sendAdminChat(player, event.message());
+                event.setCancelled(true);
+            }
         }
     }
 
