@@ -2,6 +2,7 @@ package creativitium.revolution.foundation;
 
 import creativitium.revolution.foundation.base.MessageService;
 import creativitium.revolution.foundation.base.PlayerDataService;
+import creativitium.revolution.foundation.hook.VaultHook;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,6 +25,11 @@ public class Foundation extends JavaPlugin
     private MessageService messageService;
     @Getter
     private PlayerDataService playerDataService;
+    //--
+    @Getter
+    private final RServiceGroup hooks = new RServiceGroup();
+    @Getter
+    private VaultHook vaultHook;
 
     @Override
     public void onLoad()
@@ -38,6 +44,9 @@ public class Foundation extends JavaPlugin
         messageService = coreServices.addService(NamespacedKey.fromString("fnd:messages"), new MessageService());
         playerDataService = coreServices.addService(NamespacedKey.fromString("fnd:playerdata"), new PlayerDataService());
         coreServices.startServices();
+        //--
+        vaultHook = hooks.addService(NamespacedKey.fromString("fnd:vault"), new VaultHook());
+        hooks.startServices();
         //--
         commandLoader.loadCommands("creativitium.revolution.foundation.commands", "foundation");
     }

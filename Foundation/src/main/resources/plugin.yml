@@ -7,3 +7,5 @@ description: The core of Creativitium
 load: STARTUP
 libraries:
   - org.javassist:javassist:3.29.1-GA
+depend:
+  - Vault

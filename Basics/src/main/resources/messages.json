@@ -107,9 +107,9 @@
   "basics.general.use_back": "<info>Use <white><hover:show_text:'Click to Execute'><click:run_command:/back>/back</click></hover></white> to return to your death point.",
 
   "basics.components.chat": "<tag><display> <yellow>:</yellow> <gray><message>",
-  "basics.components.death_message": "<dark_gray>[<white>☠</white>]</dark_gray> <display>",
-  "basics.components.join_message": "<dark_gray>[<green>+</green>]</dark_gray> <display>",
-  "basics.components.leave_message": "<dark_gray>[<red>-</red>]</dark_gray> <display>",
+  "basics.components.death_message": "<dark_gray>[<white>☠</white>]</dark_gray> <prefix> <display>",
+  "basics.components.join_message": "<dark_gray>[<green>+</green>]</dark_gray> <prefix> <display>",
+  "basics.components.leave_message": "<dark_gray>[<red>-</red>]</dark_gray> <prefix> <display>",
   "basics.components.motd.full": "<motd><red>The server is full.",
   "basics.components.motd.normal": "<motd>Running on Minecraft <version>",
   "basics.components.motd.whitelisted": "<motd><red>The whitelist is enabled."

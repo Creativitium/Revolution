@@ -125,6 +125,7 @@ public class BasicsService extends RService
 
         event.joinMessage(getMsg("basics.components.join_message",
                 Placeholder.component("display", player.displayName()),
+                Placeholder.component("prefix", base.getVaultHook().getPrefixAsComponent(player)),
                 Placeholder.unparsed("username", player.getName())));
 
 
@@ -139,6 +140,7 @@ public class BasicsService extends RService
 
         event.quitMessage(getMsg("basics.components.leave_message",
                 Placeholder.component("display", player.displayName()),
+                Placeholder.component("prefix", base.getVaultHook().getPrefixAsComponent(player)),
                 Placeholder.unparsed("username", player.getName())));
 
         final BPlayer data = (BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId());
@@ -158,6 +160,7 @@ public class BasicsService extends RService
 
         event.deathMessage(getMsg("basics.components.death_message",
                 Placeholder.component("display", player.displayName()),
+                Placeholder.component("prefix", base.getVaultHook().getPrefixAsComponent(player)),
                 Placeholder.unparsed("username", player.getName())));
 
         if (player.hasPermission("basics.command.back"))

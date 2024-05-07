@@ -82,6 +82,12 @@
                 <artifactId>Basics</artifactId>
                 <version>13.0-INDEV</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.MilkBowl</groupId>
+                <artifactId>VaultAPI</artifactId>
+                <version>1.7</version>
+                <scope>provided</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

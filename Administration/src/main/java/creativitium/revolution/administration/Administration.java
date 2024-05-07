@@ -1,7 +1,6 @@
 package creativitium.revolution.administration;
 
 import creativitium.revolution.administration.commands.*;
-import creativitium.revolution.administration.hooks.VaultHook;
 import creativitium.revolution.administration.services.AdminChatService;
 import creativitium.revolution.administration.services.BanService;
 import creativitium.revolution.administration.services.CommandSpyService;
@@ -28,9 +27,6 @@ public class Administration extends JavaPlugin
     private BanService banService;
     @Getter
     private InventorySeeService invSeeService;
-    //--
-    @Getter
-    private VaultHook vaultHook;
 
     @Override
     public void onLoad()
@@ -58,7 +54,6 @@ public class Administration extends JavaPlugin
         adminChatService = services.addService(NamespacedKey.fromString("adm:adminchat"), new AdminChatService());
         banService = services.addService(NamespacedKey.fromString("adm:bans"), new BanService());
         invSeeService = services.addService(NamespacedKey.fromString("adm:invsee"), new InventorySeeService());
-        vaultHook = services.addService(NamespacedKey.fromString("adm:vault"), new VaultHook());
         services.startServices();
 
         // Set up our commands
