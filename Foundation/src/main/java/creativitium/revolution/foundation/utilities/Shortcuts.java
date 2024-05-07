@@ -19,9 +19,4 @@ public class Shortcuts
     {
         return Foundation.getInstance().getPlayerDataService().getExternalPlayerService(plugin);
     }
-
-    public static void broadcast(String message, TagResolver... placeholders)
-    {
-        Bukkit.broadcast(Foundation.getInstance().getMessageService().getMessage(message, placeholders));
-    }
 }
