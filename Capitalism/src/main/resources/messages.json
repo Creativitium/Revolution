@@ -1,0 +1,13 @@
+{
+  "capitalism.command.balance.other": "<info><white><name></white> has <white><amount></white>.",
+  "capitalism.command.balance.you": "<info>You have <white><amount></white>.",
+  "capitalism.command.eco.infinity_not_allowed": "<error>That would instantly crash the economy.",
+  "capitalism.command.eco.too_much": "<error><u><click:open_url:https://en.wikipedia.org/wiki/Hyperinflation_in_the_Weimar_Republic>History should have taught you by now why this is a terrible idea.</u>  ",
+  "capitalism.command.eco.given": "<success><dark_green><amount></dark_green> has been added to <dark_green><name></dark_green>'s account.",
+  "capitalism.command.eco.set": "<success><dark_green><name></dark_green>'s balance has been set to <dark_green><amount></dark_green>.",
+  "capitalism.command.eco.taken": "<success><dark_green><amount></dark_green> has been removed from <dark_green><name></dark_green>'s account.",
+  "capitalism.command.pay.cannot_afford": "<error>You don't have enough money to do that.",
+  "capitalism.command.pay.negative_not_allowed": "<error>Did you really think that was going to work?",
+  "capitalism.command.pay.received": "<info>You have received <white><amount></white> from <white><name></white>.",
+  "capitalism.command.pay.sent": "<success>Successfully sent <dark_green><amount></dark_green> to <dark_green><name></dark_green>'s account."
+}
