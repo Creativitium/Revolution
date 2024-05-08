@@ -158,11 +158,15 @@ public class MessageService extends RService
     {
         List<TagResolver> resolvers = new ArrayList<>();
         resolvers.addAll(Arrays.stream(placeholders).toList());
-        resolvers.addAll(yourMom());
+        resolvers.addAll(getAllPrefixes());
         return MM.getMiniMessageAll().deserialize(getRawMessage(message), resolvers.toArray(new TagResolver[0]));
     }
 
-    public List<TagResolver.Single> yourMom()
+    /**
+     * Get a list of all known prefixes as TagResolvers.
+     * @return  A List of TagResolvers consisting of all the prefixes,
+     */
+    public List<TagResolver.Single> getAllPrefixes()
     {
         return prefixes.entrySet().stream().map(entry -> Placeholder.parsed(entry.getKey(), entry.getValue())).toList();
     }

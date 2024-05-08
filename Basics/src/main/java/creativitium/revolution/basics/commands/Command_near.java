@@ -51,9 +51,7 @@ public class Command_near extends RCommand
                 getMessage("basics.command.near.nearby_players.format",
                         Placeholder.parsed("name", player.getName()),
                         Placeholder.unparsed("distance", String.valueOf((int) player.getLocation().distance(location))),
-                        Placeholder.component("display_name", player.displayName()))
-                        /*.clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/tp " + player.getName()))
-                        .hoverEvent(HoverEvent.showText(Component.text("Click to Teleport")))*/).toList();
+                        Placeholder.component("display_name", player.displayName()))).toList();
 
         if (players.isEmpty())
         {

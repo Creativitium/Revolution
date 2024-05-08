@@ -46,7 +46,7 @@ public class Command_messages extends RCommand
                     TagResolver.resolver("messagescount", Tag.inserting(Component.text(foundation.getMessageService().getMessages().size()))));
             case "test" -> msg(sender, "revolution.command.messages.test", Placeholder.component("output",
                     MM.getMiniMessageAll().deserialize(StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " "),
-                            foundation.getMessageService().yourMom().toArray(new TagResolver.Single[0]))));
+                            foundation.getMessageService().getAllPrefixes().toArray(new TagResolver.Single[0]))));
             default ->
             {
                 return false;
