@@ -131,6 +131,17 @@ public class WorldRegulator extends RService
         }
     }
 
+    @EventHandler
+    public void onExplosion(BlockExplodeEvent event)
+    {
+        final World world = event.getBlock().getWorld();
+
+        if (!Setting.EXPLOSIONS.getBoolean(world, true))
+        {
+            event.setCancelled(true);
+        }
+    }
+
     /*--== Minecarts ==--*/
     @EventHandler
     public void onMinecartSpawn(EntitySpawnEvent event)

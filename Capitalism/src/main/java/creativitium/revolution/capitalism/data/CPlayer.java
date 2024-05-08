@@ -36,7 +36,7 @@ public class CPlayer implements ConfigurationSerializable
     {
         final CPlayer data = new CPlayer();
         data.name = (String) map.getOrDefault("name", null);
-        data.balance = (double) map.getOrDefault("balance", 0D);
+        data.balance = Math.min((double) map.getOrDefault("balance", 0D), 1000000000000D);
         return data;
     }
 }

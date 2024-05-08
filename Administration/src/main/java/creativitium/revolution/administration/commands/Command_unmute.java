@@ -40,7 +40,7 @@ public class Command_unmute extends RCommand
 
             action(sender, "administration.action.unmute", Placeholder.unparsed("player", player.getName()));
             p.setMuted(false);
-            msg(sender, "administration.command.unmute.you_have_been_unmuted.");
+            msg(player, "administration.command.unmute.you_have_been_unmuted");
         }, () -> msg(sender, "revolution.command.error.player_not_found"));
         return true;
     }

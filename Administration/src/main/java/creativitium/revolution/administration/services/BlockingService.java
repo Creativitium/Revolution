@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class BlockingService extends RService
 {
@@ -62,6 +63,24 @@ public class BlockingService extends RService
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event)
+    {
+        final Player player = event.getPlayer();
+        final SPlayer data = (SPlayer) Shortcuts.getService(Key.key("administration", "sanctions")).getPlayerData(player.getUniqueId());
+
+        if (data.isFrozen())
+        {
+            if (player.hasPermission("administration.bypass.freeze"))
+            {
+                data.setFrozen(false);
+                return;
+            }
+
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerTeleport(PlayerTeleportEvent event)
     {
         final Player player = event.getPlayer();
         final SPlayer data = (SPlayer) Shortcuts.getService(Key.key("administration", "sanctions")).getPlayerData(player.getUniqueId());

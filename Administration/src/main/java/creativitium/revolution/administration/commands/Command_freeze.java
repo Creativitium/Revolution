@@ -12,10 +12,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 @CommandParameters(name = "freeze",
         description = "Prevent a player from moving.",
         usage = "/freeze <player>",
+        aliases = {"fr"},
         permission = "administration.command.freeze",
         source = SourceType.BOTH)
 public class Command_freeze extends RCommand
@@ -41,6 +45,13 @@ public class Command_freeze extends RCommand
         }, () -> msg(sender, "revolution.command.error.player_not_found"));
 
         return true;
+    }
+
+    @Override
+    public @Nullable List<String> tabCompleteOptions(CommandSender sender, Player playerSender, String commandLabel, String[] args)
+    {
+        if (args.length != 1) return null;
+        return match(getOnlinePlayers(), args[0]);
     }
 
     @Override
