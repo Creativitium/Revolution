@@ -34,7 +34,15 @@ public class Command_entitywipe extends RCommand
 
         if (args.length == 0)
         {
-            types.addAll(Arrays.stream(EntityType.values()).filter(type -> !type.isAlive()).toList());
+            // Alco wants this to behave differently if the command is /mp or /mobpurge. This hack does that.
+            if (!commandLabel.toLowerCase().startsWith("m"))
+            {
+                types.addAll(Arrays.stream(EntityType.values()).filter(type -> !type.isAlive()).toList());
+            }
+            else
+            {
+                types.addAll(Arrays.stream(EntityType.values()).filter(EntityType::isAlive).toList());
+            }
         }
         else
         {
