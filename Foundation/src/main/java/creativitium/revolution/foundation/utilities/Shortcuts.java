@@ -13,10 +13,4 @@ public class Shortcuts
     {
         return Foundation.getInstance().getPlayerDataService().getService(key);
     }
-
-    @Deprecated
-    public static RPlayerService<?> getExternalPlayerService(Plugin plugin)
-    {
-        return Foundation.getInstance().getPlayerDataService().getExternalPlayerService(plugin);
-    }
 }

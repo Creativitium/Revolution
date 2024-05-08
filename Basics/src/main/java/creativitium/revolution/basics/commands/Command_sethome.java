@@ -6,6 +6,7 @@ import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -30,7 +31,7 @@ public class Command_sethome extends RCommand
 
         if (homeRegex.matcher(homeName).find())
         {
-            ((BPlayer) (Shortcuts.getExternalPlayerService(getPlugin())).getPlayerData(playerSender.getUniqueId()))
+            ((BPlayer) (Shortcuts.getService(Key.key("basics", "primary"))).getPlayerData(playerSender.getUniqueId()))
                     .getHomes().put(homeName, playerSender.getLocation());
             msg(sender, "basics.command.sethome.set", Placeholder.unparsed("name", homeName));
         }

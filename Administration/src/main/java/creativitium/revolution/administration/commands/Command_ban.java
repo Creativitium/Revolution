@@ -10,6 +10,7 @@ import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
 import creativitium.revolution.foundation.utilities.Util;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.apache.commons.lang3.ArrayUtils;
@@ -58,7 +59,7 @@ public class Command_ban extends RCommand
         {
             if (Bukkit.getPluginManager().isPluginEnabled("Basics"))
             {
-                final BPlayer bPlayer = (BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId());
+                final BPlayer bPlayer = (BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId());
                 if (bPlayer.getLastIP() != null)
                 {
                     ips.add(bPlayer.getLastIP().trim());

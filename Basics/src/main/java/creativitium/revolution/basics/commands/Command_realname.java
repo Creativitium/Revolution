@@ -6,6 +6,7 @@ import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
@@ -27,7 +28,7 @@ public class Command_realname extends RCommand
         if (args.length == 0) return false;
         final String nickname = args[0];
         final PlainTextComponentSerializer serializer = PlainTextComponentSerializer.plainText();
-        final BPlayerService service = (BPlayerService) Shortcuts .getExternalPlayerService(Basics.getInstance());
+        final BPlayerService service = (BPlayerService) Shortcuts.getService(Key.key("basics", "primary"));
 
         Bukkit.getOnlinePlayers().stream().filter(p -> service.getPlayerData(p.getUniqueId()).getNickname() != null
                 && serializer.serialize(service.getPlayerData(p.getUniqueId()).getNickname()).equalsIgnoreCase(nickname))

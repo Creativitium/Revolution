@@ -7,6 +7,7 @@ import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -36,7 +37,7 @@ public class Command_balance extends RCommand
         final Optional<Player> player = args.length == 0 ? Optional.of(playerSender) : getPlayer(args[0]);
         player.ifPresentOrElse(target ->
         {
-            final CPlayerService service = (CPlayerService) Shortcuts.getExternalPlayerService(Capitalism.getInstance());
+            final CPlayerService service = (CPlayerService) Shortcuts.getService(Key.key("capitalism", "primary"));
             final CPlayer data = service.getPlayerData(target.getUniqueId());
 
             msg(sender, "capitalism.command.balance." + (target != playerSender ? "other" : "you"),

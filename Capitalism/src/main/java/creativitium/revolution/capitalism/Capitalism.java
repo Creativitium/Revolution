@@ -6,6 +6,7 @@ import creativitium.revolution.capitalism.commands.Command_pay;
 import creativitium.revolution.capitalism.data.CPlayerService;
 import creativitium.revolution.foundation.Foundation;
 import lombok.Getter;
+import net.kyori.adventure.key.Key;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
@@ -32,7 +33,7 @@ public class Capitalism extends JavaPlugin
 
         // Register our services
         playerService = new CPlayerService();
-        Foundation.getInstance().getPlayerDataService().addExternalPlayerService(this,playerService);
+        Foundation.getInstance().getPlayerDataService().addExternalPlayerService(Key.key("capitalism", "primary"), playerService);
         Bukkit.getServicesManager().register(Economy.class, playerService.getEconomy(), this, ServicePriority.Highest);
 
         // Register our commands

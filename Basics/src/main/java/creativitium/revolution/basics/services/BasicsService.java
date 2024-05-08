@@ -8,6 +8,7 @@ import creativitium.revolution.foundation.utilities.Shortcuts;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import lombok.Getter;
 import lombok.Setter;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -105,7 +106,7 @@ public class BasicsService extends RService
     public void onPlayerJoin(PlayerJoinEvent event)
     {
         final Player player = event.getPlayer();
-        final BPlayer data = (BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId());
+        final BPlayer data = (BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId());
 
         // Update last known player name
         if (!data.getName().equalsIgnoreCase(player.getName()))
@@ -143,7 +144,7 @@ public class BasicsService extends RService
                 Placeholder.component("prefix", base.getVaultHook().getPrefixAsComponent(player)),
                 Placeholder.unparsed("username", player.getName())));
 
-        final BPlayer data = (BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId());
+        final BPlayer data = (BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId());
         data.setLoginLocation(event.getPlayer().getLocation());
         data.setLastOnline(Instant.now().getEpochSecond());
 
@@ -165,7 +166,7 @@ public class BasicsService extends RService
 
         if (player.hasPermission("basics.command.back"))
         {
-            ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId())).setLastLocation(player.getLocation());
+            ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId())).setLastLocation(player.getLocation());
             player.sendMessage(getMsg("basics.general.use_back"));
         }
     }
@@ -187,7 +188,7 @@ public class BasicsService extends RService
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerChat(AsyncChatEvent event)
     {
-        final BPlayer data = (BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(event.getPlayer().getUniqueId());
+        final BPlayer data = (BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(event.getPlayer().getUniqueId());
 
         event.renderer((source, sourceDisplayName, message, viewer) -> getMsg("basics.components.chat",
                 Placeholder.component("tag", data.getTag() != null ? data.getTag().append(Component.space()) : Component.empty()),
@@ -204,14 +205,14 @@ public class BasicsService extends RService
 
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.COMMAND && player.hasPermission("basics.command.back"))
         {
-            ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId())).setLastLocation(player.getLocation());
+            ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId())).setLastLocation(player.getLocation());
         }
     }
 
     @EventHandler
     public void onPlayerAttack(EntityDamageEvent event)
     {
-        if (event.getEntity() instanceof Player player && ((BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId())).isGodEnabled())
+        if (event.getEntity() instanceof Player player && ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId())).isGodEnabled())
         {
             event.setCancelled(true);
         }
@@ -220,13 +221,13 @@ public class BasicsService extends RService
     @EventHandler
     public void onPlayerAttack(EntityDamageByEntityEvent event)
     {
-        if (event.getEntity() instanceof Player player && ((BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId())).isGodEnabled())
+        if (event.getEntity() instanceof Player player && ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId())).isGodEnabled())
         {
             event.setCancelled(true);
         }
 
         if (event.getDamager() instanceof Player player
-                && ((BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId())).isBerserkEnabled()
+                && ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId())).isBerserkEnabled()
                 && player.getInventory().getItemInMainHand().getType() == Material.AIR
                 && !event.isCancelled())
         {
@@ -239,7 +240,7 @@ public class BasicsService extends RService
     {
         if (event.getEntity() instanceof Player player
                 && (GOD_IMMUNE_EFFECTS.contains(event.getCause()))
-                && ((BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(player.getUniqueId())).isGodEnabled())
+                && ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId())).isGodEnabled())
         {
             event.setCancelled(true);
         }

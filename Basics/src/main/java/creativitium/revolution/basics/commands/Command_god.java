@@ -6,6 +6,7 @@ import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import net.kyori.adventure.key.Key;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -22,7 +23,7 @@ public class Command_god extends RCommand
     @Override
     public boolean run(CommandSender sender, Player playerSender, String commandLabel, String[] args)
     {
-        final BPlayer data = (BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(playerSender.getUniqueId());
+        final BPlayer data = (BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(playerSender.getUniqueId());
 
         data.setGodEnabled(!data.isGodEnabled());
         msg(sender, "basics.command.god." + (data.isGodEnabled() ? "enabled" : "disabled"));

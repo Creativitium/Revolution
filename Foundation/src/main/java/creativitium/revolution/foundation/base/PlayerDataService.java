@@ -29,17 +29,22 @@ public class PlayerDataService extends RService
         playerDataMap.forEach((plugin, service) -> service.onStop());
     }
 
-    @Deprecated
-    public void addExternalPlayerService(Plugin plugin, RPlayerService<?> service)
-    {
-        addExternalPlayerService(plugin, service, true);
-    }
-
+    /**
+     * Adds an RPlayerService to the player data map.
+     * @param key       Key
+     * @param service   RPlayerService
+     */
     public void addExternalPlayerService(Key key, RPlayerService<?> service)
     {
         addExternalPlayerService(key, service, true);
     }
 
+    /**
+     * Adds an RPlayerService to the player data map.
+     * @param key       Key
+     * @param service   RPlayerService
+     * @param start     boolean
+     */
     public void addExternalPlayerService(Key key, RPlayerService<?> service, boolean start)
     {
         if (playerDataMap.containsKey(key))
@@ -55,20 +60,13 @@ public class PlayerDataService extends RService
         }
     }
 
-    @Deprecated
-    public void addExternalPlayerService(Plugin plugin, RPlayerService<?> service, boolean start)
-    {
-        addExternalPlayerService(Key.key(plugin.getName().toLowerCase(), "primary"), service, start);
-    }
-
+    /**
+     * Gets an RPlayerService from a Key.
+     * @param key   Key
+     * @return      RPlayerService
+     */
     public RPlayerService<?> getService(Key key)
     {
         return playerDataMap.get(key);
-    }
-
-    @Deprecated
-    public RPlayerService<?> getExternalPlayerService(Plugin plugin)
-    {
-        return playerDataMap.get(Key.key(plugin.getName().toLowerCase(), "primary"));
     }
 }

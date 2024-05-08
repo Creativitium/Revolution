@@ -7,6 +7,7 @@ import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -56,7 +57,7 @@ public class Command_eco extends RCommand
                 return true;
             }
 
-            final CPlayerService service = (CPlayerService) Shortcuts.getExternalPlayerService(Capitalism.getInstance());
+            final CPlayerService service = (CPlayerService) Shortcuts.getService(Key.key("capitalism", "primary"));
             final CPlayer data = service.getPlayerData(player.getUniqueId());
             switch (args[0].toLowerCase())
             {

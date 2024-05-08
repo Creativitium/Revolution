@@ -7,6 +7,7 @@ import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.MM;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -51,7 +52,7 @@ public class Command_tag extends RCommand
                     return true;
                 }
 
-                BPlayer data = ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(playerSender.getUniqueId()));
+                BPlayer data = ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(playerSender.getUniqueId()));
 
                 String tag = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
                 if (tag.length() > 128)
@@ -99,7 +100,7 @@ public class Command_tag extends RCommand
                 }
 
                 target.ifPresentOrElse(player -> {
-                    ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId())).setTag(null);
+                    ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId())).setTag(null);
                     msg((player.getName().equalsIgnoreCase(sender.getName()) ? sender : player), "basics.command.tag.cleared");
                     if (!player.getName().equalsIgnoreCase(sender.getName()))
                     {
@@ -118,7 +119,7 @@ public class Command_tag extends RCommand
                 action(sender, "basics.action.tag.clearing_all");
                 Bukkit.getOnlinePlayers().forEach(player ->
                 {
-                    ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId()))
+                    ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId()))
                             .setTag(null);
                     msg(player, "basics.command.tag.cleared");
                 });

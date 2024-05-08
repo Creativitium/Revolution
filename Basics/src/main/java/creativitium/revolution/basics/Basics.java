@@ -9,6 +9,7 @@ import creativitium.revolution.basics.services.WarpsService;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
 import lombok.Getter;
+import net.kyori.adventure.key.Key;
 import org.bukkit.GameMode;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -45,7 +46,7 @@ public class Basics extends JavaPlugin
         Foundation.getInstance().getMessageService().importFrom(this);
 
         // Set up our player data service
-        Foundation.getInstance().getPlayerDataService().addExternalPlayerService(this, new BPlayerService());
+        Foundation.getInstance().getPlayerDataService().addExternalPlayerService(Key.key("basics", "primary"), new BPlayerService());
 
         // Set up our other services
         basicsService = services.addService(NamespacedKey.fromString("basics:main"), new BasicsService());

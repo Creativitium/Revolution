@@ -8,6 +8,7 @@ import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
 import creativitium.revolution.foundation.utilities.Util;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Location;
@@ -42,7 +43,7 @@ public class Command_seen extends RCommand
             msg(sender, "basics.command.seen.never_joined_before", Placeholder.unparsed("player", args[0]));
         }
 
-        ((Optional<BPlayer>) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(args[0]))
+        ((Optional<BPlayer>) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(args[0]))
                 .ifPresent(data -> {
                     msg(sender, player.isOnline() ? "basics.command.seen.info.online" : "basics.command.seen.info.offline",
                             Placeholder.unparsed("username", data.getName()),

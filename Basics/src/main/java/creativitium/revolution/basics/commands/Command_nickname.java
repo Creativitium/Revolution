@@ -7,6 +7,7 @@ import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.MM;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -62,7 +63,7 @@ public class Command_nickname extends RCommand
                 }
 
                 target.ifPresentOrElse(player -> {
-                    ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId())).setNickname(null);
+                    ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId())).setNickname(null);
                     player.displayName(null);
                     msg((player.getName().equalsIgnoreCase(sender.getName()) ? sender : player), "basics.command.nickname.cleared");
                     if (!player.getName().equalsIgnoreCase(sender.getName()))
@@ -81,7 +82,7 @@ public class Command_nickname extends RCommand
 
                 action(sender, "basics.action.nickname.clearing_all");
                 Bukkit.getOnlinePlayers().forEach(player -> {
-                    ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId())).setNickname(null);
+                    ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId())).setNickname(null);
                     player.displayName(null);
                     msg(player, "basics.command.nickname.cleared");
                 });
@@ -94,13 +95,13 @@ public class Command_nickname extends RCommand
                     return true;
                 }
 
-                BPlayer data = ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(playerSender.getUniqueId()));
+                BPlayer data = ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(playerSender.getUniqueId()));
                 Matcher useLegacy = AMPERSAND_PATTERN.matcher(args[0]);
                 Component nickname = useLegacy.find() ? LegacyComponentSerializer.legacyAmpersand().deserialize(args[0].replaceAll("(&(?i)k)", "")) : MM.getNonExploitable().deserialize(args[0]);
 
                 // Some verification first
                 String plainText = PlainTextComponentSerializer.plainText().serialize(nickname).trim();
-                Optional<BPlayer> lol = ((Collection<BPlayer>) Shortcuts.getExternalPlayerService(Basics.getInstance()).getAllPlayerData()).stream().filter(player -> !sender.getName().equalsIgnoreCase(player.getName()))
+                Optional<BPlayer> lol = ((Collection<BPlayer>) Shortcuts.getService(Key.key("basics", "primary")).getAllPlayerData()).stream().filter(player -> !sender.getName().equalsIgnoreCase(player.getName()))
                         .filter(player -> plainText.equalsIgnoreCase(player.getName()) || (player.getNickname() != null && PlainTextComponentSerializer.plainText().serialize(player.getNickname()).equalsIgnoreCase(plainText))).findAny();
                 if (lol.isPresent())
                 {

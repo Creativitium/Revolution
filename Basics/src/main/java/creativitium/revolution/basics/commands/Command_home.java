@@ -6,6 +6,7 @@ import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Location;
@@ -31,7 +32,7 @@ public class Command_home extends RCommand
     @Override
     public boolean run(CommandSender sender, Player playerSender, String commandLabel, String[] args)
     {
-        final BPlayer data = (BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(playerSender.getUniqueId());
+        final BPlayer data = (BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(playerSender.getUniqueId());
 
         if (args.length == 0)
         {
@@ -70,7 +71,7 @@ public class Command_home extends RCommand
             }
             else if (split.length == 1)
             {
-                player = (Optional<BPlayer>) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(split[0]);
+                player = (Optional<BPlayer>) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(split[0]);
                 player.ifPresentOrElse(playerData ->
                         msg(sender, "basics.command.home.others.list",
                                 Placeholder.unparsed("name", playerData.getName()),
@@ -79,7 +80,7 @@ public class Command_home extends RCommand
             }
             else
             {
-                player = (Optional<BPlayer>) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(split[0]);
+                player = (Optional<BPlayer>) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(split[0]);
                 player.ifPresentOrElse(playerData ->
                 {
                     Location loc = playerData.getHomes().get(split[1]);
@@ -126,7 +127,7 @@ public class Command_home extends RCommand
             {
                 String[] split = args[0].split(":");
                 if (split.length == 0) return null;
-                Optional<BPlayer> data = (Optional<BPlayer>) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(split[0]);
+                Optional<BPlayer> data = (Optional<BPlayer>) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(split[0]);
 
                 if (data.isPresent())
                 {
@@ -136,7 +137,7 @@ public class Command_home extends RCommand
             }
             else
             {
-                return ((BPlayer) Shortcuts.getExternalPlayerService(Basics.getInstance()).getPlayerData(player.getUniqueId()))
+                return ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId()))
                         .getHomes().keySet().stream().toList();
             }
         }

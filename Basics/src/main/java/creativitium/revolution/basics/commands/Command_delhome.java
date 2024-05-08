@@ -6,6 +6,7 @@ import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.CommandSender;
@@ -38,7 +39,7 @@ public class Command_delhome extends RCommand
                 return true;
             }
 
-            ((BPlayer) (Shortcuts.getExternalPlayerService(getPlugin())).getPlayerData(playerSender.getUniqueId())).getHomes().clear();
+            ((BPlayer) (Shortcuts.getService(Key.key("basics", "primary"))).getPlayerData(playerSender.getUniqueId())).getHomes().clear();
             msg(sender, "basics.command.delhome.deleted.all");
         }
         else if (args[0].contains(":"))
@@ -58,7 +59,7 @@ public class Command_delhome extends RCommand
             }
             else if (split.length == 1)
             {
-                player = (Optional<BPlayer>) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(split[0]);
+                player = (Optional<BPlayer>) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(split[0]);
                 player.ifPresentOrElse(playerData ->
                                 msg(sender, "basics.command.home.others.list",
                                         Placeholder.unparsed("name", playerData.getName()),
@@ -67,7 +68,7 @@ public class Command_delhome extends RCommand
             }
             else
             {
-                player = (Optional<BPlayer>) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(split[0]);
+                player = (Optional<BPlayer>) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(split[0]);
                 player.ifPresentOrElse(playerData ->
                 {
                     if (split[1].equalsIgnoreCase("*"))
@@ -98,7 +99,7 @@ public class Command_delhome extends RCommand
                 return true;
             }
 
-            BPlayer data = (BPlayer) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(playerSender.getUniqueId());
+            BPlayer data = (BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(playerSender.getUniqueId());
             if (data.getHomes().containsKey(args[0]))
             {
                 msg(sender, "basics.command.delhome.home_not_found");
@@ -133,14 +134,14 @@ public class Command_delhome extends RCommand
             {
                 String[] split = args[0].split(":");
                 if (split.length == 0) return null;
-                ((Optional<BPlayer>) Shortcuts.getExternalPlayerService(getPlugin()).getPlayerData(split[0]))
+                ((Optional<BPlayer>) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(split[0]))
                         .ifPresent(playerData -> response.addAll(playerData.getHomes().keySet().stream()
                                 .map(homeName -> String.format("%s:%s", playerData.getName(), homeName)).toList()));
             }
 
             if (sender instanceof Player player)
             {
-                response.addAll(((BPlayer) (Shortcuts.getExternalPlayerService(getPlugin()))
+                response.addAll(((BPlayer) (Shortcuts.getService(Key.key("basics", "primary")))
                         .getPlayerData(player.getUniqueId())).getHomes().keySet().stream().toList());
                 response.add("*");
             }
