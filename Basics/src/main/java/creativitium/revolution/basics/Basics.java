@@ -58,6 +58,7 @@ public class Basics extends JavaPlugin
         Foundation.getInstance().getCommandLoader().loadCommandsManually("basics",
                 new Command_back(),
                 new Command_berserk(),
+                new Command_clear(),
                 new Command_deafen(),
                 new Command_delhome(),
                 new Command_delwarp(),

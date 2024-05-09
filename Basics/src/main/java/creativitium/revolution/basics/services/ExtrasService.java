@@ -4,7 +4,9 @@ import creativitium.revolution.foundation.templates.RService;
 import creativitium.revolution.foundation.utilities.ServerVersion;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.ServerListPingEvent;
 
 public class ExtrasService extends RService
@@ -37,5 +39,11 @@ public class ExtrasService extends RService
             event.motd(getMsg("basics.components.motd.normal",
                     Placeholder.unparsed("version", serverVersion.getName())));
         }
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event)
+    {
+        event.getPlayer().sendPlayerListHeaderAndFooter(getMsg("basics.components.tablist.header"), getMsg("basics.components.tablist.footer"));
     }
 }

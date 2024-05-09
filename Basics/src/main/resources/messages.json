@@ -6,6 +6,9 @@
   "basics.command.back.teleporting": "<info>Teleporting...",
   "basics.command.berserk.enabled": "<info><red>Berserk!",
   "basics.command.berserk.disabled": "<info>You suddenly feel calmer.",
+  "basics.command.clear.cleared_other": "<success><dark_green><display></dark_green>'s inventory has been cleared.",
+  "basics.command.clear.cleared": "<info>Your inventory has been cleared.",
+  "basics.command.clear.no_permission": "<error>You don't have permission to clear other users' inventories.",
   "basics.command.deafen.now_playing": "<rainbow>♪ Now Playing: <composer> - Why I Shouldn't Be Near A Musical Instrument ♪",
   "basics.command.deafen.someone_is_already_playing_music": "<error>Someone is already terrorizing the server with their awful music.",
   "basics.command.deafen.stopped": "<success>Its abrupt end follows an eternity of peace for all of mankind.",
@@ -112,5 +115,8 @@
   "basics.components.leave_message": "<dark_gray>[<red>-</red>]</dark_gray> <prefix> <display>",
   "basics.components.motd.full": "<motd><red>The server is full.",
   "basics.components.motd.normal": "<motd>Running on Minecraft <version>",
-  "basics.components.motd.whitelisted": "<motd><red>The whitelist is enabled."
+  "basics.components.motd.whitelisted": "<motd><red>The whitelist is enabled.",
+  "basics.components.tablist.footer": "<gray>play.creativitium.us.to",
+  "basics.components.tablist.format": "<prefix> <gray><display>",
+  "basics.components.tablist.header": "<dark_gray><obfuscated>|||</obfuscated> <gray>Welcome to <white>Creativitium</white>!</gray> <obfuscated>|||</obfuscated>"
 }

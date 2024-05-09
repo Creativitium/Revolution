@@ -2,6 +2,7 @@ package creativitium.revolution.basics.services;
 
 import creativitium.revolution.basics.Basics;
 import creativitium.revolution.basics.data.BPlayer;
+import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.templates.RService;
 import creativitium.revolution.foundation.utilities.MM;
 import creativitium.revolution.foundation.utilities.Shortcuts;
@@ -124,11 +125,15 @@ public class BasicsService extends RService
             getPlugin().getConfig().getStringList("autoexec.onJoin").forEach(player::performCommand);
         }
 
+        player.playerListName(getMsg("basics.components.tablist.format",
+                Placeholder.component("prefix", base.getVaultHook().getPrefixAsComponent(player)),
+                Placeholder.unparsed("name", player.getName()),
+                Placeholder.component("display", data.getNickname() != null ? data.getNickname() : Component.text(player.getName()))));
+
         event.joinMessage(getMsg("basics.components.join_message",
                 Placeholder.component("display", player.displayName()),
                 Placeholder.component("prefix", base.getVaultHook().getPrefixAsComponent(player)),
                 Placeholder.unparsed("username", player.getName())));
-
 
         data.setLastOnline(Instant.now().getEpochSecond());
         data.setLastIP(Objects.requireNonNull(event.getPlayer().getAddress()).getAddress().getHostAddress());
