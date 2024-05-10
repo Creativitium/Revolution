@@ -36,7 +36,7 @@ public class CommandSpyService extends RService
         final APlayerService service = (APlayerService) Shortcuts.getService(Key.key("administration", "admin_preferences"));
 
         Bukkit.getOnlinePlayers().stream().filter(player -> !player.getUniqueId().equals(sender.getUniqueId())
-                && player.hasPermission("revolution.command.commandspy")
+                && player.hasPermission("administration.command.commandspy")
                 && service.hasPlayerData(player.getUniqueId())
                 && service.getPlayerData(player.getUniqueId()).isCommandSpyEnabled()).forEach(player ->
                 player.sendMessage(getMsg("administration.components.commandspy",

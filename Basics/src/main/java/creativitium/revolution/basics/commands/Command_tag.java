@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
         description = "Manage your tag.",
         usage = "/tag <set [tag...] | clear [player] | clearall>",
         aliases = {"prefix"},
-        permission = "revolution.command.tag",
+        permission = "basics.command.tag",
         source = SourceType.BOTH)
 public class Command_tag extends RCommand
 {

@@ -142,6 +142,17 @@ public class WorldRegulator extends RService
         }
     }
 
+    @EventHandler
+    public void onFluidSpread(BlockSpreadEvent event)
+    {
+        final World world = event.getBlock().getWorld();
+
+        if (!Setting.FLUID_SPREAD.getBoolean(world))
+        {
+            event.setCancelled(true);
+        }
+    }
+
     /*--== Minecarts ==--*/
     @EventHandler
     public void onMinecartSpawn(EntitySpawnEvent event)

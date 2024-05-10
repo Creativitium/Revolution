@@ -30,7 +30,7 @@ public class Command_heal extends RCommand
     {
         if (args.length == 0 && SourceType.ONLY_CONSOLE.matchesSourceType(sender)) return false;
 
-        if (args.length != 1 && !sender.hasPermission("basics.command.heal.others"))
+        if (args.length >= 1 && !sender.hasPermission("basics.command.heal.others"))
         {
             msg(sender, "basics.command.heal.no_permission");
             return true;

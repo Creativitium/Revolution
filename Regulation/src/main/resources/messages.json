@@ -22,6 +22,8 @@
   "regulations.setting.entity_filtering.description": "Prevent certain entities from spawning in.",
   "regulations.setting.explosions.name": "Explosions",
   "regulations.setting.explosions.description": "Self-explanatory, anything that can blow up.",
+  "regulations.setting.fluid_spread.name": "Fluid Spread",
+  "regulations.setting.fluid_spread.description": "Liquids spreading.",
   "regulations.setting.minecarts.name": "Minecarts",
   "regulations.setting.minecarts.description": "A popular mode of transportation which can sometimes be abused to lag servers.",
   "regulations.setting.mob_limiting.name": "Mob Limiting",

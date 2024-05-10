@@ -5,6 +5,7 @@ toggles:
   decaying_leaves: true
   entity_filtering: false
   explosions: true
+  fluid_spread: true
   minecarts: true
   mob_limiting: false
   redstone: true

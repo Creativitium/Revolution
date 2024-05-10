@@ -20,6 +20,7 @@ public enum Setting
     ENTITY_FILTERING(Material.SKELETON_SKULL, "regulations.setting.entity_filtering.name", "regulations.setting.entity_filtering.description", "toggles.entity_filtering", boolean.class, false),
     ENTITY_BLACKLIST(Material.BARRIER, "missingno", "missingno", "blacklists.entities", List.class, false),
     EXPLOSIONS(Material.TNT, "regulations.setting.explosions.name", "regulations.setting.explosions.description", "toggles.explosions", boolean.class, true),
+    FLUID_SPREAD(Material.WATER_BUCKET, "regulations.setting.fluid_spread.name", "regulations.setting.fluid_spread.description", "toggles.fluid_spread", boolean.class, false),
     ITEM_BLACKLIST(Material.BARRIER, "missingno", "missingno", "blacklists.items", List.class, false),
     MINECARTS(Material.MINECART, "regulations.setting.minecarts.name", "regulations.setting.minecarts.description", "toggles.minecarts", boolean.class, true),
     MOB_LIMIT(Material.BARRIER, "missingno", "missingno", "limits.mobs", int.class, false),
