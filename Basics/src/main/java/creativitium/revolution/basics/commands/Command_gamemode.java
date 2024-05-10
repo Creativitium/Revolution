@@ -90,15 +90,15 @@ public class Command_gamemode extends RCommand
                 msg(sender, "basics.command.gamemode.invalid_mode", Placeholder.unparsed("mode", argz[0]));
                 return true;
             }
+
+            // Galaxy brain shit right here
+            args = ArrayUtils.remove(args, 0);
         }
         // Gamemode-specific command
         else
         {
             mode = this.mode;
         }
-
-        // Galaxy brain shit right here
-        if (args.length != 0) args = ArrayUtils.remove(args, 0);
 
         // Console is required to provide a player name
         if (args.length == 0 && SourceType.ONLY_CONSOLE.matchesSourceType(sender))

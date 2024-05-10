@@ -2,6 +2,7 @@ package creativitium.revolution.basics.commands;
 
 import creativitium.revolution.basics.Basics;
 import creativitium.revolution.basics.data.BPlayer;
+import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
@@ -65,6 +66,10 @@ public class Command_nickname extends RCommand
                 target.ifPresentOrElse(player -> {
                     ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId())).setNickname(null);
                     player.displayName(null);
+                    player.playerListName(getMessage("basics.components.tablist.format",
+                            Placeholder.component("prefix", Foundation.getInstance().getVaultHook().getPrefixAsComponent(playerSender)),
+                            Placeholder.unparsed("name", player.getName()),
+                            Placeholder.component("display", player.displayName())));
                     msg((player.getName().equalsIgnoreCase(sender.getName()) ? sender : player), "basics.command.nickname.cleared");
                     if (!player.getName().equalsIgnoreCase(sender.getName()))
                     {
@@ -84,6 +89,10 @@ public class Command_nickname extends RCommand
                 Bukkit.getOnlinePlayers().forEach(player -> {
                     ((BPlayer) Shortcuts.getService(Key.key("basics", "primary")).getPlayerData(player.getUniqueId())).setNickname(null);
                     player.displayName(null);
+                    player.playerListName(getMessage("basics.components.tablist.format",
+                            Placeholder.component("prefix", Foundation.getInstance().getVaultHook().getPrefixAsComponent(playerSender)),
+                            Placeholder.unparsed("name", player.getName()),
+                            Placeholder.component("display", player.displayName())));
                     msg(player, "basics.command.nickname.cleared");
                 });
             }
@@ -117,6 +126,10 @@ public class Command_nickname extends RCommand
 
                 data.setNickname(nickname);
                 playerSender.displayName(nickname);
+                playerSender.playerListName(getMessage("basics.components.tablist.format",
+                        Placeholder.component("prefix", Foundation.getInstance().getVaultHook().getPrefixAsComponent(playerSender)),
+                        Placeholder.unparsed("name", sender.getName()),
+                        Placeholder.component("display", playerSender.displayName())));
                 msg(sender, "basics.command.nickname.set", Placeholder.component("nickname", data.getNickname()));
             }
         }

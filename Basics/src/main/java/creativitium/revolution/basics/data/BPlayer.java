@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Data
 public class BPlayer implements ConfigurationSerializable
@@ -25,6 +26,7 @@ public class BPlayer implements ConfigurationSerializable
     private Location loginLocation = null;
     private Location lastLocation = null;
     private String lastIP = null;
+    private UUID lastMessenger = null;
 
     public BPlayer()
     {
@@ -51,6 +53,7 @@ public class BPlayer implements ConfigurationSerializable
         // I really wish I didn't have to do this, but apparently I can't serialize Longs... for some retarded reason
         map.put("lastOnline", String.valueOf(lastOnline));
         map.put("lastIP", lastIP);
+        map.put("lastMessenger", lastMessenger != null ? lastMessenger.toString() : null);
 
         return map;
     }
@@ -83,6 +86,7 @@ public class BPlayer implements ConfigurationSerializable
         // My hope is that this is so awful that Bukkit's API developers learn that Long is a thing that exists
         data.lastOnline = Long.parseLong((String) map.getOrDefault("lastOnline", "0"));
         data.setLastIP((String) map.getOrDefault("lastIP", null));
+        data.setLastMessenger(map.get("lastMessenger") != null ? UUID.fromString((String) map.get("lastMessenger")) : null);
 
         return data;
     }
