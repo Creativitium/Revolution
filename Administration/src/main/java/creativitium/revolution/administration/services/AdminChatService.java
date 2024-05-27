@@ -2,6 +2,7 @@ package creativitium.revolution.administration.services;
 
 import creativitium.revolution.administration.Administration;
 import creativitium.revolution.administration.data.APlayer;
+import creativitium.revolution.administration.event.AdminChatEvent;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.templates.RService;
 import creativitium.revolution.foundation.utilities.Shortcuts;
@@ -15,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class AdminChatService extends RService
 {
@@ -49,20 +51,40 @@ public class AdminChatService extends RService
         }
     }
 
+    @EventHandler
+    public void onAdminChat(AdminChatEvent event)
+    {
+        final Component sm = getMsg("administration.components.staffchat",
+                Placeholder.unparsed("name", event.getSender()),
+                Placeholder.component("prefix", event.getPrefix()),
+                Placeholder.component("message", event.getMessage()));
+
+        Audience.audience(Bukkit.getOnlinePlayers().stream().filter(player -> player.hasPermission("administration.components.staffchat")).toList())
+                .sendMessage(sm);
+
+        getPlugin().getComponentLogger().info(sm);
+    }
+
+    public void sendAdminChat(@NotNull Key source, @NotNull String sender, @NotNull Component prefix, @NotNull Component message, boolean async)
+    {
+        new AdminChatEvent(source, sender, prefix, message, async).callEvent();
+    }
+
     public void sendAdminChat(CommandSender sender, Component message)
     {
-        Component sm = getMsg("administration.components.staffchat",
-                Placeholder.unparsed("name", sender.getName()),
-                Placeholder.component("prefix", Foundation.getInstance().getVaultHook().getPrefixAsComponent(sender)),
-                Placeholder.component("message", message));
-
-        Bukkit.getOnlinePlayers().stream().filter(player -> player.hasPermission("administration.components.staffchat"))
-                .forEach(player -> player.sendMessage(sm));
-        getPlugin().getComponentLogger().info(sm);
+        sendAdminChat(Key.key(Key.MINECRAFT_NAMESPACE, "chat"),
+                sender.getName(),
+                Foundation.getInstance().getVaultHook().getPrefixAsComponent(sender),
+                message,
+                true);
     }
 
     public void sendAdminChat(CommandSender sender, String message)
     {
-        sendAdminChat(sender, PlainTextComponentSerializer.plainText().deserialize(message));
+        sendAdminChat(Key.key(Key.MINECRAFT_NAMESPACE, "command"),
+                sender.getName(),
+                Foundation.getInstance().getVaultHook().getPrefixAsComponent(sender),
+                PlainTextComponentSerializer.plainText().deserialize(message),
+                false);
     }
 }

@@ -1,0 +1,5 @@
+{
+  "integration.discord.adminchat.attachment": "<yellow><hover:show_text:'<url>'><click:open_url:<url>>[Attachment]</click></hover></yellow>",
+  "integration.discord.adminchat.prefix": "<dark_gray>[<role>]</dark_gray>",
+  "integration.discord.adminchat.format": "<name> <prefix>: <message>"
+}

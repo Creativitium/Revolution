@@ -40,7 +40,7 @@ public class VaultHook extends RService
         return chat != null;
     }
 
-    public String getPrefix(CommandSender sender)
+    public String getPrimaryGroup(CommandSender sender)
     {
         if (chat == null)
         {
@@ -53,6 +53,23 @@ public class VaultHook extends RService
         }
         else
         {
+            return "&5CONSOLE";
+        }
+    }
+
+    public String getPrefix(CommandSender sender)
+    {
+        if (chat == null)
+        {
+            return "";
+        }
+
+        if (sender instanceof Player player)
+        {
+            return chat.getPlayerPrefix(player);
+        }
+        else
+        {
             return "&8[&5CONSOLE&8]";
         }
     }
@@ -60,5 +77,10 @@ public class VaultHook extends RService
     public Component getPrefixAsComponent(CommandSender player)
     {
         return legacy.deserialize(getPrefix(player));
+    }
+
+    public Component getPrimaryGroupAsComponent(CommandSender player)
+    {
+        return legacy.deserialize(getPrimaryGroup(player));
     }
 }

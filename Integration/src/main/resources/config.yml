@@ -1,0 +1,10 @@
+# DiscordSRV-specific configurations
+discordsrv:
+  # Instead of pulling the admin chat channel from this configuration, we can use the system that DiscordSRV provides.
+  # This behavior is disabled by default because if there is no "admin" channel specified in the DiscordSRV
+  #   configuration, then it will default to the main chat channel, which may cause issues with confidential information
+  #   being accidentally publicized.
+  useNativeChannelGrabber: false
+
+discord:
+  adminChatChannelId: ""

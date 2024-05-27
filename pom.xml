@@ -19,6 +19,7 @@
         <module>Dimension</module>
         <module>Regulation</module>
         <module>Capitalism</module>
+        <module>Integration</module>
     </modules>
     <properties>
         <java.version>17</java.version>
@@ -81,6 +82,11 @@
             <dependency>
                 <groupId>creativitium.revolution</groupId>
                 <artifactId>Basics</artifactId>
+                <version>13.0-INDEV</version>
+            </dependency>
+            <dependency>
+                <groupId>creativitium.revolution</groupId>
+                <artifactId>Administration</artifactId>
                 <version>13.0-INDEV</version>
             </dependency>
             <dependency>
