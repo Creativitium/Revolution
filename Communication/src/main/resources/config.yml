@@ -1,0 +1,7 @@
+discord:
+  enabled: false
+  token: "BOT_TOKEN"
+  channels:
+    console: ""
+    admin_chat: ""
+    server_chat: ""

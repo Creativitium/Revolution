@@ -1,0 +1,11 @@
+name: Communication
+version: '${project.version}'
+main: creativitium.revolution.communication.Communication
+api-version: 1.19
+authors: [ videogamesm12 ]
+description: Plugin that bridges in-game chats to other platforms.
+depend:
+  - Foundation
+libraries:
+  - net.dv8tion:JDA:5.0.0-beta.24
+  - dev.vankka:mcdiscordreserializer:4.3.0

@@ -1,0 +1,12 @@
+{
+  "communication.messages.server_has_started": "<b>Server has started</b>",
+  "communication.messages.server_has_stopped": "<b>Server has stopped</b>",
+
+  "communication.prefix.platform.discord": "<dark_gray>[<>Discord</>]</dark_gray>",
+  "communication.prefix.platform.discord_role": "<dark_gray>[<role>]</dark_gray>",
+
+  "communication.suffix.platform.discord_attachment": "<yellow><hover:show_text:'<url>'><click:open_url:<url>>[Media]</click></hover></yellow>",
+
+  "communication.format.platform.discord": "<platformprefix> <userprefix> <user> » <message>",
+  "communication.format.platform.minecraft": "<platformprefix> <userprefix> <red><user></red> » <message>"
+}

@@ -20,6 +20,7 @@
         <module>Regulation</module>
         <module>Capitalism</module>
         <module>Integration</module>
+        <module>Communication</module>
     </modules>
     <properties>
         <java.version>17</java.version>
