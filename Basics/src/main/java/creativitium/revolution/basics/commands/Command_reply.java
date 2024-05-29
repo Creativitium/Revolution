@@ -8,15 +8,10 @@ import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import org.apache.commons.lang3.ArrayUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 @CommandParameters(name = "reply",
         description = "Reply to a message!",

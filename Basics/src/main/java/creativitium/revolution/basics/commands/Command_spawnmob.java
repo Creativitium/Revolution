@@ -31,7 +31,7 @@ public class Command_spawnmob extends RCommand
     {
         if (args.length == 0) return false;
 
-        int amount = 1;
+        int amount;
         final EntityType type;
         try
         {

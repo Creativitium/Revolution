@@ -73,7 +73,7 @@ public class CPlayerService extends RPlayerService<CPlayer>
 
     public static class InternalEconomy extends AbstractEconomy
     {
-        private CPlayerService internal;
+        private final CPlayerService internal;
 
         public InternalEconomy(CPlayerService service)
         {

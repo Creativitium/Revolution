@@ -15,7 +15,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@CommandParameters(name = "time", description = "Set the time for a world.", usage = "/time <set | add> <morning | day | noon | sunset | night | ticks> [world]", permission = "dimension.command.time", source = SourceType.BOTH)
+@CommandParameters(name = "time",
+        description = "Set the time for a world.",
+        usage = "/time <set | add> <morning | day | noon | sunset | night | ticks> [world]",
+        permission = "dimension.command.time",
+        source = SourceType.BOTH)
 public class Command_time extends RCommand
 {
     @Override

@@ -56,7 +56,6 @@ public abstract class RPlayerService<T extends ConfigurationSerializable> extend
             data.clear();
             configuration = YamlConfiguration.loadConfiguration(dataFile);
             loadDataFromConfiguration();
-            //configuration.getKeys(false).forEach(key -> data.put(UUID.fromString(key), configuration.getSerializable(key, T)));
         }
     }
 

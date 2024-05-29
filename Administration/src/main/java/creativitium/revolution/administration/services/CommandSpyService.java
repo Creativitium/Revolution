@@ -1,6 +1,5 @@
 package creativitium.revolution.administration.services;
 
-import creativitium.revolution.administration.data.APlayer;
 import creativitium.revolution.administration.data.APlayerService;
 import creativitium.revolution.foundation.templates.RService;
 import creativitium.revolution.foundation.utilities.Shortcuts;

@@ -34,7 +34,7 @@ public class Command_eco extends RCommand
         if (target.isPresent())
         {
             final Player player = target.get();
-            double amount = 0D;
+            double amount;
             try
             {
                 amount = Double.parseDouble(args[2]);

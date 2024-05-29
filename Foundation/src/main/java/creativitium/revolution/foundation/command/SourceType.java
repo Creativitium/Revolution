@@ -5,16 +5,24 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.RemoteConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+
 public enum SourceType
 {
-    ONLY_IN_GAME,
-    ONLY_CONSOLE,
-    BOTH;
+    ONLY_IN_GAME(Player.class),
+    ONLY_CONSOLE(ConsoleCommandSender.class, RemoteConsoleCommandSender.class),
+    BOTH(Player.class, ConsoleCommandSender.class, RemoteConsoleCommandSender.class);
+
+    private final Class<? extends CommandSender>[] applicable;
+
+    @SafeVarargs
+    SourceType(Class<? extends CommandSender>... applicable)
+    {
+        this.applicable = applicable;
+    }
 
     public boolean matchesSourceType(CommandSender sender)
     {
-        return (sender instanceof Player && this == ONLY_IN_GAME)
-                || ((sender instanceof ConsoleCommandSender || sender instanceof RemoteConsoleCommandSender) && this == ONLY_CONSOLE)
-                || this == BOTH;
+        return Arrays.stream(applicable).anyMatch(type -> type.isInstance(sender));
     }
 }

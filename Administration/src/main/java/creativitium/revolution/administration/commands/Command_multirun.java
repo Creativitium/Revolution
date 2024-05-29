@@ -55,7 +55,7 @@ public class Command_multirun extends RCommand
 
             for (int i = 1; i < amount + 1; i++)
             {
-                final String processed = command.replaceAll("placeholder", String.valueOf(i));
+                final String processed = command.replaceAll(placeholder, String.valueOf(i));
 
                 if (SourceType.ONLY_IN_GAME.matchesSourceType(sender))
                     playerSender.performCommand(processed);

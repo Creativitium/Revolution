@@ -4,7 +4,6 @@ import creativitium.revolution.foundation.templates.RService;
 import creativitium.revolution.foundation.utilities.ServerVersion;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.ServerListPingEvent;

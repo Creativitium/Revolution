@@ -2,9 +2,7 @@ package creativitium.revolution.administration.commands;
 
 import creativitium.revolution.administration.Administration;
 import creativitium.revolution.administration.data.Ban;
-import creativitium.revolution.basics.Basics;
 import creativitium.revolution.basics.data.BPlayer;
-import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;

@@ -6,7 +6,6 @@ import creativitium.revolution.basics.Basics;
 import creativitium.revolution.foundation.command.SourceType;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.FileReader;

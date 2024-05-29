@@ -1,7 +1,6 @@
 package creativitium.revolution.administration.commands;
 
 import creativitium.revolution.administration.Administration;
-import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;

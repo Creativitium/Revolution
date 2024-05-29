@@ -9,15 +9,12 @@ import creativitium.revolution.foundation.command.SourceType;
 import creativitium.revolution.foundation.utilities.Shortcuts;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +39,7 @@ public class Command_balance extends RCommand
 
             msg(sender, "capitalism.command.balance." + (target != playerSender ? "other" : "you"),
                     Placeholder.unparsed("name", target.getName()),
-                    Placeholder.parsed("amount", service.getFormat().format(service.getPlayerData(target.getUniqueId()).getBalance())));
+                    Placeholder.parsed("amount", service.getFormat().format(data.getBalance())));
         }, () -> msg(sender, "revolution.command.error.player_not_found"));
         return true;
     }

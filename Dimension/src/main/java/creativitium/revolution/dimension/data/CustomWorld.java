@@ -1,7 +1,6 @@
 package creativitium.revolution.dimension.data;
 
 import creativitium.revolution.dimension.Dimension;
-import creativitium.revolution.foundation.Foundation;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;

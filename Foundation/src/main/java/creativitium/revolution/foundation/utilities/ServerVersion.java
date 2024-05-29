@@ -8,6 +8,11 @@ import org.bukkit.Bukkit;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
+/**
+ * <h1>ServerVersion</h1>
+ * <p>An object representing the server version manifest file, which has been present since 1.14.</p>
+ */
+
 @Getter
 public class ServerVersion
 {

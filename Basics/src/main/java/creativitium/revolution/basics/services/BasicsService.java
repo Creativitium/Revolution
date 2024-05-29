@@ -2,7 +2,6 @@ package creativitium.revolution.basics.services;
 
 import creativitium.revolution.basics.Basics;
 import creativitium.revolution.basics.data.BPlayer;
-import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.templates.RService;
 import creativitium.revolution.foundation.utilities.MM;
 import creativitium.revolution.foundation.utilities.Shortcuts;
@@ -14,10 +13,8 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -39,6 +36,8 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Getter
+@Setter
 public class BasicsService extends RService
 {
     private static final Pattern AMPERSAND_PATTERN = Pattern.compile("(&(?i)[a-fklmnor\\d]{1})");
@@ -56,8 +55,6 @@ public class BasicsService extends RService
             EntityPotionEffectEvent.Cause.DOLPHIN
     );
 
-    @Getter
-    @Setter
     private Location spawnpoint = null;
 
     public BasicsService()
@@ -179,7 +176,7 @@ public class BasicsService extends RService
     @EventHandler
     public void formatPlayerChat(AsyncChatEvent event)
     {
-        if (getPlugin().getConfig().getBoolean("formatChatMessages", true));
+        if (getPlugin().getConfig().getBoolean("formatChatMessages", true))
         {
             final String message = ((TextComponent) event.originalMessage()).content();
             final Matcher useLegacy = AMPERSAND_PATTERN.matcher(message);

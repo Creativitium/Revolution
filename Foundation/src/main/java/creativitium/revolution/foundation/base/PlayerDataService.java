@@ -3,7 +3,6 @@ package creativitium.revolution.foundation.base;
 import creativitium.revolution.foundation.templates.RPlayerService;
 import creativitium.revolution.foundation.templates.RService;
 import net.kyori.adventure.key.Key;
-import org.bukkit.plugin.Plugin;
 
 import java.util.HashMap;
 import java.util.Map;

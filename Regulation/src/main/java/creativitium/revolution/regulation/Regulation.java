@@ -16,7 +16,7 @@ public class Regulation extends JavaPlugin
     private static Regulation instance;
     //--
     @Getter
-    private RServiceGroup services = new RServiceGroup();
+    private final RServiceGroup services = new RServiceGroup();
     @Getter
     private WorldRegulator worldRegulator;
     @Getter

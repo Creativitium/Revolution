@@ -1,7 +1,6 @@
 package creativitium.revolution.basics.commands;
 
 import creativitium.revolution.basics.Basics;
-import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.command.CommandParameters;
 import creativitium.revolution.foundation.command.RCommand;
 import creativitium.revolution.foundation.command.SourceType;
@@ -12,7 +11,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,7 +27,7 @@ import java.util.stream.IntStream;
         source = SourceType.BOTH)
 public class Command_deafen extends RCommand
 {
-    private List<BukkitTask> music = new ArrayList<>();
+    private final List<BukkitTask> music = new ArrayList<>();
     private BossBar nowPlaying = null;
     // This doesn't work because the RNG algorithm "L32X64MixRandom" isn't available with my JRE
     //final RandomGenerator random = RandomGeneratorFactory.getDefault().create(Instant.now().getEpochSecond());
@@ -83,18 +81,14 @@ public class Command_deafen extends RCommand
         final int finalIntensity = intensity;
 
         IntStream.range(0, intensity).forEach(number ->
-        {
-            music.add(Bukkit.getScheduler().runTaskLater(getPlugin(), () ->
-            {
-                Bukkit.getOnlinePlayers().forEach(victim ->
+                music.add(Bukkit.getScheduler().runTaskLater(getPlugin(), () ->
                 {
-                    victim.playSound(Sound.sound(sounds[random.nextInt(sounds.length)].key(), Sound.Source.MASTER,
-                            99999f, random.nextFloat(-1F, 1F)), Sound.Emitter.self());
-                });
+                    Bukkit.getOnlinePlayers().forEach(victim ->
+                            victim.playSound(Sound.sound(sounds[random.nextInt(sounds.length)].key(), Sound.Source.MASTER,
+                                    99999f, random.nextFloat(-1F, 1F)), Sound.Emitter.self()));
 
-                nowPlaying.progress((float) number / finalIntensity);
-            }, number * 5L));
-        });
+                    nowPlaying.progress((float) number / finalIntensity);
+                }, number * 5L)));
 
         Bukkit.getScheduler().runTaskLater(getPlugin(), () ->
         {
