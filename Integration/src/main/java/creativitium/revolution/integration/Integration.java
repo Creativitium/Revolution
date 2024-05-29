@@ -4,8 +4,8 @@ import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
 import creativitium.revolution.integration.discord.Adm2DiscordSRV;
 import lombok.Getter;
+import net.kyori.adventure.key.Key;
 import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,7 +34,7 @@ public class Integration extends JavaPlugin
         Foundation.getInstance().getMessageService().importFrom(this);
 
         // Sets up our integrations
-        adm2DiscordSRV = manager.isPluginEnabled("DiscordSRV") && manager.isPluginEnabled("Administration") ? discordPlugins.addService(NamespacedKey.fromString("integration:discordsrv_administration"), new Adm2DiscordSRV()) : null;
+        adm2DiscordSRV = manager.isPluginEnabled("DiscordSRV") && manager.isPluginEnabled("Administration") ? discordPlugins.addService(Key.key("integration", "discordsrv_administration"), new Adm2DiscordSRV()) : null;
 
         // Start our groups of plugins
         discordPlugins.startServices();

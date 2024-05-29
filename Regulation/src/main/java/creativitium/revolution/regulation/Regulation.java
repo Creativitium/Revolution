@@ -7,7 +7,7 @@ import creativitium.revolution.regulation.commands.Command_toggle;
 import creativitium.revolution.regulation.services.GlobalRegulator;
 import creativitium.revolution.regulation.services.WorldRegulator;
 import lombok.Getter;
-import org.bukkit.NamespacedKey;
+import net.kyori.adventure.key.Key;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Regulation extends JavaPlugin
@@ -38,8 +38,8 @@ public class Regulation extends JavaPlugin
         Foundation.getInstance().getMessageService().importFrom(this);
 
         // Set up our services
-        this.worldRegulator = services.addService(NamespacedKey.fromString("regulation:regulator"), new WorldRegulator(getDataFolder()));
-        this.globalRegulator = services.addService(NamespacedKey.fromString("regulation:global"), new GlobalRegulator());
+        this.worldRegulator = services.addService(Key.key("regulation", "regulator"), new WorldRegulator(getDataFolder()));
+        this.globalRegulator = services.addService(Key.key("regulation", "global"), new GlobalRegulator());
         this.services.startServices();
 
         // Set up our commands

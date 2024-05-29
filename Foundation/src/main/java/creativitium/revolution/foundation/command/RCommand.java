@@ -24,6 +24,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
+/**
+ * <h1>RCommand</h1>
+ * <p>A custom command wrapper that generates a working {@link org.bukkit.command.Command} on runtime which can be
+ * registered using a {@link creativitium.revolution.foundation.CommandLoader}.</p>
+ */
 public abstract class RCommand
 {
     protected final Foundation foundation = Foundation.getInstance();
@@ -173,13 +178,18 @@ public abstract class RCommand
 
     /**
      * Gets a list of all online players' names.
-     * @return  List<String>
+     * @return  A List<String> containing the usernames of all online players
      */
     protected final List<String> getOnlinePlayers()
     {
         return Bukkit.getOnlinePlayers().stream().map(HumanEntity::getName).toList();
     }
 
+    /**
+     * Gets an OfflinePlayer.
+     * @param nameOrUuid    A String representing either a player's username or their UUID
+     * @return              OfflinePlayer
+     */
     protected final OfflinePlayer getOfflinePlayer(String nameOrUuid)
     {
         try
@@ -192,11 +202,22 @@ public abstract class RCommand
         }
     }
 
+    /**
+     * Gets an optional OfflinePlayer if they are cached by the server.
+     * @param name  A String representing a player's username
+     * @return      An Optional with an OfflinePlayer if present, otherwise it returns an empty Optional
+     */
     protected final Optional<OfflinePlayer> getOfflinePlayerIfCached(String name)
     {
         return Optional.ofNullable(Bukkit.getOfflinePlayerIfCached(name));
     }
 
+    /**
+     * Gets an optional Player if they are currently on the server.
+     * @param nameOrUuid    A String representing either a player's username or their UUID
+     * @return              An Optional with a Player if they are present on the server, otherwise it returns an empty
+     *                      Optional
+     */
     protected final Optional<Player> getPlayer(String nameOrUuid)
     {
         try
@@ -212,14 +233,19 @@ public abstract class RCommand
     /**
      * Get all the Strings in a list that start with the given input String.
      * @param args  List<String>
-     * @param input String
-     * @return      List<String>
+     * @param input A String representing the argument given
+     * @return      A List<String> representing the potential arguments that match the given argument
      */
     protected final List<String> match(List<String> args, String input)
     {
-        return args.stream().filter(string -> string.toLowerCase().equalsIgnoreCase(input) || string.toLowerCase().startsWith(input.toLowerCase())).toList();
+        return args.stream().filter(string -> string.toLowerCase().equalsIgnoreCase(input)
+                || string.toLowerCase().startsWith(input.toLowerCase())).toList();
     }
 
+    /**
+     * <h2>RCommandInternal</h2>
+     * <p>An internal class that does all the legwork for RCommand's functions under the hood</p>
+     */
     private static class RCommandInternal extends Command implements PluginIdentifiableCommand
     {
         private final RCommand external;

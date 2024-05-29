@@ -12,7 +12,6 @@ import creativitium.revolution.foundation.RServiceGroup;
 import lombok.Getter;
 import net.kyori.adventure.key.Key;
 import org.bukkit.GameMode;
-import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -52,9 +51,9 @@ public class Basics extends JavaPlugin
         Foundation.getInstance().getPlayerDataService().addExternalPlayerService(Key.key("basics", "primary"), new BPlayerService());
 
         // Set up our other services
-        basicsService = services.addService(NamespacedKey.fromString("basics:main"), new BasicsService());
-        warpsService = services.addService(NamespacedKey.fromString("basics:warps"), new WarpsService());
-        extrasService = services.addService(NamespacedKey.fromString("basics:extras"), new ExtrasService());
+        basicsService = services.addService(Key.key("basics", "main"), new BasicsService());
+        warpsService = services.addService(Key.key("basics", "warps"), new WarpsService());
+        extrasService = services.addService(Key.key("basics", "extras"), new ExtrasService());
         services.startServices();
 
         // Set up our commands

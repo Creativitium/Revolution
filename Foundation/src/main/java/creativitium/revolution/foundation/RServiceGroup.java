@@ -1,27 +1,27 @@
 package creativitium.revolution.foundation;
 
 import creativitium.revolution.foundation.templates.RService;
-import org.bukkit.NamespacedKey;
+import net.kyori.adventure.key.Key;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * <h1>RServiceGroup</h1>
- * <p>Class that defines a group of RService instances.</p>
+ * <p>A group of {@link creativitium.revolution.foundation.templates.RService} instances.</p>
  */
 public class RServiceGroup
 {
-    private final Map<NamespacedKey, RService> services = new HashMap<>();
+    private final Map<Key, RService> services = new HashMap<>();
 
     /**
      * Add an RService instance to this group.
-     * @param tag       NamespacedKey
+     * @param tag       Key
      * @param service   RService
      * @return          RService
      * @param <T>       RService
      */
-    public <T extends RService> T addService(NamespacedKey tag, T service)
+    public <T extends RService> T addService(Key tag, T service)
     {
         if (services.containsKey(tag))
         {
@@ -34,11 +34,11 @@ public class RServiceGroup
 
     /**
      * Get an RService instance that is part of this group.
-     * @param tag   NamespacedKey
+     * @param tag   Key
      * @return      RService
      * @param <T>   RService
      */
-    public <T extends RService> T getService(NamespacedKey tag)
+    public <T extends RService> T getService(Key tag)
     {
         return (T) services.get(tag);
     }

@@ -7,6 +7,10 @@ import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 
+/**
+ * <h1>SourceType</h1>
+ * <p>An enum for {@link org.bukkit.command.CommandSender} types that would be typically executing commands.</p>
+ */
 public enum SourceType
 {
     ONLY_IN_GAME(Player.class),

@@ -9,7 +9,6 @@ import creativitium.revolution.foundation.RServiceGroup;
 import creativitium.revolution.administration.data.APlayerService;
 import lombok.Getter;
 import net.kyori.adventure.key.Key;
-import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Administration extends JavaPlugin
@@ -58,11 +57,11 @@ public class Administration extends JavaPlugin
         Foundation.getInstance().getPlayerDataService().addExternalPlayerService(Key.key("administration", "sanctions"), new SPlayerService());
 
         // Set up our other services
-        commandSpyService = services.addService(NamespacedKey.fromString("adm:commandspy"), new CommandSpyService());
-        adminChatService = services.addService(NamespacedKey.fromString("adm:adminchat"), new AdminChatService());
-        banService = services.addService(NamespacedKey.fromString("adm:bans"), new BanService());
-        invSeeService = services.addService(NamespacedKey.fromString("adm:invsee"), new InventorySeeService());
-        blockingService = services.addService(NamespacedKey.fromString("adm:blocking"), new BlockingService());
+        commandSpyService = services.addService(Key.key("adm", "commandspy"), new CommandSpyService());
+        adminChatService = services.addService(Key.key("adm", "adminchat"), new AdminChatService());
+        banService = services.addService(Key.key("adm", "bans"), new BanService());
+        invSeeService = services.addService(Key.key("adm", "invsee"), new InventorySeeService());
+        blockingService = services.addService(Key.key("adm", "blocking"), new BlockingService());
         services.startServices();
 
         // Set up our commands

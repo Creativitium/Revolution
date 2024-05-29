@@ -8,7 +8,7 @@ import creativitium.revolution.foundation.CommandLoader;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
 import lombok.Getter;
-import org.bukkit.NamespacedKey;
+import net.kyori.adventure.key.Key;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Dimension extends JavaPlugin
@@ -40,8 +40,8 @@ public class Dimension extends JavaPlugin
         Foundation.getInstance().getMessageService().importFrom(this);
 
         // Setup our services
-        worldManager = group.addService(NamespacedKey.fromString("dim:worlds"), new WorldManager());
-        basicProtection = group.addService(NamespacedKey.fromString("dim:protection"), new BasicWorldProtection());
+        worldManager = group.addService(Key.key("dim", "worlds"), new WorldManager());
+        basicProtection = group.addService(Key.key("dim", "protection"), new BasicWorldProtection());
         group.startServices();
 
         // Add additional commands
