@@ -1,7 +1,7 @@
 package creativitium.revolution.dimension;
 
-import creativitium.revolution.dimension.commands.Command_time;
-import creativitium.revolution.dimension.commands.Command_weather;
+import creativitium.revolution.dimension.commands.TimeCmd;
+import creativitium.revolution.dimension.commands.WeatherCmd;
 import creativitium.revolution.dimension.services.BasicWorldProtection;
 import creativitium.revolution.dimension.services.WorldManager;
 import creativitium.revolution.foundation.CommandLoader;
@@ -46,8 +46,8 @@ public class Dimension extends JavaPlugin
 
         // Add additional commands
         commandLoader.loadCommandsManually("dimension",
-                new Command_time(),
-                new Command_weather()
+                new TimeCmd(),
+                new WeatherCmd()
         );
     }
 

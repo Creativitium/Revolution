@@ -1,8 +1,8 @@
 package creativitium.revolution.capitalism;
 
-import creativitium.revolution.capitalism.commands.Command_balance;
-import creativitium.revolution.capitalism.commands.Command_eco;
-import creativitium.revolution.capitalism.commands.Command_pay;
+import creativitium.revolution.capitalism.commands.BalanceCmd;
+import creativitium.revolution.capitalism.commands.EcoCmd;
+import creativitium.revolution.capitalism.commands.PayCmd;
 import creativitium.revolution.capitalism.data.CPlayerService;
 import creativitium.revolution.foundation.CommandLoader;
 import creativitium.revolution.foundation.Foundation;
@@ -41,8 +41,8 @@ public class Capitalism extends JavaPlugin
 
         // Register our commands
         commandLoader.loadCommandsManually("capitalism",
-                new Command_balance(),
-                new Command_eco(),
-                new Command_pay());
+                new BalanceCmd(),
+                new EcoCmd(),
+                new PayCmd());
     }
 }
