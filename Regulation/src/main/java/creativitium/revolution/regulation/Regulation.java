@@ -28,6 +28,7 @@ public class Regulation extends JavaPlugin
     public void onLoad()
     {
         instance = this;
+        saveDefaultConfig();
         commandLoader = new CommandLoader();
     }
 

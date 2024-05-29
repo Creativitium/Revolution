@@ -43,11 +43,6 @@ public class MessageService extends RService
     }
 
     @Override
-    public void onStop()
-    {
-    }
-
-    @Override
     public Plugin getPlugin()
     {
         return Foundation.getInstance();

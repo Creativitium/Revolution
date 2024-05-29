@@ -28,12 +28,6 @@ public class VaultHook extends RService
         }
     }
 
-    @Override
-    public void onStop()
-    {
-    }
-
-
     private boolean setupChat()
     {
         RegisteredServiceProvider<Chat> rsp = Bukkit.getServicesManager().getRegistration(Chat.class);

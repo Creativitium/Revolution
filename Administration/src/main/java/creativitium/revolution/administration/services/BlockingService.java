@@ -13,16 +13,6 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class BlockingService extends RService
 {
-    @Override
-    public void onStart()
-    {
-    }
-
-    @Override
-    public void onStop()
-    {
-    }
-
     @EventHandler
     public void onPlayerChat(AsyncChatEvent event)
     {

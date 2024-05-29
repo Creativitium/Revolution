@@ -25,16 +25,6 @@ public class AdminChatService extends RService
         super(Administration.getInstance());
     }
 
-    @Override
-    public void onStart()
-    {
-    }
-
-    @Override
-    public void onStop()
-    {
-    }
-
     @EventHandler
     public void onPlayerChat(AsyncChatEvent event)
     {

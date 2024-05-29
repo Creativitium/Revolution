@@ -28,16 +28,6 @@ public class BasicWorldProtection extends RService
         this.plugin = Dimension.getInstance();
     }
 
-    @Override
-    public void onStart()
-    {
-    }
-
-    @Override
-    public void onStop()
-    {
-    }
-
     @EventHandler(priority = EventPriority.LOWEST)
     public void onDeath(PlayerDeathEvent event)
     {

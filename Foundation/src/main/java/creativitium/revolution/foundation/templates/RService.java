@@ -29,9 +29,15 @@ public abstract class RService implements Listener
         this(Foundation.getInstance());
     }
 
-    public abstract void onStart();
+    public void onStart()
+    {
+        // Do nothing
+    }
 
-    public abstract void onStop();
+    public void onStop()
+    {
+        // Do nothing
+    }
 
     protected final Component getMsg(String message, TagResolver... placeholders)
     {

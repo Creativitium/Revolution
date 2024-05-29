@@ -45,6 +45,7 @@ public class Adm2DiscordSRV extends RService
     @Override
     public void onStop()
     {
+        DiscordSRV.api.unsubscribe(this);
     }
 
     @Subscribe(priority = ListenerPriority.MONITOR)

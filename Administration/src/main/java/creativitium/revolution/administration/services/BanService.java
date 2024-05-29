@@ -36,11 +36,6 @@ public class BanService extends RService
         load();
     }
 
-    @Override
-    public void onStop()
-    {
-    }
-
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerLogin(PlayerLoginEvent event)
     {

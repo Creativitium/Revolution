@@ -53,18 +53,21 @@ public class WorldRegulator extends RService
     @Override
     public void onStop()
     {
-        /*worldRegulations.forEach((world, config) ->
+        if (getPlugin().getConfig().getBoolean("saveOnShutdown", true))
         {
-            final File worldFile = new File(folder, world.getName() + ".yml");
-            try
+            worldRegulations.forEach((world, config) ->
             {
-                config.save(worldFile);
-            }
-            catch (IOException ex)
-            {
-                getPlugin().getSLF4JLogger().warn("Failed to save world configuration file", ex);
-            }
-        });*/
+                final File worldFile = new File(folder, world.getName() + ".yml");
+                try
+                {
+                    config.save(worldFile);
+                }
+                catch (IOException ex)
+                {
+                    getPlugin().getSLF4JLogger().warn("Failed to save world configuration file", ex);
+                }
+            });
+        }
     }
 
     @EventHandler

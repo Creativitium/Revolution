@@ -68,11 +68,6 @@ public class BasicsService extends RService
         loadSpawn();
     }
 
-    @Override
-    public void onStop()
-    {
-    }
-
     public void loadSpawn()
     {
         final File spawn = new File(getPlugin().getDataFolder(), "spawn.yml");

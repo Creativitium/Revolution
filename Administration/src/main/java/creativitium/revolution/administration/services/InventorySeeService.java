@@ -15,16 +15,6 @@ public class InventorySeeService extends RService
         super(Administration.getInstance());
     }
 
-    @Override
-    public void onStart()
-    {
-    }
-
-    @Override
-    public void onStop()
-    {
-    }
-
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event)
     {

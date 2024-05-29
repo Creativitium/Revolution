@@ -12,16 +12,6 @@ public class ExtrasService extends RService
 {
     private final ServerVersion serverVersion = ServerVersion.getServerVersion();
 
-    @Override
-    public void onStart()
-    {
-    }
-
-    @Override
-    public void onStop()
-    {
-    }
-
     @EventHandler
     public void onServerPing(ServerListPingEvent event)
     {

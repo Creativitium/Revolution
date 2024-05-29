@@ -18,16 +18,6 @@ public class CommandSpyService extends RService
         super(Administration.getInstance());
     }
 
-    @Override
-    public void onStart()
-    {
-    }
-
-    @Override
-    public void onStop()
-    {
-    }
-
     @EventHandler
     public void onPlayerCommand(PlayerCommandPreprocessEvent event)
     {
