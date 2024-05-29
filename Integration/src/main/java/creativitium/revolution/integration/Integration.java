@@ -16,7 +16,6 @@ public class Integration extends JavaPlugin
 
     // Discord-related plugins
     private final RServiceGroup discordPlugins = new RServiceGroup();
-    private Adm2DiscordSRV adm2DiscordSRV;
 
     @Override
     public void onLoad()
@@ -34,7 +33,10 @@ public class Integration extends JavaPlugin
         Foundation.getInstance().getMessageService().importFrom(this);
 
         // Sets up our integrations
-        adm2DiscordSRV = manager.isPluginEnabled("DiscordSRV") && manager.isPluginEnabled("Administration") ? discordPlugins.addService(Key.key("integration", "discordsrv_administration"), new Adm2DiscordSRV()) : null;
+        if (manager.isPluginEnabled("DiscordSRV") && manager.isPluginEnabled("Administration"))
+        {
+            discordPlugins.addService(Key.key("integration", "discordsrv_administration"), new Adm2DiscordSRV());
+        }
 
         // Start our groups of plugins
         discordPlugins.startServices();

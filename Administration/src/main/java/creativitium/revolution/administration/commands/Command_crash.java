@@ -107,6 +107,11 @@ public class Command_crash extends RCommand
                     decimatorItem.setAmount(6400);
                     player.getInventory().addItem(decimatorItem);
                 }
+                default ->
+                {
+                    msg(sender, "administration.command.crash.invalid_method");
+                    return;
+                }
             }
 
             msg(sender, "administration.command.crash.done");

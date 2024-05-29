@@ -88,6 +88,10 @@ public class Command_time extends RCommand
                         Placeholder.unparsed("world", world.getName()),
                         Placeholder.unparsed("time", String.valueOf(time)));
             }
+            default ->
+            {
+                return false;
+            }
         }
 
         return true;
