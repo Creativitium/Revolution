@@ -3,7 +3,7 @@ package creativitium.revolution.regulation;
 import creativitium.revolution.foundation.CommandLoader;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
-import creativitium.revolution.regulation.commands.Command_toggle;
+import creativitium.revolution.regulation.commands.ToggleCmd;
 import creativitium.revolution.regulation.services.GlobalRegulator;
 import creativitium.revolution.regulation.services.WorldRegulator;
 import lombok.Getter;
@@ -43,6 +43,6 @@ public class Regulation extends JavaPlugin
         this.services.startServices();
 
         // Set up our commands
-        commandLoader.loadCommandsManually("regulation", new Command_toggle());
+        commandLoader.loadCommandsManually("regulation", new ToggleCmd());
     }
 }
