@@ -85,6 +85,8 @@ public abstract class Communicator extends RService
      */
     public abstract void handleCommunicatorMessage(CommunicatorChatEvent event);
 
+
+
     /**
      * Perform checks, preferably at startup, before we set up our communicator.
      */

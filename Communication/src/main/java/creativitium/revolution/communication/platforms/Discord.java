@@ -18,6 +18,7 @@ import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
+import net.dv8tion.jda.api.events.session.ShutdownEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.kyori.adventure.key.Key;
@@ -176,6 +177,13 @@ public class Discord extends Communicator
         {
             discord.sendMessage(discord.getPlugin().getConfig().getString("discord.channels.server_chat"),
                     discord.getMsg("communication.messages.server_has_started"));
+        }
+
+        @Override
+        public void onShutdown(@NotNull ShutdownEvent event)
+        {
+            discord.sendMessage(discord.getPlugin().getConfig().getString("discord.channels.server_chat"),
+                    discord.getMsg("communication.messages.server_has_stopped"));
         }
     }
 }
