@@ -61,7 +61,7 @@ public class BiOptional<X, Y>
      */
     public boolean areBothEqual()
     {
-        return left == right;
+        return Objects.equals(left, right);
     }
 
     /**

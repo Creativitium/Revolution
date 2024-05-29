@@ -18,8 +18,6 @@ public class Capitalism extends JavaPlugin
     @Getter
     private static Capitalism instance;
     //--
-    private CPlayerService playerService;
-    //--
     private CommandLoader commandLoader;
 
     @Override
@@ -36,7 +34,8 @@ public class Capitalism extends JavaPlugin
         Foundation.getInstance().getMessageService().importFrom(this);
 
         // Register our services
-        playerService = new CPlayerService();
+        //--
+        CPlayerService playerService = new CPlayerService();
         Foundation.getInstance().getPlayerDataService().addExternalPlayerService(Key.key("capitalism", "primary"), playerService);
         Bukkit.getServicesManager().register(Economy.class, playerService.getEconomy(), this, ServicePriority.Highest);
 

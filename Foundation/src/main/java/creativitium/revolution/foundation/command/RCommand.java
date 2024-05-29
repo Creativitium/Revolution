@@ -238,7 +238,7 @@ public abstract class RCommand
      */
     protected final List<String> match(List<String> args, String input)
     {
-        return args.stream().filter(string -> string.toLowerCase().equalsIgnoreCase(input)
+        return args.stream().filter(string -> string.equalsIgnoreCase(input)
                 || string.toLowerCase().startsWith(input.toLowerCase())).toList();
     }
 
