@@ -6,6 +6,7 @@ import creativitium.revolution.basics.data.BPlayerService;
 import creativitium.revolution.basics.services.BasicsService;
 import creativitium.revolution.basics.services.ExtrasService;
 import creativitium.revolution.basics.services.WarpsService;
+import creativitium.revolution.foundation.CommandLoader;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
 import lombok.Getter;
@@ -30,6 +31,7 @@ public class Basics extends JavaPlugin
     @Getter
     private ExtrasService extrasService;
     //--
+    private CommandLoader commandLoader;
     private CustomCommandLoader customCommandLoader;
 
     @Override
@@ -37,6 +39,7 @@ public class Basics extends JavaPlugin
     {
         instance = this;
         this.saveDefaultConfig();
+        commandLoader = new CommandLoader();
     }
 
     @Override
@@ -55,7 +58,7 @@ public class Basics extends JavaPlugin
         services.startServices();
 
         // Set up our commands
-        Foundation.getInstance().getCommandLoader().loadCommandsManually("basics",
+        commandLoader.loadCommandsManually("basics",
                 new Command_back(),
                 new Command_berserk(),
                 new Command_clear(),

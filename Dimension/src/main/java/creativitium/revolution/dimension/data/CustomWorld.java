@@ -35,7 +35,7 @@ public class CustomWorld
 
         // Register the command if it's enabled and hasn't been registered already
         if (command != null && command.enabled && Bukkit.getCommandMap().getCommand(name.replace(" ", "_").toLowerCase()) == null)
-            Foundation.getInstance().getCommandLoader().loadCommandsManually("dimension", new WorldCommand(this));
+            Dimension.getInstance().getCommandLoader().loadCommandsManually("dimension", new WorldCommand(this));
     }
 
     public final World generate()

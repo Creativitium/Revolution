@@ -8,6 +8,8 @@ import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.RemoteConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -51,9 +53,17 @@ public class VaultHook extends RService
         {
             return chat.getPrimaryGroup(player);
         }
+        else if (sender instanceof ConsoleCommandSender)
+        {
+            return "CONSOLE";
+        }
+        else if (sender instanceof RemoteConsoleCommandSender)
+        {
+            return "RCON";
+        }
         else
         {
-            return "&5CONSOLE";
+            return "";
         }
     }
 
@@ -68,9 +78,17 @@ public class VaultHook extends RService
         {
             return chat.getPlayerPrefix(player);
         }
-        else
+        else if (sender instanceof ConsoleCommandSender)
         {
             return "&8[&5CONSOLE&8]";
+        }
+        else if (sender instanceof RemoteConsoleCommandSender)
+        {
+            return "&8[&5RCON&8]";
+        }
+        else
+        {
+            return "";
         }
     }
 

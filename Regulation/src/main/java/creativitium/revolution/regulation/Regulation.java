@@ -1,5 +1,6 @@
 package creativitium.revolution.regulation;
 
+import creativitium.revolution.foundation.CommandLoader;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
 import creativitium.revolution.regulation.commands.Command_toggle;
@@ -20,11 +21,14 @@ public class Regulation extends JavaPlugin
     private WorldRegulator worldRegulator;
     @Getter
     private GlobalRegulator globalRegulator;
+    //--
+    private CommandLoader commandLoader;
 
     @Override
     public void onLoad()
     {
         instance = this;
+        commandLoader = new CommandLoader();
     }
 
     @Override
@@ -39,6 +43,6 @@ public class Regulation extends JavaPlugin
         this.services.startServices();
 
         // Set up our commands
-        Foundation.getInstance().getCommandLoader().loadCommandsManually("regulation", new Command_toggle());
+        commandLoader.loadCommandsManually("regulation", new Command_toggle());
     }
 }

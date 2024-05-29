@@ -3,6 +3,7 @@ package creativitium.revolution.administration;
 import creativitium.revolution.administration.commands.*;
 import creativitium.revolution.administration.data.SPlayerService;
 import creativitium.revolution.administration.services.*;
+import creativitium.revolution.foundation.CommandLoader;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
 import creativitium.revolution.administration.data.APlayerService;
@@ -28,6 +29,8 @@ public class Administration extends JavaPlugin
     private InventorySeeService invSeeService;
     @Getter
     private BlockingService blockingService;
+    //--
+    private CommandLoader commandLoader;
 
     @Override
     public void onLoad()
@@ -36,6 +39,9 @@ public class Administration extends JavaPlugin
 
         // Save our configuration if it doesn't exist already
         this.saveDefaultConfig();
+
+        // Initialize our own instance of CommandLoader
+        commandLoader = new CommandLoader();
     }
 
     @Override
@@ -60,10 +66,7 @@ public class Administration extends JavaPlugin
         services.startServices();
 
         // Set up our commands
-        /* This just doesn't work at all. None of the commands get registered when we do it with this method, and yet
-         *  somehow, Reflections reports that it found 94 urls... how?! */
-        //Foundation.getInstance().getCommandLoader().loadCommands("creativitium.revolution.administration.commands", "admin");
-        Foundation.getInstance().getCommandLoader().loadCommandsManually("administration",
+        commandLoader.loadCommandsManually("administration",
                 new Command_adminchat(),
                 new Command_ban(),
                 new Command_banip(),

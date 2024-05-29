@@ -4,6 +4,7 @@ import creativitium.revolution.capitalism.commands.Command_balance;
 import creativitium.revolution.capitalism.commands.Command_eco;
 import creativitium.revolution.capitalism.commands.Command_pay;
 import creativitium.revolution.capitalism.data.CPlayerService;
+import creativitium.revolution.foundation.CommandLoader;
 import creativitium.revolution.foundation.Foundation;
 import lombok.Getter;
 import net.kyori.adventure.key.Key;
@@ -18,11 +19,14 @@ public class Capitalism extends JavaPlugin
     private static Capitalism instance;
     //--
     private CPlayerService playerService;
+    //--
+    private CommandLoader commandLoader;
 
     @Override
     public void onLoad()
     {
         instance = this;
+        commandLoader = new CommandLoader();
     }
 
     @Override
@@ -37,7 +41,7 @@ public class Capitalism extends JavaPlugin
         Bukkit.getServicesManager().register(Economy.class, playerService.getEconomy(), this, ServicePriority.Highest);
 
         // Register our commands
-        Foundation.getInstance().getCommandLoader().loadCommandsManually("capitalism",
+        commandLoader.loadCommandsManually("capitalism",
                 new Command_balance(),
                 new Command_eco(),
                 new Command_pay());

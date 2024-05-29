@@ -4,6 +4,7 @@ import creativitium.revolution.dimension.commands.Command_time;
 import creativitium.revolution.dimension.commands.Command_weather;
 import creativitium.revolution.dimension.services.BasicWorldProtection;
 import creativitium.revolution.dimension.services.WorldManager;
+import creativitium.revolution.foundation.CommandLoader;
 import creativitium.revolution.foundation.Foundation;
 import creativitium.revolution.foundation.RServiceGroup;
 import lombok.Getter;
@@ -22,10 +23,14 @@ public class Dimension extends JavaPlugin
     @Getter
     private BasicWorldProtection basicProtection;
 
+    @Getter
+    private CommandLoader commandLoader;
+
     @Override
     public void onLoad()
     {
         instance = this;
+        commandLoader = new CommandLoader();
     }
 
     @Override
@@ -40,7 +45,7 @@ public class Dimension extends JavaPlugin
         group.startServices();
 
         // Add additional commands
-        Foundation.getInstance().getCommandLoader().loadCommandsManually("dimension",
+        commandLoader.loadCommandsManually("dimension",
                 new Command_time(),
                 new Command_weather()
         );
