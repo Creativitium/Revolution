@@ -31,7 +31,6 @@ public class Basics extends JavaPlugin
     private ExtrasService extrasService;
     //--
     private CommandLoader commandLoader;
-    private CustomCommandLoader customCommandLoader;
 
     @Override
     public void onLoad()
@@ -101,8 +100,7 @@ public class Basics extends JavaPlugin
                 new WorldCmd());
 
         // Set up our custom commands
-        this.customCommandLoader = new CustomCommandLoader(new File(getDataFolder(), "commands"));
-        customCommandLoader.loadCommands();
+        new CustomCommandLoader(new File(getDataFolder(), "commands")).loadCommands();
     }
 
     @Override

@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 public class Util
 {
@@ -25,6 +26,19 @@ public class Util
         calendar.setTime(new Date());
         calendar.add(unit.type, amount);
         return calendar.getTime().getTime() / 1000;
+    }
+
+    public static boolean isUUIDValid(String input)
+    {
+        try
+        {
+            UUID.fromString(input);
+            return true;
+        }
+        catch (Throwable ex)
+        {
+            return false;
+        }
     }
 
     @RequiredArgsConstructor

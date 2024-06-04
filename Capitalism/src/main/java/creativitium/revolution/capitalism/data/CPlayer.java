@@ -12,17 +12,7 @@ import java.util.Map;
 @Setter
 public class CPlayer implements ConfigurationSerializable
 {
-    private String name = null;
     private double balance = 0.00;
-
-    public CPlayer()
-    {
-    }
-
-    public CPlayer(String name)
-    {
-        this.name = name;
-    }
 
     @Override
     public @NotNull Map<String, Object> serialize()
@@ -35,7 +25,6 @@ public class CPlayer implements ConfigurationSerializable
     public static CPlayer deserialize(Map<String, Object> map)
     {
         final CPlayer data = new CPlayer();
-        data.name = (String) map.getOrDefault("name", null);
         data.balance = Math.min((double) map.getOrDefault("balance", 0D), 1000000000000D);
         return data;
     }

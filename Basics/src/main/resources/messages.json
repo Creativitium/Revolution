@@ -117,6 +117,9 @@
 
   "basics.general.use_back": "<info>Use <white><hover:show_text:'Click to Execute'><click:run_command:/back>/back</click></hover></white> to return to your death point.",
 
+  "basics.mail.new_messages": "<msg> You have <amount> new messages in your mailbox.",
+  "basics.mail.format": "<msg> <dark_gray>[<gray><timestamp></gray>] <dark_gray>[<gray><name></gray>] <readIndicator><message>",
+
   "basics.components.chat": "<tag><display> <yellow>:</yellow> <gray><message>",
   "basics.components.death_message": "<dark_gray>[<white>☠</white>]</dark_gray> <prefix> <display>",
   "basics.components.join_message": "<dark_gray>[<green>+</green>]</dark_gray> <prefix> <display>",
