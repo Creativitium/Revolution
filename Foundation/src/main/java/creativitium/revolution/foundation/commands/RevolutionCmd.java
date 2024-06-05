@@ -15,6 +15,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @CommandParameters(name = "revolution",
@@ -33,18 +35,22 @@ public class RevolutionCmd extends RCommand
         msg(sender, "foundation.command.revolution.info.introduction",
                 Placeholder.parsed("version", foundation.getDescription().getVersion()));
 
-        msg(sender, "foundation.command.revolution.info.build_info", Placeholder.component("plugins",
-                Component.join(JoinConfiguration.commas(true),
-                        foundation.getMessageService().getExternalPlugins().stream().map(pl ->
-                        {
-                            final Optional<BuildVersion> buildVersion = BuildVersion.getVersion(pl);
+        final List<Component> plugins = foundation.getMessageService().getExternalPlugins().stream().map(plugin ->
+        {
+            final Optional<BuildVersion> buildMetadata = BuildVersion.getVersion(plugin);
+            final Component formattedBuildMetadata = buildMetadata.isPresent() ? getMessage("foundation.command.revolution.info.build_info.format", buildMetadata.get().getAsPlaceholders().toArray(new TagResolver.Single[]{})) : getMessage("foundation.command.revolution.info.build_info.unable_to_find_build_metadata");
+            final String stringBuildInfo = buildMetadata.isPresent() ? buildMetadata.get().toString() : "";
 
-                            return getMessage("foundation.command.revolution.info.build_info.plugin",
-                                    TagResolver.resolver("status_color", Tag.styling(text -> text.color(pl.isEnabled() ? NamedTextColor.GREEN : NamedTextColor.RED))),
-                                    Placeholder.parsed("name", pl.getName()),
-                                    Placeholder.parsed("stringified_build_info", buildVersion.isPresent() ? buildVersion.get().toString() : ""),
-                                    Placeholder.component("formatted_build_info", buildVersion.isPresent() ? getMessage("foundation.command.revolution.info.build_info.format", buildVersion.get().toPlaceholders()) : getMessage("foundation.command.revolution.info.build_info.unable_to_find_build_metadata")));
-                        }).toList())));
+            return getMessage("foundation.command.revolution.info.build_info.plugin",
+                    TagResolver.resolver("status_color",
+                            Tag.styling(text -> text.color(plugin.isEnabled() ? NamedTextColor.GREEN : NamedTextColor.RED))),
+                    Placeholder.parsed("name", plugin.getName()),
+                    Placeholder.parsed("build_info", stringBuildInfo),
+                    Placeholder.component("formatted_build_info", formattedBuildMetadata));
+        }).toList();
+
+        msg(sender, "foundation.command.revolution.info.build_info", Placeholder.component("plugins",
+                Component.join(JoinConfiguration.commas(true), plugins)));
 
         return true;
     }
