@@ -76,6 +76,7 @@ public class Basics extends JavaPlugin
                 new ItemCmd(),
                 new KillCmd(),
                 new ListCmd(),
+                new MailCmd(),
                 new MessageCmd(),
                 new NearCmd(),
                 new NicknameCmd(),

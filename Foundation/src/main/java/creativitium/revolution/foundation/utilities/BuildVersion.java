@@ -52,7 +52,7 @@ public class BuildVersion
     @SerializedName("git.closest.tag.name")
     private String closestTag;
     @SerializedName("git.closest.tag.commit.count")
-    private int closestTagCommitCount;
+    private String closestTagCommitCount;
 
     public boolean isDevelopmentBuild()
     {

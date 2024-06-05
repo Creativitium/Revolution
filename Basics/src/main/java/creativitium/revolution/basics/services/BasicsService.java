@@ -129,6 +129,12 @@ public class BasicsService extends RService
 
         data.setLastOnline(Instant.now().getEpochSecond());
         data.setLastIP(Objects.requireNonNull(event.getPlayer().getAddress()).getAddress().getHostAddress());
+
+        if (data.getMail().stream().anyMatch(mailMessage -> !mailMessage.isRead()))
+        {
+            player.sendMessage(getMsg("basics.mail.new_messages",
+                    Placeholder.unparsed("amount", String.valueOf(data.getMail().stream().filter(mailMessage -> !mailMessage.isRead()).count()))));
+        }
     }
 
     @EventHandler

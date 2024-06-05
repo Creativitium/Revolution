@@ -3,6 +3,7 @@ package creativitium.revolution.basics.data;
 import creativitium.revolution.foundation.utilities.Util;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,6 +20,7 @@ public class MailMessage implements ConfigurationSerializable
     private final @NotNull String senderName;
     private final @NotNull String message;
     @Builder.Default
+    @Setter
     private boolean read = false;
 
     @Override
@@ -38,7 +40,7 @@ public class MailMessage implements ConfigurationSerializable
     public static MailMessage deserialize(Map<String, Object> map)
     {
         return builder()
-                .timestamp(Long.parseLong((String) map.getOrDefault("timestamp", "0")))
+                .timestamp(Integer.toUnsignedLong((Integer) map.getOrDefault("timestamp", 0)))
                 .senderId(map.containsKey("senderId") && Util.isUUIDValid((String) map.get("senderId")) ?
                         UUID.fromString((String) map.get("senderId")) : null)
                 .senderName((String) map.getOrDefault("senderName", "Unknown"))
