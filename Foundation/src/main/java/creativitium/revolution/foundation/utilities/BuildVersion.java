@@ -52,7 +52,7 @@ public class BuildVersion
     @SerializedName("git.closest.tag.name")
     private String closestTag;
     @SerializedName("git.closest.tag.commit.count")
-    private int closestTagCommitCount;
+    private String closestTagCommitCount;
 
     public boolean isDevelopmentBuild()
     {
@@ -81,7 +81,7 @@ public class BuildVersion
                 Placeholder.parsed("commit_id", getCommitId()),
                 Placeholder.parsed("commit_time", getCommitTime()),
                 Placeholder.parsed("closest_tag", getClosestTag()),
-                Placeholder.parsed("closest_tag_commit_count", String.valueOf(getClosestTagCommitCount())));
+                Placeholder.parsed("closest_tag_commit_count", getClosestTagCommitCount()));
     }
 
     public static Optional<BuildVersion> getVersion(Plugin plugin)
