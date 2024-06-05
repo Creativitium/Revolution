@@ -17,5 +17,11 @@
 
   "revolution.command.messages.reload": "<success>The messages system has been reloaded.",
   "revolution.command.messages.stats": "<info>There are currently <white><prefixcount> <gray>prefixes and <white><messagescount> <gray>messages loaded.",
-  "revolution.command.messages.test": "Output:<newline><output>"
+  "revolution.command.messages.test": "Output:<newline><output>",
+
+  "foundation.command.revolution.info.introduction": "<info>This server is running <white>Revolution</white> version <white><version></white>.",
+  "foundation.command.revolution.info.build_info": "<info>Currently installed Revolution plugins: <plugins>",
+  "foundation.command.revolution.info.build_info.format": "<white><b>Build Information:</b><newline><gray>Branch: <white><branch></white><newline>Build Date: <white><build_date></white><newline>Commit ID: <white><commit></white><newline>Commit Date: <white><commit_date></white><newline>Changes Committed: <white><changes_committed></white>",
+  "foundation.command.revolution.info.build_info.plugin": "<white><hover:show_text:'<formatted_build_info>'><click:copy_to_clipboard:'<stringified_build_info>'><name></click></hover></white>",
+  "foundation.command.revolution.info.build_info.unable_to_find_build_metadata": "<red>Unable to find build metadata for this plugin."
 }
