@@ -24,7 +24,7 @@ public class MessageService extends RService
     private final Map<String, String> prefixes = new HashMap<>();
     @Getter
     private final Map<String, String> messages = new HashMap<>();
-    //--
+    @Getter
     private final List<Plugin> externalPlugins = new ArrayList<>();
 
     @Override
