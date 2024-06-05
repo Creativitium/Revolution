@@ -6,7 +6,7 @@
 
     <groupId>creativitium</groupId>
     <artifactId>revolution</artifactId>
-    <version>13.0-INDEV</version>
+    <version>13.0.0-alpha.1</version>
     <packaging>pom</packaging>
 
     <name>Revolution</name>
@@ -110,17 +110,17 @@
             <dependency>
                 <groupId>creativitium.revolution</groupId>
                 <artifactId>Foundation</artifactId>
-                <version>13.0-INDEV</version>
+                <version>13.0.0-alpha.1</version>
             </dependency>
             <dependency>
                 <groupId>creativitium.revolution</groupId>
                 <artifactId>Basics</artifactId>
-                <version>13.0-INDEV</version>
+                <version>13.0.0-alpha.1</version>
             </dependency>
             <dependency>
                 <groupId>creativitium.revolution</groupId>
                 <artifactId>Administration</artifactId>
-                <version>13.0-INDEV</version>
+                <version>13.0.0-alpha.1</version>
             </dependency>
             <dependency>
                 <groupId>com.github.MilkBowl</groupId>

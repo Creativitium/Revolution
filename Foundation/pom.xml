@@ -6,12 +6,12 @@
     <parent>
         <groupId>creativitium</groupId>
         <artifactId>revolution</artifactId>
-        <version>13.0-INDEV</version>
+        <version>13.0.0-alpha.1</version>
     </parent>
 
     <groupId>creativitium.revolution</groupId>
     <artifactId>Foundation</artifactId>
-    <version>13.0-INDEV</version>
+    <version>13.0.0-alpha.1</version>
 
     <packaging>jar</packaging>
 
