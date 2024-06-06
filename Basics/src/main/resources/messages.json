@@ -49,6 +49,9 @@
   "basics.command.list.singular": "<info>There is <white><amount></white> player online out of a maximum of <white><max></white>.",
   "basics.command.list.list": "<info>Online players: <list>",
   "basics.command.list.list.format": "<prefix> <display>",
+  "basics.command.mail.cleared": "<success>Your mail has been cleared.",
+  "basics.command.mail.read.no_mail": "<info>You don't have any mail.",
+  "basics.command.mail.sent": "<success><dark_green><name></dark_green> has been sent the following message:",
   "basics.command.message.receiver": "<msg> <dark_gray>[<white><display> <gray>-></gray> me</white>]</dark_gray> <gray><message>",
   "basics.command.message.sender": "<msg> <dark_gray>[<white>me <gray>-></gray> <display></white>]</dark_gray> <gray><message>",
   "basics.command.near.nearby_players": "<info>Nearby players: <white><players></white>",
@@ -117,8 +120,10 @@
 
   "basics.general.use_back": "<info>Use <white><hover:show_text:'Click to Execute'><click:run_command:/back>/back</click></hover></white> to return to your death point.",
 
-  "basics.mail.new_messages": "<msg> You have <amount> new messages in your mailbox.",
-  "basics.mail.format": "<msg> <dark_gray>[<gray><timestamp></gray>] <dark_gray>[<gray><name></gray>] <readIndicator><message>",
+  "basics.mail.header": " <gradient:black:gray>====</gradient> Mail <gray>--</gray> Page <page><gray>/</gray><pages> <gradient:gray:black>====</gradient>",
+  "basics.mail.footer": " <gradient:black:gray>====</gradient> <prev> Page <page><gray>/</gray><pages> <next> <gradient:gray:black>====</gradient>",
+  "basics.mail.format": "<msg><dark_gray>[<white><timestamp></white>] <dark_gray>[<gray><name></gray>]</dark_gray> <white><read_indicator><message>",
+  "basics.mail.new_messages": "<msg>You have <amount> unread messages in your mailbox.",
 
   "basics.components.chat": "<tag><display> <yellow>:</yellow> <gray><message>",
   "basics.components.death_message": "<dark_gray>[<white>☠</white>]</dark_gray> <prefix> <display>",

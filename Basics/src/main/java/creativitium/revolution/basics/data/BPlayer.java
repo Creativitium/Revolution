@@ -6,6 +6,7 @@ import lombok.Data;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -25,6 +26,7 @@ public class BPlayer implements ConfigurationSerializable
     private Location lastLocation = null;
     private String lastIP = null;
     private UUID lastMessenger = null;
+    private List<MailMessage> mail = new ArrayList<>();
 
     public BPlayer()
     {
@@ -52,6 +54,7 @@ public class BPlayer implements ConfigurationSerializable
         map.put("lastOnline", String.valueOf(lastOnline));
         map.put("lastIP", lastIP);
         map.put("lastMessenger", lastMessenger != null ? lastMessenger.toString() : null);
+        map.put("mail", mail);
 
         return map;
     }
@@ -85,6 +88,28 @@ public class BPlayer implements ConfigurationSerializable
         data.lastOnline = Long.parseLong((String) map.getOrDefault("lastOnline", "0"));
         data.setLastIP((String) map.getOrDefault("lastIP", null));
         data.setLastMessenger(map.get("lastMessenger") != null ? UUID.fromString((String) map.get("lastMessenger")) : null);
+        // This is terrible, but I don't have any idea for how to do a cleaner implementation
+        //List<Object> map.getOrDefault("mail", new ArrayList<>());
+        try
+        {
+            final List<Map<String, Object>> mailData = (List<Map<String, Object>>) map.getOrDefault("mail", new ArrayList<>());
+
+            if (mailData == null)
+            {
+                data.setMail(new ArrayList<>());
+            }
+            else
+            {
+                // Infuriating hacks coming through!
+                ConfigurationSerialization.registerClass(MailMessage.class);
+                data.setMail(new ArrayList<>(mailData.stream().filter(Objects::nonNull).map(MailMessage::deserialize).toList()));
+            }
+        }
+        catch (Exception ex)
+        {
+            Basics.getInstance().getSLF4JLogger().warn("Unable to read mail for player {}", data.name, ex);
+            data.setMail(new ArrayList<>());
+        }
 
         return data;
     }
