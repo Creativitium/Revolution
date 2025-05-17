@@ -58,11 +58,8 @@ public abstract class RCommand extends Command implements PluginIdentifiableComm
         setAliases(List.of(parameters.usage()));
         //--
         setPermission(parameters.permission());
-        this.source = parameters.source();
-        //--
-
-        setPermission(parameters.permission());
         permissionMessage(Foundation.getInstance().getMessageService().getMessage("revolution.command.error.no_permission.command"));
+        this.source = parameters.source();
     }
 
     /**
