@@ -40,7 +40,7 @@ import java.util.regex.Pattern;
 @Setter
 public class BasicsService extends RService
 {
-    private static final Pattern AMPERSAND_PATTERN = Pattern.compile("(&(?i)[a-fklmnor\\d]{1})");
+    private static final Pattern AMPERSAND_PATTERN = Pattern.compile("(&(?i)[a-fklmnor\\d])");
 
     private static final List<EntityPotionEffectEvent.Cause> GOD_IMMUNE_EFFECTS = List.of(
             EntityPotionEffectEvent.Cause.POTION_SPLASH,

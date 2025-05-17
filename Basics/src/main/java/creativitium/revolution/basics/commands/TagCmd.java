@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
         source = SourceType.BOTH)
 public class TagCmd extends RCommand
 {
-    private static final Pattern AMPERSAND_PATTERN = Pattern.compile("(&(?i)[a-fklmnor\\d]{1})");
+    private static final Pattern AMPERSAND_PATTERN = Pattern.compile("(&(?i)[a-fklmnor\\d])");
 
     @Override
     public boolean run(CommandSender sender, Player playerSender, String commandLabel, String[] args)

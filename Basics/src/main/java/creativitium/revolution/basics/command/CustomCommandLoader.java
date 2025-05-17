@@ -33,10 +33,10 @@ public class CustomCommandLoader
         commands.forEach(command -> command.unregister(Bukkit.getCommandMap()));
         commands.clear();
 
-
-        if (!folder.isDirectory())
+        if (folder.exists() && !folder.isDirectory())
         {
             Basics.getInstance().getSLF4JLogger().warn("Failed to register commands as the intended folder isn't a folder!");
+            return;
         }
 
         List<CustomCommand> output = !folder.isDirectory() ? loadDefaults() :

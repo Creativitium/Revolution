@@ -31,7 +31,12 @@ public class VaultHook extends RService
     private boolean setupChat()
     {
         RegisteredServiceProvider<Chat> rsp = Bukkit.getServicesManager().getRegistration(Chat.class);
-        chat = rsp.getProvider();
+
+        if (rsp != null)
+        {
+            chat = rsp.getProvider();
+        }
+
         return chat != null;
     }
 

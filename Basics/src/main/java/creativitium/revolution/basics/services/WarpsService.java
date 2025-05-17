@@ -8,6 +8,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.block.Sign;
+import org.bukkit.block.sign.SignSide;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -58,12 +59,13 @@ public class WarpsService extends RService
                 && event.getClickedBlock().getState() instanceof Sign sign)
         {
             final PlainTextComponentSerializer plainText = PlainTextComponentSerializer.plainText();
+            final Player player = event.getPlayer();
+            final SignSide side = sign.getSide(sign.getInteractableSideFor(player));
 
-            if (plainText.serialize(sign.line(0)).equalsIgnoreCase("[Warp]"))
+            if (plainText.serialize(side.line(0)).equalsIgnoreCase("[Warp]"))
             {
                 event.setCancelled(true);
-                final Player player = event.getPlayer();
-                final String warpName = plainText.serialize(sign.line(1));
+                final String warpName = plainText.serialize(side.line(1));
                 getWarp(warpName).ifPresentOrElse(warp ->
                 {
                     if (warp.getPosition() == null)
