@@ -30,7 +30,7 @@ public class CustomCommandLoader
     public void loadCommands()
     {
         // Unregister existing commands
-        commands.forEach(command -> ((Command) command.getInternalCommand()).unregister(Bukkit.getCommandMap()));
+        commands.forEach(command -> command.unregister(Bukkit.getCommandMap()));
         commands.clear();
 
 
@@ -55,7 +55,7 @@ public class CustomCommandLoader
         output.forEach(command ->
         {
             commands.add(command);
-            Bukkit.getCommandMap().register("basics-yml", command.getInternalCommand());
+            Bukkit.getCommandMap().register("basics-yml", command);
         });
     }
 

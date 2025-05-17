@@ -24,7 +24,7 @@ public class CommandLoader
             try
             {
                 final RCommand command = commandClass.getDeclaredConstructor().newInstance();
-                Bukkit.getCommandMap().register(prefix.toLowerCase(), command.getInternalCommand());
+                Bukkit.getCommandMap().register(prefix.toLowerCase(), command);
                 commands.add(command);
             }
             catch (Throwable ex)
@@ -45,7 +45,7 @@ public class CommandLoader
     {
         Arrays.stream(cmds).forEach(command ->
         {
-            Bukkit.getCommandMap().register(prefix.toLowerCase(), command.getInternalCommand());
+            Bukkit.getCommandMap().register(prefix.toLowerCase(), command);
             commands.add(command);
         });
     }

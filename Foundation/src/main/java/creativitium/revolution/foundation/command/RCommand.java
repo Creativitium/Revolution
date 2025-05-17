@@ -26,29 +26,15 @@ import java.util.*;
 
 /**
  * <h1>RCommand</h1>
- * <p>A custom command wrapper that generates a working {@link org.bukkit.command.Command} on runtime which can be
+ * <p>A custom implementation of {@link Command}. Commands can be created with one of two constructors and then
  * registered using a {@link creativitium.revolution.foundation.CommandLoader}.</p>
  */
-public abstract class RCommand
+public abstract class RCommand extends Command implements PluginIdentifiableCommand
 {
     protected final Foundation foundation = Foundation.getInstance();
     //--
     @Getter
-    private final String name;
-    @Getter
-    private final String description;
-    @Getter
-    private final String usage;
-    @Getter
-    private final List<String> aliases;
-    //--
-    @Getter
-    private final String permission;
-    @Getter
     private final SourceType source;
-    //--
-    @Getter
-    private final RCommandInternal internalCommand;
 
     /**
      * Constructor for RCommand that does not take any parameters on its own, but rather pulls them from the
@@ -56,7 +42,9 @@ public abstract class RCommand
      */
     public RCommand()
     {
-        if (!getClass().isAnnotationPresent(CommandParameters.class))
+		super("temporary");
+
+		if (!getClass().isAnnotationPresent(CommandParameters.class))
         {
             throw new IllegalStateException("Parameters were not defined for this command!");
         }
@@ -64,15 +52,17 @@ public abstract class RCommand
         //--
         CommandParameters parameters = getClass().getAnnotation(CommandParameters.class);
         //--
-        this.name = parameters.name();
-        this.description = parameters.description();
-        this.usage = parameters.usage();
-        this.aliases = Arrays.asList(parameters.aliases());
+        setName(parameters.name());
+        setDescription(parameters.description());
+        setUsage(parameters.usage());
+        setAliases(List.of(parameters.usage()));
         //--
-        this.permission = parameters.permission();
+        setPermission(parameters.permission());
         this.source = parameters.source();
         //--
-        internalCommand = new RCommandInternal(this);
+
+        setPermission(parameters.permission());
+        permissionMessage(Foundation.getInstance().getMessageService().getMessage("revolution.command.error.no_permission.command"));
     }
 
     /**
@@ -88,15 +78,70 @@ public abstract class RCommand
      */
     public RCommand(String name, String description, String usage, String[] aliases, String permission, SourceType source)
     {
-        this.name = name;
-        this.description = description;
-        this.usage = usage;
-        this.aliases = Arrays.asList(aliases);
-        //--
-        this.permission = permission;
+        super(name, description, usage, List.of(aliases));
+
+        setPermission(permission);
         this.source = source;
-        //--
-        internalCommand = new RCommandInternal(this);
+    }
+
+    @Override
+    public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args)
+    {
+        if (!testPermissionSilent(sender) || !getSource().matchesSourceType(sender))
+        {
+            sender.sendMessage(Objects.requireNonNull(permissionMessage()));
+            return true;
+        }
+
+        try
+        {
+            if (!run(sender, sender instanceof Player player ? player : null, commandLabel, args))
+            {
+                msg(sender, "revolution.command.error.usage", Placeholder.unparsed("usage", getUsage()));
+            }
+        }
+        catch (Throwable ex)
+        {
+            Component exceptionMessage = Component.text(ex.getMessage() != null ? ex.getMessage() : ex.getClass().getName());
+            if (sender.hasPermission("foundation.command.see_stacktrace"))
+            {
+                exceptionMessage = exceptionMessage.hoverEvent(HoverEvent.showText(Component.translatable("chat.copy.click").color(NamedTextColor.WHITE).appendNewline().appendNewline().append(Component.text(ExceptionUtils.getStackTrace(ex).replaceAll("\t", "    ")).color(NamedTextColor.GRAY).decorate(TextDecoration.ITALIC))))
+                        .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, ExceptionUtils.getStackTrace(ex)));
+            }
+
+            msg(sender, "revolution.command.error.internal", Placeholder.component("exception", exceptionMessage));
+            getPlugin().getSLF4JLogger().error("Command exception details:", ex);
+        }
+
+        return true;
+    }
+
+    @Override
+    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException
+    {
+        List<String> options = null;
+
+        try
+        {
+            if (testPermissionSilent(sender) && getSource().matchesSourceType(sender))
+            {
+                options = tabCompleteOptions(sender, sender instanceof Player player ? player : null, alias, args);
+            }
+        }
+        catch (Throwable ex)
+        {
+            Component exceptionMessage = Component.text(ex.getMessage() != null ? ex.getMessage() : ex.getClass().getName());
+            if (sender.hasPermission("foundation.command.see_stacktrace"))
+            {
+                exceptionMessage = exceptionMessage.hoverEvent(HoverEvent.showText(Component.translatable("chat.copy.click").color(NamedTextColor.WHITE).appendNewline().appendNewline().append(Component.text(ExceptionUtils.getStackTrace(ex).replaceAll("\t", "    ")).color(NamedTextColor.GRAY).decorate(TextDecoration.ITALIC))))
+                        .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, ExceptionUtils.getStackTrace(ex)));
+            }
+
+            msg(sender, "revolution.command.error.internal", Placeholder.component("exception", exceptionMessage));
+            getPlugin().getSLF4JLogger().error("Command exception details:", ex);
+        }
+
+        return options != null ? options : new ArrayList<>();
     }
 
     public abstract boolean run(CommandSender sender, Player playerSender, String commandLabel, String[] args);
@@ -240,88 +285,5 @@ public abstract class RCommand
     {
         return args.stream().filter(string -> string.equalsIgnoreCase(input)
                 || string.toLowerCase().startsWith(input.toLowerCase())).toList();
-    }
-
-    /**
-     * <h2>RCommandInternal</h2>
-     * <p>An internal class that does all the legwork for RCommand's functions under the hood</p>
-     */
-    private static class RCommandInternal extends Command implements PluginIdentifiableCommand
-    {
-        private final RCommand external;
-
-        protected RCommandInternal(RCommand command)
-        {
-            super(command.getName(), command.getDescription(), command.getUsage(), command.getAliases());
-            setPermission(command.getPermission());
-            permissionMessage(Foundation.getInstance().getMessageService().getMessage("revolution.command.error.no_permission.command"));
-            external = command;
-        }
-
-        @Override
-        public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args)
-        {
-            if (!testPermissionSilent(sender) || !external.getSource().matchesSourceType(sender))
-            {
-                sender.sendMessage(Objects.requireNonNull(permissionMessage()));
-                return true;
-            }
-
-            try
-            {
-                if (!external.run(sender, sender instanceof Player player ? player : null, commandLabel, args))
-                {
-                    external.msg(sender, "revolution.command.error.usage", Placeholder.unparsed("usage", getUsage()));
-                }
-            }
-            catch (Throwable ex)
-            {
-                Component exceptionMessage = Component.text(ex.getMessage() != null ? ex.getMessage() : ex.getClass().getName());
-                if (sender.hasPermission("foundation.command.see_stacktrace"))
-                {
-                    exceptionMessage = exceptionMessage.hoverEvent(HoverEvent.showText(Component.translatable("chat.copy.click").color(NamedTextColor.WHITE).appendNewline().appendNewline().append(Component.text(ExceptionUtils.getStackTrace(ex).replaceAll("\t", "    ")).color(NamedTextColor.GRAY).decorate(TextDecoration.ITALIC))))
-                        .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, ExceptionUtils.getStackTrace(ex)));
-                }
-
-                external.msg(sender, "revolution.command.error.internal", Placeholder.component("exception", exceptionMessage));
-                getPlugin().getSLF4JLogger().error("Command exception details:", ex);
-            }
-
-            return true;
-        }
-
-        @Override
-        public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException
-        {
-            List<String> options = null;
-
-            try
-            {
-                if (testPermissionSilent(sender) && external.getSource().matchesSourceType(sender))
-                {
-                    options = external.tabCompleteOptions(sender, sender instanceof Player player ? player : null, alias, args);
-                }
-            }
-            catch (Throwable ex)
-            {
-                Component exceptionMessage = Component.text(ex.getMessage() != null ? ex.getMessage() : ex.getClass().getName());
-                if (sender.hasPermission("foundation.command.see_stacktrace"))
-                {
-                    exceptionMessage = exceptionMessage.hoverEvent(HoverEvent.showText(Component.translatable("chat.copy.click").color(NamedTextColor.WHITE).appendNewline().appendNewline().append(Component.text(ExceptionUtils.getStackTrace(ex).replaceAll("\t", "    ")).color(NamedTextColor.GRAY).decorate(TextDecoration.ITALIC))))
-                            .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, ExceptionUtils.getStackTrace(ex)));
-                }
-
-                external.msg(sender, "revolution.command.error.internal", Placeholder.component("exception", exceptionMessage));
-                getPlugin().getSLF4JLogger().error("Command exception details:", ex);
-            }
-
-            return options != null ? options : new ArrayList<>();
-        }
-
-        @Override
-        public @NotNull Plugin getPlugin()
-        {
-            return external.getPlugin();
-        }
     }
 }

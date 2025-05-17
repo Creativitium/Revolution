@@ -56,10 +56,10 @@ public class CustomCommand extends RCommand
             msg(sender, "basics.custom_command.footer",
                     Placeholder.component("prev", page == 1 ? previous.color(NamedTextColor.DARK_GRAY) :
                             previous.color(NamedTextColor.WHITE).clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND,
-                                    "/" + getName() + " " + (page - 1)))),
+                                    "/" + commandLabel + " " + (page - 1)))),
                     Placeholder.component("next", page >= partitioned.size() ? next.color(NamedTextColor.DARK_GRAY) :
                             next.color(NamedTextColor.WHITE).clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND,
-                                    "/" + getName() + " " + (page + 1)))),
+                                    "/" + commandLabel + " " + (page + 1)))),
                     Placeholder.unparsed("page", String.valueOf(page)),
                     Placeholder.unparsed("pages", String.valueOf(partitioned.size())));
         }
