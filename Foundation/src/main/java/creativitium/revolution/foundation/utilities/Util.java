@@ -12,6 +12,8 @@ public class Util
 {
     public static DateFormat DATE_FORMAT = new SimpleDateFormat("MMMMM d, yyyy 'at' h:mm:ss aaa");
 
+    public static DateFormat SHORT_DATE_FORMAT = new SimpleDateFormat("MM'/'dd'/'yyyy '@' hh:mm");
+
     private static final Calendar calendar = Calendar.getInstance();
 
     public static long getOffsetFromCurrentTimeMilis(final int amount, final TimeUnit unit)
